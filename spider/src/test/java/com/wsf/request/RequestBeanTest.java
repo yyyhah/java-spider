@@ -15,7 +15,7 @@ public class RequestBeanTest {
     public void testRequestBean1() throws InterruptedException {
         LinkedHashMap<String, byte[]> map = new LinkedHashMap<String, byte[]>();
         HashMap<String, String> header = new HashMap<>();
-        header.put("request.cookie","JSESSIONID=OmBnrUluuac67skRU7KSTnke6Yn-3OszhznqBnGKo7y6D6aoxPV_!-1737983810; tp_up=TBBnrVuQxjPKmdbgpy5NfD7s07usalmprJiDOEovZQ4jPn5iI4FG!-1737983810");
+        header.put("request.cookie","JSESSIONID=uOtr_zLHZLzJfSVCowEu45O8Kkz4IkfiKgv5rHDcbfoGHIyRDa8H!-1737983810; tp_up=_mVr_0AUTif5XhZ8PtUJpvxd-MqP44awiYC_T0oWNrBh6qjY4BD8!-1737983810");
         header.put("request.referer","Referer: https://i.hdu.edu.cn/tp_up/view?m=up");
         header.put("request.host","Host: i.hdu.edu.cn");
         header.put("request.user-agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36");
