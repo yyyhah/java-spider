@@ -4,16 +4,19 @@ import com.wsf.config.Configure;
 import com.wsf.controller.IController;
 import com.wsf.controller.request.ICenterController;
 import com.wsf.io.IReadFromPool;
+import com.wsf.io.IWriteToPool;
 import com.wsf.io.impl.ReadFromPoolImpl;
+import com.wsf.io.impl.WriteToPoolImpl;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.ExecutionException;
 
 public class CenterControllerImpl implements ICenterController {
     //与资源池的接口
-    IReadFromPool fromPool = null;
-    IController requestController = null;
-
+    private IReadFromPool fromPool = null;
+    private IWriteToPool toResource = null;
+    private IController requestController = null;
+    //监视所有进程执行情况
     public CenterControllerImpl() {
         init();
     }
@@ -45,14 +48,26 @@ public class CenterControllerImpl implements ICenterController {
     public void init(){
         //初始化读取器
         fromPool = new ReadFromPoolImpl(Configure.getReqBuffer());
+        toResource = new WriteToPoolImpl();
         //创建请求器调度器
         requestController = new RequestControllerImpl();
         //初始化请求器调度器
         requestController.init();
+
+
     }
 
     @Override
     public void destroy() {
-
+        requestController.destroy();
+        while(!RequestControllerImpl.getManagerPool().isTerminated()){
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        toResource.close();
+        fromPool.close();
     }
 }

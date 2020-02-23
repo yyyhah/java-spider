@@ -139,8 +139,7 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
             return;
         }
         LinkedList<Future> lists = new LinkedList<Future>();
-        System.out.println("当前线程:"+Thread.currentThread());
-        System.out.println("RequestManager中的线程池:"+executorService);
+
         while(inBuffer.size()>0){
             //从缓存区中获取一个url链接,并弹出
             String url = inBuffer.poll();
@@ -148,6 +147,7 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
             Future future = executorService.submit(factory.getRequestBean(url));
             lists.add(future);
         }
+        System.out.println("RequestManager中的线程池:"+executorService);
         //阻塞线程，等待全部子线程执行完毕
         for (Future list : lists) {
             try {
@@ -158,6 +158,7 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
                 e.printStackTrace();
             }
         }
+        System.out.println("RequestManager中的线程池:"+executorService);
         RequestControllerImpl.finish(outBuffer,manaferId);
     }
 }

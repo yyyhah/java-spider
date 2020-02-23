@@ -3,7 +3,6 @@ package com.wsf.controller;
 import com.wsf.config.Configure;
 import com.wsf.controller.request.impl.CenterControllerImpl;
 import com.wsf.io.IReadFromPool;
-import com.wsf.io.IWriteToPool;
 import com.wsf.io.impl.ReadFromPoolImpl;
 import com.wsf.io.impl.WriteToPoolImpl;
 import org.junit.Test;
@@ -28,9 +27,10 @@ public class CenterControllerTest {
 
         CenterControllerImpl center = new CenterControllerImpl();
         center.startOneRequest();
+        center.destroy();
         Thread.sleep(3000);
 
-        write.flushParse();//记住要刷新
+        write.flush();
         IReadFromPool read = new ReadFromPoolImpl(Configure.getReqBuffer());
         ConcurrentHashMap<String, byte[]> map = read.readForParse();
         System.out.println(map);

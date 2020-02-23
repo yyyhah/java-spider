@@ -48,12 +48,12 @@ public class RequestControllerImpl implements IRequestController {
             managerPool.shutdownNow();
             e.printStackTrace();
         }
-        //等待7秒，让线程完全关闭
-        try {
-            Thread.sleep(70000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        //等待7秒，让线程完全关闭
+//        try {
+//            Thread.sleep(7000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -74,6 +74,7 @@ public class RequestControllerImpl implements IRequestController {
     public void init() {
         // 创建管理器资源池
         managerPool = Executors.newFixedThreadPool(managerNumber);
+
         //导入资源池
         toResource = new WriteToPoolImpl();
         //创建子管理器,之所以要先创建，主要是为了能重复利用子管理器。
@@ -125,7 +126,7 @@ public class RequestControllerImpl implements IRequestController {
                 manager.setInBuffer(inBuffer);
                 //移除当前
                 manager.setOutBuffer(createOutBuffer());
-                managerPool.submit(manager);
+                Future submit = managerPool.submit(manager);
             }
             return waitManager.size();
         }
@@ -149,5 +150,13 @@ public class RequestControllerImpl implements IRequestController {
 
     public static void setManagerNumber(Integer managerNumber) {
         RequestControllerImpl.managerNumber = managerNumber;
+    }
+
+    public static ExecutorService getManagerPool() {
+        return managerPool;
+    }
+
+    public static void setManagerPool(ExecutorService managerPool) {
+        RequestControllerImpl.managerPool = managerPool;
     }
 }

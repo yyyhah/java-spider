@@ -71,6 +71,7 @@ public class RequestBean implements Runnable{
             while((len=bis.read(bytes))!=-1){
                 bos.write(bytes,0,len);
             }
+            System.out.println("Bean当前线程"+Thread.currentThread());
             //将资源保存到请求器和调度器之间的缓存区中
             outBuffer.put(this.url,bos.toByteArray());
         } catch (IOException e) {

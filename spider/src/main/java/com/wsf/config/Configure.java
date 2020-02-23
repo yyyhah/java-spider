@@ -8,7 +8,7 @@ import java.io.InputStream;
 import java.util.*;
 
 /**
- * 配置类，创建线程池，创建RequestBean工厂，读取config.properties文件信息
+ * 配置类，创建线程池，创建RequestBean工厂，读取config.properties文件信息，然后可以作为一个信息类供其他类调用
  */
 public class Configure {
     //保存请求头信息
