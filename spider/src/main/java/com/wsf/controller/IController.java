@@ -17,7 +17,7 @@ public interface IController<T,E>{
      * 创建一块存放处理器处理完返回控制器结果的缓存区
      * @return
      */
-     LinkedHashMap createOutBuffer();
+     E createOutBuffer();
 
 
     /**

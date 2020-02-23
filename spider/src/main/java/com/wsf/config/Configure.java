@@ -19,8 +19,13 @@ public class Configure {
     private static Integer connTimeout = null;
     private static Integer readTimeout = null;
     private static String protocol = null;
-    private static Source source = null;
     private static Integer reqBuffer = null;
+    private static Integer reqControllerThreadNumber = null;
+    private static Integer reqHandlerThreadNumber = null;
+    private static Integer parseControllerThreadNumber = null;
+    private static Integer parseHandlerThreadNumber = null;
+    private static Integer saveControllerThreadNumber = null;
+    private static Integer saveHandlerThreadNumber = null;
     static{
         InputStream is = RequestManager.class.getClassLoader().getResourceAsStream("config.properties");
         try {
@@ -33,28 +38,54 @@ public class Configure {
                     requestHeader.put(string,prop.getProperty(string));
                 }
             }
-            String poolSize1 = prop.getProperty("handlerThreadNumber");
-            if(poolSize1!=null){
-                handlerNumber = Integer.parseInt(poolSize1);
+            String temp = null;
+            temp = prop.getProperty("handlerThreadNumber");
+            if(temp!=null){
+                handlerNumber = Integer.parseInt(temp);
             }
-            String poolSize2 = prop.getProperty("controllerThreadNumber");
-            if(poolSize2!=null){
-                controllerNumber = Integer.parseInt(poolSize2);
+            temp = prop.getProperty("controllerThreadNumber");
+            if(temp!=null){
+                controllerNumber = Integer.parseInt(temp);
             }
-            String conn = prop.getProperty("connTimeout");
-            if(conn!=null){
-                connTimeout = Integer.parseInt(conn);
+            temp = prop.getProperty("connTimeout");
+            if(temp!=null){
+                connTimeout = Integer.parseInt(temp);
             }
-            String read = prop.getProperty("readTimeout");
-            if(read!=null) {
-                readTimeout = Integer.parseInt(read);
+            temp = prop.getProperty("readTimeout");
+            if(temp!=null) {
+                readTimeout = Integer.parseInt(temp);
             }
-            String reqBuffer1= prop.getProperty("reqBuffer");
-            if(reqBuffer1!=null){
-                reqBuffer = Integer.parseInt(reqBuffer1);
+            temp= prop.getProperty("reqBuffer");
+            if(temp!=null){
+                reqBuffer = Integer.parseInt(temp);
+            }
+            temp = prop.getProperty("reqControllerThreadNumber");
+            if(temp!=null){
+                reqControllerThreadNumber = Integer.parseInt(temp);
+            }
+            temp = prop.getProperty("reqHandlerThreadNumber");
+            if(temp!=null){
+                reqHandlerThreadNumber = Integer.parseInt(temp);
+            }
+            temp = prop.getProperty("parseControllerThreadNumber");
+            if(temp!=null){
+                parseControllerThreadNumber = Integer.parseInt(temp);
+            }
+            temp = prop.getProperty("parseHandlerThreadNumber");
+            if(temp!=null){
+                parseHandlerThreadNumber = Integer.parseInt(temp);
+            }
+            temp = prop.getProperty("saveControllerThreadNumber");
+            if(temp!=null){
+                saveControllerThreadNumber = Integer.parseInt(temp);
+            }
+            temp = prop.getProperty("saveHandlerThreadNumber");
+            if(temp!=null){
+                saveHandlerThreadNumber = Integer.parseInt(temp);
             }
             protocol = prop.getProperty("protocol");
-            source = (Source)Class.forName("com.wsf.source.Source").getConstructor().newInstance();
+            Class.forName("com.wsf.source.Source");
+
         } catch (IOException e) {
             throw new ExceptionInInitializerError("线程池初始化错误！");
         } catch (Exception e) {
@@ -127,11 +158,51 @@ public class Configure {
         Configure.protocol = protocol;
     }
 
-    public static Source getSource() {
-        return source;
+    public static Integer getReqControllerThreadNumber() {
+        return reqControllerThreadNumber;
     }
 
-    public static void setSource(Source source) {
-        Configure.source = source;
+    public static void setReqControllerThreadNumber(Integer reqControllerThreadNumber) {
+        Configure.reqControllerThreadNumber = reqControllerThreadNumber;
+    }
+
+    public static Integer getReqHandlerThreadNumber() {
+        return reqHandlerThreadNumber;
+    }
+
+    public static void setReqHandlerThreadNumber(Integer reqHandlerThreadNumber) {
+        Configure.reqHandlerThreadNumber = reqHandlerThreadNumber;
+    }
+
+    public static Integer getParseControllerThreadNumber() {
+        return parseControllerThreadNumber;
+    }
+
+    public static void setParseControllerThreadNumber(Integer parseControllerThreadNumber) {
+        Configure.parseControllerThreadNumber = parseControllerThreadNumber;
+    }
+
+    public static Integer getParseHandlerThreadNumber() {
+        return parseHandlerThreadNumber;
+    }
+
+    public static void setParseHandlerThreadNumber(Integer parseHandlerThreadNumber) {
+        Configure.parseHandlerThreadNumber = parseHandlerThreadNumber;
+    }
+
+    public static Integer getSaveControllerThreadNumber() {
+        return saveControllerThreadNumber;
+    }
+
+    public static void setSaveControllerThreadNumber(Integer saveControllerThreadNumber) {
+        Configure.saveControllerThreadNumber = saveControllerThreadNumber;
+    }
+
+    public static Integer getSaveHandlerThreadNumber() {
+        return saveHandlerThreadNumber;
+    }
+
+    public static void setSaveHandlerThreadNumber(Integer saveHandlerThreadNumber) {
+        Configure.saveHandlerThreadNumber = saveHandlerThreadNumber;
     }
 }

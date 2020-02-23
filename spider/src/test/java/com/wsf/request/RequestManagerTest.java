@@ -4,18 +4,15 @@ import com.wsf.factory.ManagerFactory;
 import com.wsf.manager.impl.RequestManager;
 import org.junit.Test;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 public class RequestManagerTest {
     private LinkedHashMap<String,byte[]> map;
     @Test
     public void testRequestManager() throws InterruptedException, ClassNotFoundException, ExecutionException {
         ExecutorService es = Executors.newFixedThreadPool(3);
-        LinkedHashMap<String, byte[]> outBuffer = new LinkedHashMap<>();
-        LinkedList<String> inBuffer = new LinkedList<>();
+        ConcurrentHashMap<String, byte[]> outBuffer = new ConcurrentHashMap<>();
+        ConcurrentLinkedQueue<String> inBuffer = new ConcurrentLinkedQueue<>();
         inBuffer.add("https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome");
         RequestManager manager = ManagerFactory.getRequestManager(1,null,null,null,5);
         manager.setInBuffer(inBuffer);

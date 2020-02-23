@@ -5,19 +5,20 @@ import com.wsf.controller.request.impl.RequestControllerImpl;
 import com.wsf.factory.RequestFactory;
 import com.wsf.manager.IHandlerManager;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.concurrent.*;
 
 /**
  * 该类用于管理请求器的请求，多例
  */
-public class RequestManager implements IHandlerManager<LinkedList<String>,LinkedHashMap<String,byte[]>> {
+public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<String>,ConcurrentHashMap<String,byte[]>> {
     //线程池
     private ExecutorService executorService;
     //请求器和控制器之间的缓冲区(单向) 请求器->控制器
-    private LinkedHashMap<String,byte[]> outBuffer;
+    private ConcurrentHashMap<String,byte[]> outBuffer;
     //控制器和请求器之间的缓冲区(单向) 控制器->请求器 conReqBuffer;
-    private LinkedList<String> inBuffer;
+    private ConcurrentLinkedQueue<String> inBuffer;
     //RequestBean工厂类
     private RequestFactory factory;
     //保存请求头信息
@@ -111,20 +112,20 @@ public class RequestManager implements IHandlerManager<LinkedList<String>,Linked
         this.size = size;
     }
 
-    public LinkedHashMap<String, byte[]> getOutBuffer() {
+    public ConcurrentHashMap<String, byte[]> getOutBuffer() {
         return outBuffer;
     }
 
-    public void setOutBuffer(LinkedHashMap<String, byte[]> outBuffer) {
+    public void setOutBuffer(ConcurrentHashMap<String, byte[]> outBuffer) {
         this.outBuffer = outBuffer;
         factory.setOutBuffer(outBuffer);
     }
 
-    public LinkedList<String> getInBuffer() {
+    public ConcurrentLinkedQueue<String> getInBuffer() {
         return inBuffer;
     }
 
-    public void setInBuffer(LinkedList<String> inBuffer) {
+    public void setInBuffer(ConcurrentLinkedQueue<String> inBuffer) {
         this.inBuffer = inBuffer;
     }
 
@@ -142,7 +143,7 @@ public class RequestManager implements IHandlerManager<LinkedList<String>,Linked
         System.out.println("RequestManager中的线程池:"+executorService);
         while(inBuffer.size()>0){
             //从缓存区中获取一个url链接,并弹出
-            String url = inBuffer.pop();
+            String url = inBuffer.poll();
             //开启请求线程
             Future future = executorService.submit(factory.getRequestBean(url));
             lists.add(future);

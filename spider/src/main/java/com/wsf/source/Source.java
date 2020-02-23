@@ -1,36 +1,45 @@
 package com.wsf.source;
-
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * 资源池
  */
 public class Source {
-    private static LinkedList<String> reqInBuffer;
-    private static LinkedHashMap<String,byte[]> reqOutBuffer;
-
+    //url池
+    private static ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer;
+    //html池
+    private static ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer;
+    //item池
+    private static ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer;
     //初始化资源池
     static {
-        reqInBuffer =new LinkedList<>();
-        reqOutBuffer = new LinkedHashMap<>();
+        urlBuffer =new ConcurrentLinkedQueue<>();
+        htmlBuffer =new ConcurrentLinkedQueue<>();
+        itemBuffer =new ConcurrentLinkedQueue<>();
     }
 
-    public static LinkedList<String> getReqInBuffer() {
-        return reqInBuffer;
+    public static ConcurrentLinkedQueue<ConcurrentLinkedQueue> getUrlBuffer() {
+        return urlBuffer;
     }
 
-    //一个时刻只能一个线程在存放数据
-    public static void setReqInBuffer(LinkedList<String> buffer) {
-        reqInBuffer = buffer;
+    public static void setUrlBuffer(ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer) {
+        Source.urlBuffer = urlBuffer;
     }
 
-
-    public static LinkedHashMap<String,byte[]> getReqOutBuffer() {
-        return reqOutBuffer;
+    public static ConcurrentLinkedQueue<ConcurrentHashMap> getHtmlBuffer() {
+        return htmlBuffer;
     }
 
-    public static void setReqOutBuffer(LinkedHashMap<String,byte[]> buffer) {
-        reqOutBuffer = buffer;
+    public static void setHtmlBuffer(ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer) {
+        Source.htmlBuffer = htmlBuffer;
+    }
+
+    public static ConcurrentLinkedQueue<ConcurrentHashMap> getItemBuffer() {
+        return itemBuffer;
+    }
+
+    public static void setItemBuffer(ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer) {
+        Source.itemBuffer = itemBuffer;
     }
 }
