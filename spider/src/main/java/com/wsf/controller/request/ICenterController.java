@@ -36,4 +36,8 @@ public interface ICenterController extends IController {
     default void destroy() {
 
     }
+
+    default Boolean isIdle(){
+        return null;
+    }
 }

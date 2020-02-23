@@ -62,6 +62,7 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
     @Override
     public void destroy(){
         //关闭线程池
+        System.out.println("Manager:"+executorService);
         executorService.shutdown();
         try {
             //5秒后检测线程是否关闭，如果没有关闭，强制关闭

@@ -59,15 +59,17 @@ public class CenterControllerImpl implements ICenterController {
 
     @Override
     public void destroy() {
-        requestController.destroy();
-        while(!RequestControllerImpl.getManagerPool().isTerminated()){
+        //只有当各个管理器的运行队列为空时才能关闭程序,设置休息时间4秒，4秒后强制关闭
+        if(!requestController.isIdle()){
             try {
-                Thread.sleep(2000);
+                Thread.sleep(4000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
+        requestController.destroy();
         toResource.close();
         fromPool.close();
+
     }
 }

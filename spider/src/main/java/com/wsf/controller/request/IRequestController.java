@@ -13,4 +13,5 @@ public interface IRequestController extends IController<ConcurrentLinkedQueue<St
      */
     Integer executeBatch(LinkedList<ConcurrentLinkedQueue<String>> inBufferList);
 
+
 }

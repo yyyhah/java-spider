@@ -13,11 +13,11 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @SuppressWarnings("all")
 public class WriteToPoolImpl implements IWriteToPool {
     //url池
-    private static ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer = Source.getUrlBuffer();
+    private ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer = Source.getUrlBuffer();
     //html池
-    private static ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer = Source.getHtmlBuffer();
+    private ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer = Source.getHtmlBuffer();
     //item池
-    private static ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
+    private ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
 
     //写入缓存区的大小,默认值40
     private static Integer writeBuffer = 40;
@@ -88,6 +88,9 @@ public class WriteToPoolImpl implements IWriteToPool {
     @Override
     public void close() {
         flush();
+        urlBuffer = null;
+        itemBuffer = null;
+        htmlBuffer = null;
     }
 
     /**

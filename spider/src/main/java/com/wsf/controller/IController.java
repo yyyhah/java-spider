@@ -36,4 +36,10 @@ public interface IController<T,E>{
      */
     void destroy();
 
+    /**
+     * 判断当前控制器的管理器是否空闲
+     * @return
+     */
+    Boolean isIdle();
+
 }

@@ -40,7 +40,7 @@ public class RequestControllerImpl implements IRequestController {
         managerPool.shutdown();
         try {
             //6秒之后没有关闭，强制关闭
-            if(managerPool.awaitTermination(6000, TimeUnit.SECONDS)){
+            if(!managerPool.awaitTermination(6000, TimeUnit.SECONDS)){
                 managerPool.shutdownNow();
             }
         } catch (InterruptedException e) {
@@ -152,11 +152,12 @@ public class RequestControllerImpl implements IRequestController {
         RequestControllerImpl.managerNumber = managerNumber;
     }
 
-    public static ExecutorService getManagerPool() {
-        return managerPool;
-    }
-
-    public static void setManagerPool(ExecutorService managerPool) {
-        RequestControllerImpl.managerPool = managerPool;
+    //判断当前控制器的线程池是否空闲
+    @Override
+    public Boolean isIdle(){
+        if(runManager==null||runManager.size()==0){
+            return true;
+        }
+        return false;
     }
 }

@@ -28,9 +28,6 @@ public class CenterControllerTest {
         CenterControllerImpl center = new CenterControllerImpl();
         center.startOneRequest();
         center.destroy();
-        Thread.sleep(3000);
-
-        write.flush();
         IReadFromPool read = new ReadFromPoolImpl(Configure.getReqBuffer());
         ConcurrentHashMap<String, byte[]> map = read.readForParse();
         System.out.println(map);
