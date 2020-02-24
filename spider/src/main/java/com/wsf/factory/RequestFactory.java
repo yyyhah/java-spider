@@ -12,16 +12,17 @@ public class RequestFactory {
     private Integer connTimeout = null;
     private Integer readTimeout = null;
 
-    public RequestFactory(Integer connTimeout,Integer readTimeout,Map<String, String> requestHeader) {
+    public RequestFactory(Integer connTimeout, Integer readTimeout, Map<String, String> requestHeader) {
         this.requestHeader = requestHeader;
         //如果超时不为0 设置超时
-        if(connTimeout!=null){
+        if (connTimeout != null) {
             setConnTimeout(connTimeout);
         }
-        if(readTimeout!=null) {
+        if (readTimeout != null) {
             setReadTimeout(readTimeout);
         }
     }
+
     public Map<String, String> getRequestHeader() {
         return requestHeader;
     }
@@ -32,6 +33,7 @@ public class RequestFactory {
 
     /**
      * 获取连接超时时间
+     *
      * @return
      */
     public Integer getConnTimeout() {
@@ -40,6 +42,7 @@ public class RequestFactory {
 
     /**
      * 设置连接超时时间
+     *
      * @param connTimeout
      */
     public void setConnTimeout(Integer connTimeout) {
@@ -49,13 +52,16 @@ public class RequestFactory {
 
     /**
      * 获取读取超时时间
+     *
      * @return
      */
     public Integer getReadTimeout() {
         return readTimeout;
     }
+
     /**
      * 设置读取超时时间
+     *
      * @return
      */
     public void setReadTimeout(Integer readTimeout) {
@@ -65,11 +71,12 @@ public class RequestFactory {
 
     /**
      * 获取一个RequestBean对象
+     *
      * @param url 访问的网址
      * @return RequestBean 返回请求对象
      */
-    public  RequestBean getRequestBean(String url){
+    public RequestBean getRequestBean(String url) {
         //这里直接new创建对象好了，反射的话虽然耦合低，但是会慢挺多的。
-        return new RequestBean(url,requestHeader);
+        return new RequestBean(url, requestHeader);
     }
 }

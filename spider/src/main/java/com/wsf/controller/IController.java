@@ -9,7 +9,7 @@ import java.util.concurrent.ExecutionException;
  * 2. 设置 进出缓存区
  * 同时该接口继承了Runnable 支持线程操作
  */
-public interface IController<T,E>{
+public interface IController<T, E> {
 
 
     /**
@@ -19,6 +19,7 @@ public interface IController<T,E>{
 
     /**
      * 处理一条请求操作
+     *
      * @return 表示当前传入的信息，剩下几条未执行，如果未0 表示正常
      */
     Integer execute(T t);
@@ -30,12 +31,14 @@ public interface IController<T,E>{
 
     /**
      * 判断当前控制器的管理器是否有空闲线程
+     *
      * @return
      */
     Boolean isIdle();
 
     /**
      * 当前运行队列是否为空
+     *
      * @return
      */
     Boolean isEmpty();

@@ -122,3 +122,4 @@
 2020-02-24 14:49:53 method: com.wsf.controller.request.impl.CenterControllerImpl.startBatchRequest(CenterControllerImpl.java:51) - [ WARN ]----管理器繁忙
 2020-02-24 14:55:48 method: com.wsf.controller.request.impl.CenterControllerImpl.startBatchRequest(CenterControllerImpl.java:51) - [ WARN ]----管理器繁忙
 2020-02-24 14:57:36 method: com.wsf.controller.request.impl.CenterControllerImpl.executeRequest(CenterControllerImpl.java:32) - [ WARN ]----管理器繁忙,请稍后再试
+2020-02-24 17:25:31 method: com.wsf.info.GetHtmlInfo.get(GetHtmlInfo.java:84) - [ ERROR ]----网站访问失败！

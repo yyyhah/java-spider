@@ -3,7 +3,6 @@ package com.wsf.controller.request;
 import com.wsf.controller.IController;
 
 
-
 /**
  * 中央调度器，主要进行其他几个调度器执行的管理
  * 1. 分配资源，几个调度器的时间占比
@@ -28,7 +27,7 @@ public interface ICenterController extends IController {
     }
 
     @Override
-    default Integer execute(Object o){
+    default Integer execute(Object o) {
         return null;
     }
 
@@ -38,12 +37,12 @@ public interface ICenterController extends IController {
     }
 
     @Override
-    default Boolean isIdle(){
+    default Boolean isIdle() {
         return null;
     }
 
     @Override
-    default Boolean isEmpty(){
+    default Boolean isEmpty() {
         return null;
     }
 

@@ -12,24 +12,25 @@ import java.lang.reflect.Proxy;
 public class IOFactory {
     /**
      * 获取一个读取器 读
+     *
      * @param bufferSize
      * @return
      */
-    public static IReadFromPool getReadConnect(Integer bufferSize){
+    public static IReadFromPool getReadConnect(Integer bufferSize) {
         ReadFromPoolImpl readFromPool = new ReadFromPoolImpl(bufferSize);
         return (IReadFromPool) Proxy.newProxyInstance(ReadFromPoolImpl.class.getClassLoader(), ReadFromPoolImpl.class.getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
                 String name = method.getName();
-                if (readFromPool.isClosed()){
-                    if(name.equals("close")||name.equals("isClosed")){
+                if (readFromPool.isClosed()) {
+                    if (name.equals("close") || name.equals("isClosed")) {
                         method.invoke(readFromPool, objects);
-                    }else{
+                    } else {
                         System.out.println("当前流已经关闭!");
                     }
                     return null;
-                }else{
-                    return method.invoke(readFromPool,objects);
+                } else {
+                    return method.invoke(readFromPool, objects);
                 }
             }
         });
@@ -37,9 +38,10 @@ public class IOFactory {
 
     /**
      * 获取一个读取器 写
+     *
      * @return
      */
-    public static IWriteToPool getWriteConnect(){
+    public static IWriteToPool getWriteConnect() {
         WriteToPoolImpl writeToPool = new WriteToPoolImpl();
         return (IWriteToPool) Proxy.newProxyInstance(WriteToPoolImpl.class.getClassLoader(), WriteToPoolImpl.class.getInterfaces(), new InvocationHandler() {
             @Override

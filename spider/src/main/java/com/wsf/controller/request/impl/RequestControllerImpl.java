@@ -21,16 +21,16 @@ public class RequestControllerImpl implements IRequestController {
     //向资源池写入接口
     private static IWriteToPool toResource;
     //请求器线程池大小,默认值10
-    private static Integer managerNumber = Configure.getReqControllerThreadNumber()==null?Configure.getControllerNumber()==null?10:
-            Configure.getControllerNumber():Configure.getReqControllerThreadNumber();
+    private static Integer managerNumber = Configure.getReqControllerThreadNumber() == null ? Configure.getControllerNumber() == null ? 10 :
+            Configure.getControllerNumber() : Configure.getReqControllerThreadNumber();
     //请求器线程池
     private static ExecutorService managerPool;
     //管理器
     private static LinkedList<RequestManager> managers = new LinkedList<RequestManager>();
     //运行中的管理器,设置其初始化大小
-    private static HashMap<Integer,RequestManager> runManager = new HashMap<Integer, RequestManager>(managerNumber);
+    private static HashMap<Integer, RequestManager> runManager = new HashMap<Integer, RequestManager>(managerNumber);
     //等待队列中管理器，设置其初始化大小
-    private static HashMap<Integer,RequestManager> waitManager = new HashMap<Integer, RequestManager>(managerNumber);
+    private static HashMap<Integer, RequestManager> waitManager = new HashMap<Integer, RequestManager>(managerNumber);
 
     @Override
     public void init() {
@@ -41,23 +41,24 @@ public class RequestControllerImpl implements IRequestController {
         toResource = new IOFactory().getWriteConnect();
         //创建子管理器,之所以要先创建，主要是为了能重复利用子管理器。
         for (int i = 0; i < managerNumber; i++) {
-            RequestManager manager = ManagerFactory.getRequestManager(i,Configure.getConnTimeout(),Configure.getReadTimeout(),Configure.getRequestHeader(), Configure.getHandlerNumber());
+            RequestManager manager = ManagerFactory.getRequestManager(i, Configure.getConnTimeout(), Configure.getReadTimeout(), Configure.getRequestHeader(), Configure.getHandlerNumber());
             manager.init();
             managers.add(manager);
             //将所有的管理器放入等待队列
-            waitManager.put(i,manager);
+            waitManager.put(i, manager);
         }
     }
 
     /**
      * 为了避免竞争manager资源，这里需要加锁
+     *
      * @param inBuffer
      * @return
      * @throws ExecutionException
      * @throws InterruptedException
      */
     @Override
-    public Integer execute(ConcurrentLinkedQueue<String> inBuffer){
+    public Integer execute(ConcurrentLinkedQueue<String> inBuffer) {
         synchronized (waitManager) {
             if (waitManager.size() == 0) {
                 return -1;
@@ -94,29 +95,31 @@ public class RequestControllerImpl implements IRequestController {
 
     /**
      * 为了避免竞争manager资源，这里需要加锁
+     *
      * @param outBuffer
      * @param managerId
      */
     //Manager线程池的回调方法。
-    public static void finish(ConcurrentHashMap<String,byte[]> outBuffer,Integer managerId){
+    public static void finish(ConcurrentHashMap<String, byte[]> outBuffer, Integer managerId) {
         //当一个管理器线程运行结束，将该管理器线程从运行队列移除，加入空闲队列，并将输入输出数据源设为空,由于上下两处都用到了waitManager,这里加个锁
-        synchronized (waitManager){
-            synchronized (runManager){
+        synchronized (waitManager) {
+            synchronized (runManager) {
                 RequestManager remove = runManager.remove(managerId);
                 //将得到的数据保存到资源池中
                 setResource(outBuffer);
                 remove.setInBuffer(null);
                 waitManager.put(managerId, remove);
-                System.out.println("managerPool 归还了一个线程:"+managerPool);
+                System.out.println("managerPool 归还了一个线程:" + managerPool);
             }
         }
     }
 
     /**
      * 将outBuffer存入资源池
+     *
      * @param outBuffer
      */
-    public static void setResource(ConcurrentHashMap<String,byte[]> outBuffer) {
+    public static void setResource(ConcurrentHashMap<String, byte[]> outBuffer) {
         toResource.writeToParse(outBuffer);
     }
 
@@ -130,17 +133,18 @@ public class RequestControllerImpl implements IRequestController {
 
     //判断当前控制器的线程池是否空闲
     @Override
-    public Boolean isEmpty(){
-        if(runManager==null||runManager.size()==0){
+    public Boolean isEmpty() {
+        if (runManager == null || runManager.size() == 0) {
             return true;
         }
         return false;
     }
 
     @Override
-    public Boolean isIdle(){
-        return waitManager.size()>0;
+    public Boolean isIdle() {
+        return waitManager.size() > 0;
     }
+
     @Override
     public void destroy() {
         for (RequestManager manager : managers) {
@@ -150,7 +154,7 @@ public class RequestControllerImpl implements IRequestController {
         managerPool.shutdown();
         try {
             //6秒之后没有关闭，强制关闭
-            if(!managerPool.awaitTermination(6000, TimeUnit.SECONDS)){
+            if (!managerPool.awaitTermination(6000, TimeUnit.SECONDS)) {
                 managerPool.shutdownNow();
             }
         } catch (InterruptedException e) {

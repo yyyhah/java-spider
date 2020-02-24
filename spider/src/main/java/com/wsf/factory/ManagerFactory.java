@@ -10,9 +10,10 @@ import java.util.Map;
 public class ManagerFactory {
     /**
      * 获取请求器管理器对象
+     *
      * @return
      */
-    public static RequestManager getRequestManager(Integer managerId,Integer connTimeout, Integer readTimeout, Map<String,String> header, Integer size) {
-        return new RequestManager(managerId,header,connTimeout,readTimeout,size);
+    public static RequestManager getRequestManager(Integer managerId, Integer connTimeout, Integer readTimeout, Map<String, String> header, Integer size) {
+        return new RequestManager(managerId, header, connTimeout, readTimeout, size);
     }
 }

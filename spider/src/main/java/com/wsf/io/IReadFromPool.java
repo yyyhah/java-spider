@@ -10,59 +10,70 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * 当下载的资源过大会会向磁盘读取存入文件，该接口定义
  * 向资源池读入时操作
  */
-public interface IReadFromPool{
+public interface IReadFromPool {
     /**
      * 从url池中读取 请求器输入文件
+     *
      * @return
      */
     ConcurrentLinkedQueue<String> readForReq();
 
     /**
      * 从html池中读取 解析器输入文件
+     *
      * @return
      */
-    ConcurrentHashMap<String,byte[]> readForParse();
+    ConcurrentHashMap<String, byte[]> readForParse();
 
     /**
      * 从item池中读取 保存器输入文件
+     *
      * @return
      */
     ConcurrentHashMap<String, Item> readForSave();
 
     /**
      * 从url池中批量读取
+     *
      * @return
      */
     LinkedList<ConcurrentLinkedQueue> readForReqBatch();
 
     /**
      * 从html池中批量读取
+     *
      * @return
      */
     LinkedList<ConcurrentHashMap> readForParseBatch();
 
     /**
      * 从item池中批量读取
+     *
      * @return
      */
     LinkedList<ConcurrentHashMap> readForSaveBatch();
 
     /**
      * 判断url池中是否还有数据
+     *
      * @return true 还有数据 false 没有数据
      */
     Boolean hasNextReq();
 
     /**
      * 判断html池中是否还有数据
+     *
      * @return true 还有数据 false 没有数据
      */
     Boolean hasNextParse();
+
     /**
      * 判断item池中是否还有数据
+     *
      * @return true 还有数据 false 没有数据
      */
     Boolean hashNextSave();
+
     /**
      * 关闭读取器，将缓存区中的数据放回数据池子
      */
@@ -70,6 +81,7 @@ public interface IReadFromPool{
 
     /**
      * 判断当前流是否关闭
+     *
      * @return
      */
     Boolean isClosed();

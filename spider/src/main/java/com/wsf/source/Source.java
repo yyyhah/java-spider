@@ -1,4 +1,5 @@
 package com.wsf.source;
+
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -12,11 +13,12 @@ public class Source {
     private static ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer;
     //item池
     private static ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer;
+
     //初始化资源池
     static {
-        urlBuffer =new ConcurrentLinkedQueue<>();
-        htmlBuffer =new ConcurrentLinkedQueue<>();
-        itemBuffer =new ConcurrentLinkedQueue<>();
+        urlBuffer = new ConcurrentLinkedQueue<>();
+        htmlBuffer = new ConcurrentLinkedQueue<>();
+        itemBuffer = new ConcurrentLinkedQueue<>();
     }
 
     public static ConcurrentLinkedQueue<ConcurrentLinkedQueue> getUrlBuffer() {

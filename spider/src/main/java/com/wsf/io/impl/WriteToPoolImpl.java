@@ -14,14 +14,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @SuppressWarnings("all")
 public class WriteToPoolImpl implements IWriteToPool {
     //url池
-    private  ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer = Source.getUrlBuffer();
+    private ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer = Source.getUrlBuffer();
     //html池
-    private  ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer = Source.getHtmlBuffer();
+    private ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer = Source.getHtmlBuffer();
     //item池
-    private  ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
+    private ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
 
     //写入缓存区的大小,默认值40
-    private static Integer writeBuffer = Configure.getIOWriteBuffer()==null?40:Configure.getIOWriteBuffer();
+    private static Integer writeBuffer = Configure.getIOWriteBuffer() == null ? 40 : Configure.getIOWriteBuffer();
 
     //url读取缓存
     private ConcurrentLinkedQueue[] urlWriteBuffer = null;
@@ -34,25 +34,28 @@ public class WriteToPoolImpl implements IWriteToPool {
     private Integer itemIndex = 0;
 
     private boolean closed = false;
+
     public WriteToPoolImpl() {
         this(null);
     }
+
     public WriteToPoolImpl(Integer bufferSize) {
-        writeBuffer = bufferSize==null?writeBuffer:bufferSize;
+        writeBuffer = bufferSize == null ? writeBuffer : bufferSize;
         urlWriteBuffer = new ConcurrentLinkedQueue[writeBuffer];
         itemWriteBuffer = new ConcurrentHashMap[writeBuffer];
         htmlWriteBuffer = new ConcurrentHashMap[writeBuffer];
     }
+
     @Override
     public void writeToParse(ConcurrentHashMap<String, byte[]> inBuffer) {
         //如果inBuffer为null，那就不必添加了
-        if(inBuffer==null || inBuffer.size()==0){
+        if (inBuffer == null || inBuffer.size() == 0) {
             return;
         }
         //如果缓存区没满，加入缓存区
-        if(htmlIndex < writeBuffer){
+        if (htmlIndex < writeBuffer) {
             htmlWriteBuffer[htmlIndex++] = inBuffer;
-        }else{
+        } else {
             //如果缓存区满了，全部放入资源池
             flushParse();
             htmlWriteBuffer[htmlIndex++] = inBuffer;
@@ -61,12 +64,12 @@ public class WriteToPoolImpl implements IWriteToPool {
 
     @Override
     public void writeToSave(ConcurrentHashMap<String, Item> inBuffer) {
-        if(inBuffer==null || inBuffer.size()==0){
+        if (inBuffer == null || inBuffer.size() == 0) {
             return;
         }
-        if(itemIndex < writeBuffer){
+        if (itemIndex < writeBuffer) {
             itemWriteBuffer[itemIndex++] = inBuffer;
-        }else{
+        } else {
             //如果缓存区满了，全部放入资源池
             flushSave();
             itemWriteBuffer[itemIndex++] = inBuffer;
@@ -75,12 +78,12 @@ public class WriteToPoolImpl implements IWriteToPool {
 
     @Override
     public void writeToReq(ConcurrentLinkedQueue<String> inBuffer) {
-        if(inBuffer==null || inBuffer.size()==0){
+        if (inBuffer == null || inBuffer.size() == 0) {
             return;
         }
-        if(urlIndex < writeBuffer){
+        if (urlIndex < writeBuffer) {
             urlWriteBuffer[urlIndex++] = inBuffer;
-        }else{
+        } else {
             //如果缓存区满了，全部放入资源池
             flushReq();
             urlWriteBuffer[urlIndex++] = inBuffer;
@@ -99,7 +102,7 @@ public class WriteToPoolImpl implements IWriteToPool {
     /**
      * 将写入url的信息全部刷入资源池
      */
-    public void flushReq(){
+    public void flushReq() {
         for (int i = 0; i < urlIndex; i++) {
             urlBuffer.add(urlWriteBuffer[i]);
             urlWriteBuffer[i] = null;
@@ -111,7 +114,7 @@ public class WriteToPoolImpl implements IWriteToPool {
     /**
      * 将写入html的信息全部刷入资源池
      */
-    public void flushParse(){
+    public void flushParse() {
         for (int i = 0; i < htmlIndex; i++) {
             htmlBuffer.add(htmlWriteBuffer[i]);
             htmlWriteBuffer[i] = null;
@@ -122,7 +125,7 @@ public class WriteToPoolImpl implements IWriteToPool {
     /**
      * 将写入item的信息全部刷入资源池
      */
-    public void flushSave(){
+    public void flushSave() {
         for (int i = 0; i < itemIndex; i++) {
             itemBuffer.add(itemWriteBuffer[i]);
             itemWriteBuffer[i] = null;

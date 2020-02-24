@@ -24,17 +24,17 @@ public class ReadFromPoolImpl implements IReadFromPool {
     private ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
 
     //读取缓存区的大小,默认值40
-    private static Integer readBuffer = Configure.getIOReadBuffer() == null?40:Configure.getIOReadBuffer();
+    private static Integer readBuffer = Configure.getIOReadBuffer() == null ? 40 : Configure.getIOReadBuffer();
 
     //按批读取时的批数 req
-    private static Integer reqBatchNumber = Configure.getReqControllerThreadNumber()==null?Configure.getControllerNumber()
-            :Configure.getReqControllerThreadNumber();
+    private static Integer reqBatchNumber = Configure.getReqControllerThreadNumber() == null ? Configure.getControllerNumber()
+            : Configure.getReqControllerThreadNumber();
     //按批读取时的批数 save
-    private static Integer saveBatchNumber = Configure.getSaveControllerThreadNumber()==null?Configure.getControllerNumber()
-            :Configure.getSaveControllerThreadNumber();
+    private static Integer saveBatchNumber = Configure.getSaveControllerThreadNumber() == null ? Configure.getControllerNumber()
+            : Configure.getSaveControllerThreadNumber();
     //按批读取时的批数 parse
-    private static Integer parseBatchNumber = Configure.getParseControllerThreadNumber()==null?Configure.getControllerNumber()
-            :Configure.getParseControllerThreadNumber();
+    private static Integer parseBatchNumber = Configure.getParseControllerThreadNumber() == null ? Configure.getControllerNumber()
+            : Configure.getParseControllerThreadNumber();
 
     //url读取缓存
     private ConcurrentLinkedQueue[] urlReadBuffer = null;
@@ -50,15 +50,15 @@ public class ReadFromPoolImpl implements IReadFromPool {
     private static Logger logger = Logger.getLogger(ReadFromPoolImpl.class);
 
 
-
     public ReadFromPoolImpl() {
         this(null);
     }
+
     public ReadFromPoolImpl(Integer bufferSize) {
-        reqBatchNumber = reqBatchNumber==null?10:reqBatchNumber;
-        parseBatchNumber = parseBatchNumber==null?10:parseBatchNumber;
-        saveBatchNumber =parseBatchNumber==null?10:saveBatchNumber;
-        readBuffer = bufferSize==null?readBuffer:bufferSize;
+        reqBatchNumber = reqBatchNumber == null ? 10 : reqBatchNumber;
+        parseBatchNumber = parseBatchNumber == null ? 10 : parseBatchNumber;
+        saveBatchNumber = parseBatchNumber == null ? 10 : saveBatchNumber;
+        readBuffer = bufferSize == null ? readBuffer : bufferSize;
         //创建缓存数组
         urlReadBuffer = new ConcurrentLinkedQueue[readBuffer];
         htmlReadBuffer = new ConcurrentHashMap[readBuffer];
@@ -68,16 +68,16 @@ public class ReadFromPoolImpl implements IReadFromPool {
     @Override
     public ConcurrentLinkedQueue<String> readForReq() {
         //当缓存区中没有数据或者数据为null时，从池子中导入数据
-        if(urlReadBuffer.length <= urlIndex || urlReadBuffer[urlIndex]==null){
+        if (urlReadBuffer.length <= urlIndex || urlReadBuffer[urlIndex] == null) {
             //如果池子中没有数据，直接返回null
-            if(urlBuffer.size()==0){
+            if (urlBuffer.size() == 0) {
                 return null;
             }
-            for(int i = 0;i < readBuffer;i++){
-                if(urlBuffer.size()>0) {
+            for (int i = 0; i < readBuffer; i++) {
+                if (urlBuffer.size() > 0) {
                     urlReadBuffer[i] = urlBuffer.poll();
-                }else{
-                  urlReadBuffer[i] = null;
+                } else {
+                    urlReadBuffer[i] = null;
                 }
             }
             urlIndex = 0;
@@ -87,15 +87,15 @@ public class ReadFromPoolImpl implements IReadFromPool {
 
     @Override
     public ConcurrentHashMap<String, byte[]> readForParse() {
-        if(htmlReadBuffer.length <= htmlIndex || htmlReadBuffer[htmlIndex]==null){
+        if (htmlReadBuffer.length <= htmlIndex || htmlReadBuffer[htmlIndex] == null) {
             //如果池子中没有数据，直接返回null
-            if(htmlBuffer.size()==0){
+            if (htmlBuffer.size() == 0) {
                 return null;
             }
-            for(int i = 0;i < readBuffer;i++){
-                if(htmlBuffer.size()>0) {
+            for (int i = 0; i < readBuffer; i++) {
+                if (htmlBuffer.size() > 0) {
                     htmlReadBuffer[i] = htmlBuffer.poll();
-                }else{
+                } else {
                     htmlReadBuffer[i] = null;
                 }
             }
@@ -106,15 +106,15 @@ public class ReadFromPoolImpl implements IReadFromPool {
 
     @Override
     public ConcurrentHashMap<String, Item> readForSave() {
-        if(itemReadBuffer.length <= itemIndex || itemReadBuffer[itemIndex]==null){
+        if (itemReadBuffer.length <= itemIndex || itemReadBuffer[itemIndex] == null) {
             //如果池子中没有数据，直接返回null
-            if(itemBuffer.size()==0){
+            if (itemBuffer.size() == 0) {
                 return null;
             }
-            for(int i = 0;i < readBuffer;i++){
-                if(itemBuffer.size()>0) {
+            for (int i = 0; i < readBuffer; i++) {
+                if (itemBuffer.size() > 0) {
                     itemReadBuffer[i] = itemBuffer.poll();
-                }else{
+                } else {
                     itemReadBuffer[i] = null;
                 }
             }
@@ -128,7 +128,7 @@ public class ReadFromPoolImpl implements IReadFromPool {
         LinkedList<ConcurrentLinkedQueue> lists = new LinkedList<>();
         for (Integer i = 0; i < reqBatchNumber; i++) {
             ConcurrentLinkedQueue<String> strings = readForReq();
-            if(strings==null){
+            if (strings == null) {
                 break;
             }
             lists.add(strings);
@@ -141,7 +141,7 @@ public class ReadFromPoolImpl implements IReadFromPool {
         LinkedList<ConcurrentHashMap> lists = new LinkedList<>();
         for (Integer i = 0; i < parseBatchNumber; i++) {
             ConcurrentHashMap<String, byte[]> map = readForParse();
-            if(map==null){
+            if (map == null) {
                 break;
             }
             lists.add(map);
@@ -154,7 +154,7 @@ public class ReadFromPoolImpl implements IReadFromPool {
         LinkedList<ConcurrentHashMap> lists = new LinkedList<>();
         for (Integer i = 0; i < saveBatchNumber; i++) {
             ConcurrentHashMap<String, Item> map = readForSave();
-            if(map==null){
+            if (map == null) {
                 break;
             }
             lists.add(map);
@@ -164,24 +164,24 @@ public class ReadFromPoolImpl implements IReadFromPool {
 
     @Override
     public Boolean hasNextReq() {
-        return (urlIndex < readBuffer && urlReadBuffer[urlIndex]!=null) || urlBuffer.size()>0;
+        return (urlIndex < readBuffer && urlReadBuffer[urlIndex] != null) || urlBuffer.size() > 0;
     }
 
     @Override
     public Boolean hasNextParse() {
-        return (htmlIndex < readBuffer && htmlReadBuffer[htmlIndex]!=null) || htmlBuffer.size()>0;
+        return (htmlIndex < readBuffer && htmlReadBuffer[htmlIndex] != null) || htmlBuffer.size() > 0;
     }
 
     @Override
     public Boolean hashNextSave() {
-        return (itemIndex < readBuffer && itemReadBuffer[itemIndex]!=null) || itemBuffer.size()>0;
+        return (itemIndex < readBuffer && itemReadBuffer[itemIndex] != null) || itemBuffer.size() > 0;
     }
 
     @Override
     public void close() {
         //将全部数据保存进资源池
         if (urlIndex < readBuffer && urlReadBuffer[urlIndex] != null) {
-            for (int i = urlIndex; i < readBuffer && urlReadBuffer[i]!=null; i++) {
+            for (int i = urlIndex; i < readBuffer && urlReadBuffer[i] != null; i++) {
                 urlBuffer.add(urlReadBuffer[i]);
             }
         }

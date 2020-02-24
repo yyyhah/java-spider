@@ -12,7 +12,7 @@ import java.util.*;
  */
 public class Configure {
     //保存请求头信息
-    private static Map<String,String> requestHeader;
+    private static Map<String, String> requestHeader;
     //线程池的大小
     private static Integer handlerNumber = null;
     private static Integer controllerNumber = null;
@@ -29,8 +29,10 @@ public class Configure {
     private static Integer IOReadBuffer = null;
     private static Integer IOWriteBuffer = null;
     private static Integer IOReadBatchSize = null;
+    private static String encodeType = null;
     private static Logger logger = Logger.getLogger(Configure.class);
-    static{
+
+    static {
         InputStream is = RequestManager.class.getClassLoader().getResourceAsStream("config.properties");
         try {
             Properties prop = new Properties();
@@ -38,68 +40,68 @@ public class Configure {
             Set<String> strings = prop.stringPropertyNames();
             requestHeader = new HashMap<String, String>();
             for (String string : strings) {
-                if(string.startsWith("request.")){
-                    requestHeader.put(string,prop.getProperty(string));
+                if (string.startsWith("request.")) {
+                    requestHeader.put(string, prop.getProperty(string));
                 }
             }
             String temp = null;
             temp = prop.getProperty("handlerThreadNumber");
-            if(temp!=null){
+            if (temp != null) {
                 handlerNumber = Integer.parseInt(temp);
             }
             temp = prop.getProperty("controllerThreadNumber");
-            if(temp!=null){
+            if (temp != null) {
                 controllerNumber = Integer.parseInt(temp);
             }
             temp = prop.getProperty("connTimeout");
-            if(temp!=null){
+            if (temp != null) {
                 connTimeout = Integer.parseInt(temp);
             }
             temp = prop.getProperty("readTimeout");
-            if(temp!=null) {
+            if (temp != null) {
                 readTimeout = Integer.parseInt(temp);
             }
-            temp= prop.getProperty("reqBuffer");
-            if(temp!=null){
+            temp = prop.getProperty("reqBuffer");
+            if (temp != null) {
                 reqBuffer = Integer.parseInt(temp);
             }
             temp = prop.getProperty("reqControllerThreadNumber");
-            if(temp!=null){
+            if (temp != null) {
                 reqControllerThreadNumber = Integer.parseInt(temp);
             }
             temp = prop.getProperty("reqHandlerThreadNumber");
-            if(temp!=null){
+            if (temp != null) {
                 reqHandlerThreadNumber = Integer.parseInt(temp);
             }
             temp = prop.getProperty("parseControllerThreadNumber");
-            if(temp!=null){
+            if (temp != null) {
                 parseControllerThreadNumber = Integer.parseInt(temp);
             }
             temp = prop.getProperty("parseHandlerThreadNumber");
-            if(temp!=null){
+            if (temp != null) {
                 parseHandlerThreadNumber = Integer.parseInt(temp);
             }
             temp = prop.getProperty("saveControllerThreadNumber");
-            if(temp!=null){
+            if (temp != null) {
                 saveControllerThreadNumber = Integer.parseInt(temp);
             }
             temp = prop.getProperty("saveHandlerThreadNumber");
-            if(temp!=null){
+            if (temp != null) {
                 saveHandlerThreadNumber = Integer.parseInt(temp);
             }
             temp = prop.getProperty("io.readBuffer");
-            if(temp!=null){
+            if (temp != null) {
                 IOReadBuffer = Integer.parseInt(temp);
             }
             temp = prop.getProperty("io.writeBuffer");
-            if(temp!=null){
+            if (temp != null) {
                 IOWriteBuffer = Integer.parseInt(temp);
             }
             temp = prop.getProperty("io.readBatchSize");
-            if(temp!=null){
+            if (temp != null) {
                 IOReadBatchSize = Integer.parseInt(temp);
             }
-
+            encodeType = prop.getProperty("encodeType");
             protocol = prop.getProperty("protocol");
             Class.forName("com.wsf.source.Source");
 
@@ -110,7 +112,7 @@ public class Configure {
             logger.error("初始化资源池出错");
             throw new ExceptionInInitializerError("初始化资源池出错");
         } finally {
-            if(is!=null) {
+            if (is != null) {
                 try {
                     is.close();
                 } catch (IOException e) {
@@ -246,5 +248,13 @@ public class Configure {
 
     public static void setIOReadBatchSize(Integer IOReadBatchSize) {
         Configure.IOReadBatchSize = IOReadBatchSize;
+    }
+
+    public static String getEncodeType() {
+        return encodeType;
+    }
+
+    public static void setEncodeType(String encodeType) {
+        Configure.encodeType = encodeType;
     }
 }

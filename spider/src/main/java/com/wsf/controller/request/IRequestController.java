@@ -6,6 +6,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 
-public interface IRequestController extends IController<ConcurrentLinkedQueue<String>, ConcurrentHashMap<String,byte[]>> {
+public interface IRequestController extends IController<ConcurrentLinkedQueue<String>, ConcurrentHashMap<String, byte[]>> {
 //    Integer executeBatch(LinkedList<ConcurrentLinkedQueue> inBufferList);
 }
