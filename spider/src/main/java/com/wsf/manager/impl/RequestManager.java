@@ -4,9 +4,13 @@ package com.wsf.manager.impl;
 import com.wsf.controller.request.impl.RequestControllerImpl;
 import com.wsf.factory.RequestFactory;
 import com.wsf.manager.IHandlerManager;
+import com.wsf.request.RequestBean;
 
-import java.util.LinkedList;
+import org.apache.log4j.Logger;
+
+import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.*;
 
 /**
@@ -15,8 +19,6 @@ import java.util.concurrent.*;
 public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<String>,ConcurrentHashMap<String,byte[]>> {
     //线程池
     private ExecutorService executorService;
-    //请求器和控制器之间的缓冲区(单向) 请求器->控制器
-    private ConcurrentHashMap<String,byte[]> outBuffer;
     //控制器和请求器之间的缓冲区(单向) 控制器->请求器 conReqBuffer;
     private ConcurrentLinkedQueue<String> inBuffer;
     //RequestBean工厂类
@@ -52,8 +54,7 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
         //创建线程池
         executorService = Executors.newFixedThreadPool(size);
         //设置请求头，创建request工厂
-        factory = new RequestFactory(this.outBuffer,this.connTimeout,this.readTimeout,this.requestHeader);
-        System.out.println("RequestManager:当前线程池线程数目："+size);
+        factory = new RequestFactory(this.connTimeout,this.readTimeout,this.requestHeader);
     }
 
     /**
@@ -113,15 +114,6 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
         this.size = size;
     }
 
-    public ConcurrentHashMap<String, byte[]> getOutBuffer() {
-        return outBuffer;
-    }
-
-    public void setOutBuffer(ConcurrentHashMap<String, byte[]> outBuffer) {
-        this.outBuffer = outBuffer;
-        factory.setOutBuffer(outBuffer);
-    }
-
     public ConcurrentLinkedQueue<String> getInBuffer() {
         return inBuffer;
     }
@@ -132,34 +124,34 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
 
     @Override
     public void run() {
-        if(outBuffer==null){
-            throw new RuntimeException("RequestManager的outBuffer为空,请设置");
-        }
         if(inBuffer==null||inBuffer.size()==0){
             System.out.println("RequestManager的inBuffer为空");
             return;
         }
-        LinkedList<Future> lists = new LinkedList<Future>();
-
+        Map<Future,String> lists = new HashMap<>();
         while(inBuffer.size()>0){
             //从缓存区中获取一个url链接,并弹出
             String url = inBuffer.poll();
             //开启请求线程
-            Future future = executorService.submit(factory.getRequestBean(url));
-            lists.add(future);
+            RequestBean requestBean = factory.getRequestBean(url);
+            Future<Object[]> future = executorService.submit(requestBean);
+            lists.put(future,url);
         }
-        System.out.println("RequestManager中的线程池:"+executorService);
+        System.out.println("RequestManager等待关闭前:"+executorService);
+        ConcurrentHashMap<String,byte[]> outBuffer = new ConcurrentHashMap<>();
         //阻塞线程，等待全部子线程执行完毕
-        for (Future list : lists) {
+        Set<Map.Entry<Future, String>> entries = lists.entrySet();
+        for (Map.Entry<Future, String> entry : entries) {
             try {
-                list.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
+                Object[] ret = (Object[])entry.getKey().get();
+                outBuffer.put((String) ret[0], (byte[]) ret[1]);
+            } catch (Exception e) {
+                Logger logger = Logger.getLogger(getClass());
+                logger.error("requestManager,id为"+manaferId+"执行线程"+Thread.currentThread()+"出错");
+                outBuffer.put(entry.getValue(),new byte[]{0});
             }
         }
-        System.out.println("RequestManager中的线程池:"+executorService);
+        System.out.println("RequestManager等待关闭后:"+executorService);
         RequestControllerImpl.finish(outBuffer,manaferId);
     }
 }

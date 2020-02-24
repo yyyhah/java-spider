@@ -12,14 +12,6 @@ import java.util.concurrent.ExecutionException;
 public interface IController<T,E>{
 
 
-
-    /**
-     * 创建一块存放处理器处理完返回控制器结果的缓存区
-     * @return
-     */
-     E createOutBuffer();
-
-
     /**
      * 初始化控制器
      */
@@ -29,7 +21,7 @@ public interface IController<T,E>{
      * 处理一条请求操作
      * @return 表示当前传入的信息，剩下几条未执行，如果未0 表示正常
      */
-    Integer execute(T t) throws ExecutionException, InterruptedException;
+    Integer execute(T t);
 
     /**
      * 销毁控制器
@@ -37,9 +29,15 @@ public interface IController<T,E>{
     void destroy();
 
     /**
-     * 判断当前控制器的管理器是否空闲
+     * 判断当前控制器的管理器是否有空闲线程
      * @return
      */
     Boolean isIdle();
+
+    /**
+     * 当前运行队列是否为空
+     * @return
+     */
+    Boolean isEmpty();
 
 }

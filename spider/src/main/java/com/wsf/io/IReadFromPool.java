@@ -48,7 +48,29 @@ public interface IReadFromPool{
     LinkedList<ConcurrentHashMap> readForSaveBatch();
 
     /**
+     * 判断url池中是否还有数据
+     * @return true 还有数据 false 没有数据
+     */
+    Boolean hasNextReq();
+
+    /**
+     * 判断html池中是否还有数据
+     * @return true 还有数据 false 没有数据
+     */
+    Boolean hasNextParse();
+    /**
+     * 判断item池中是否还有数据
+     * @return true 还有数据 false 没有数据
+     */
+    Boolean hashNextSave();
+    /**
      * 关闭读取器，将缓存区中的数据放回数据池子
      */
     void close();
+
+    /**
+     * 判断当前流是否关闭
+     * @return
+     */
+    Boolean isClosed();
 }

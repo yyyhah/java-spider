@@ -37,4 +37,11 @@ public interface IWriteToPool{
      * 刷新读取器
      */
     void flush();
+
+
+    /**
+     * 判断当前流是否关闭
+     * @return
+     */
+    Boolean isClosed();
 }

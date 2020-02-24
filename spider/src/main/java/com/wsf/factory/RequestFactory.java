@@ -8,13 +8,11 @@ import java.util.Map;
  * 获取RequestBean对象的工厂类，多例
  */
 public class RequestFactory {
-    private Map<String,byte[]> outBuffer;
     private Map<String, String> requestHeader;
     private Integer connTimeout = null;
     private Integer readTimeout = null;
 
-    public RequestFactory(Map<String,byte[]> outBuffer,Integer connTimeout,Integer readTimeout,Map<String, String> requestHeader) {
-        this.outBuffer = outBuffer;
+    public RequestFactory(Integer connTimeout,Integer readTimeout,Map<String, String> requestHeader) {
         this.requestHeader = requestHeader;
         //如果超时不为0 设置超时
         if(connTimeout!=null){
@@ -24,15 +22,6 @@ public class RequestFactory {
             setReadTimeout(readTimeout);
         }
     }
-
-    public Map<String, byte[]> getOutBuffer() {
-        return outBuffer;
-    }
-
-    public void setOutBuffer(Map<String, byte[]> outBuffer) {
-        this.outBuffer = outBuffer;
-    }
-
     public Map<String, String> getRequestHeader() {
         return requestHeader;
     }
@@ -81,6 +70,6 @@ public class RequestFactory {
      */
     public  RequestBean getRequestBean(String url){
         //这里直接new创建对象好了，反射的话虽然耦合低，但是会慢挺多的。
-        return new RequestBean(url,outBuffer,requestHeader);
+        return new RequestBean(url,requestHeader);
     }
 }

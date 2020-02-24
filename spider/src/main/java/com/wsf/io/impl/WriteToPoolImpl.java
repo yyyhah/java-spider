@@ -1,5 +1,6 @@
 package com.wsf.io.impl;
 
+import com.wsf.config.Configure;
 import com.wsf.domain.Item;
 import com.wsf.io.IWriteToPool;
 import com.wsf.source.Source;
@@ -13,25 +14,26 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @SuppressWarnings("all")
 public class WriteToPoolImpl implements IWriteToPool {
     //url池
-    private ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer = Source.getUrlBuffer();
+    private  ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer = Source.getUrlBuffer();
     //html池
-    private ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer = Source.getHtmlBuffer();
+    private  ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer = Source.getHtmlBuffer();
     //item池
-    private ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
+    private  ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
 
     //写入缓存区的大小,默认值40
-    private static Integer writeBuffer = 40;
+    private static Integer writeBuffer = Configure.getIOWriteBuffer()==null?40:Configure.getIOWriteBuffer();
 
     //url读取缓存
-    private static ConcurrentLinkedQueue[] urlWriteBuffer = null;
-    private static Integer urlIndex = 0;
+    private ConcurrentLinkedQueue[] urlWriteBuffer = null;
+    private Integer urlIndex = 0;
     //html读取缓存
-    private static ConcurrentHashMap[] htmlWriteBuffer = null;
-    private static Integer htmlIndex = 0;
+    private ConcurrentHashMap[] htmlWriteBuffer = null;
+    private Integer htmlIndex = 0;
     //item读取缓存
-    private static ConcurrentHashMap[] itemWriteBuffer = null;
-    private static Integer itemIndex = 0;
+    private ConcurrentHashMap[] itemWriteBuffer = null;
+    private Integer itemIndex = 0;
 
+    private boolean closed = false;
     public WriteToPoolImpl() {
         this(null);
     }
@@ -88,9 +90,10 @@ public class WriteToPoolImpl implements IWriteToPool {
     @Override
     public void close() {
         flush();
-        urlBuffer = null;
-        itemBuffer = null;
+        closed = true;
         htmlBuffer = null;
+        itemBuffer = null;
+        urlBuffer = null;
     }
 
     /**
@@ -132,5 +135,10 @@ public class WriteToPoolImpl implements IWriteToPool {
         flushSave();
         flushParse();
         flushReq();
+    }
+
+    @Override
+    public Boolean isClosed() {
+        return this.closed;
     }
 }

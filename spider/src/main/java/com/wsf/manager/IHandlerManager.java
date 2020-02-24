@@ -56,10 +56,6 @@ public interface IHandlerManager<E,T> extends Runnable{
      */
     void setReadTimeout(Integer readTimeout);
 
-    T getOutBuffer();
-
-    void setOutBuffer(T outBuffer);
-
     E getInBuffer();
 
     void setInBuffer(E inBuffer);

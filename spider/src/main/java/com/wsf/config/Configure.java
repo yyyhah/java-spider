@@ -1,7 +1,7 @@
 package com.wsf.config;
 
 import com.wsf.manager.impl.RequestManager;
-import com.wsf.source.Source;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -26,6 +26,10 @@ public class Configure {
     private static Integer parseHandlerThreadNumber = null;
     private static Integer saveControllerThreadNumber = null;
     private static Integer saveHandlerThreadNumber = null;
+    private static Integer IOReadBuffer = null;
+    private static Integer IOWriteBuffer = null;
+    private static Integer IOReadBatchSize = null;
+    private static Logger logger = Logger.getLogger(Configure.class);
     static{
         InputStream is = RequestManager.class.getClassLoader().getResourceAsStream("config.properties");
         try {
@@ -83,20 +87,34 @@ public class Configure {
             if(temp!=null){
                 saveHandlerThreadNumber = Integer.parseInt(temp);
             }
+            temp = prop.getProperty("io.readBuffer");
+            if(temp!=null){
+                IOReadBuffer = Integer.parseInt(temp);
+            }
+            temp = prop.getProperty("io.writeBuffer");
+            if(temp!=null){
+                IOWriteBuffer = Integer.parseInt(temp);
+            }
+            temp = prop.getProperty("io.readBatchSize");
+            if(temp!=null){
+                IOReadBatchSize = Integer.parseInt(temp);
+            }
+
             protocol = prop.getProperty("protocol");
             Class.forName("com.wsf.source.Source");
 
         } catch (IOException e) {
-            throw new ExceptionInInitializerError("线程池初始化错误！");
+            logger.error("配置文件读取出错");
+            throw new ExceptionInInitializerError("配置文件读取出错");
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("初始化资源池出错");
             throw new ExceptionInInitializerError("初始化资源池出错");
         } finally {
             if(is!=null) {
                 try {
                     is.close();
                 } catch (IOException e) {
-                    e.printStackTrace();
+                    logger.error("关闭配置文件输入流出错");
                 }
             }
         }
@@ -204,5 +222,29 @@ public class Configure {
 
     public static void setSaveHandlerThreadNumber(Integer saveHandlerThreadNumber) {
         Configure.saveHandlerThreadNumber = saveHandlerThreadNumber;
+    }
+
+    public static Integer getIOReadBuffer() {
+        return IOReadBuffer;
+    }
+
+    public static void setIOReadBuffer(Integer IOReadBuffer) {
+        Configure.IOReadBuffer = IOReadBuffer;
+    }
+
+    public static Integer getIOWriteBuffer() {
+        return IOWriteBuffer;
+    }
+
+    public static void setIOWriteBuffer(Integer IOWriteBuffer) {
+        Configure.IOWriteBuffer = IOWriteBuffer;
+    }
+
+    public static Integer getIOReadBatchSize() {
+        return IOReadBatchSize;
+    }
+
+    public static void setIOReadBatchSize(Integer IOReadBatchSize) {
+        Configure.IOReadBatchSize = IOReadBatchSize;
     }
 }

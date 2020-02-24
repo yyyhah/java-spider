@@ -2,7 +2,6 @@ package com.wsf.controller.request;
 
 import com.wsf.controller.IController;
 
-import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -12,15 +11,16 @@ import java.util.concurrent.ExecutionException;
  */
 public interface ICenterController extends IController {
 
-    //请求器执行一组数据
+    /**
+     * 请求器执行一组数据
+     */
     void startOneRequest();
-    //请求器执行多组数据
-    void startBatchRequest();
+//
+//    /**
+//     * 请求器执行多组数据
+//     */
+//    void startBatchRequest();
 
-    @Override
-    default Object createOutBuffer() {
-        return null;
-    }
 
     @Override
     default void init() {
@@ -28,7 +28,7 @@ public interface ICenterController extends IController {
     }
 
     @Override
-    default Integer execute(Object o) throws ExecutionException, InterruptedException {
+    default Integer execute(Object o){
         return null;
     }
 
@@ -37,7 +37,14 @@ public interface ICenterController extends IController {
 
     }
 
+    @Override
     default Boolean isIdle(){
         return null;
     }
+
+    @Override
+    default Boolean isEmpty(){
+        return null;
+    }
+
 }

@@ -2,11 +2,16 @@ package com.wsf.io;
 
 import com.wsf.config.Configure;
 import com.wsf.domain.Item;
+import com.wsf.factory.IOFactory;
 import com.wsf.io.impl.ReadFromPoolImpl;
 import com.wsf.io.impl.WriteToPoolImpl;
+import com.wsf.source.Source;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.io.FileInputStream;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -14,12 +19,12 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class IOTest {
     private IWriteToPool write;
     private IReadFromPool read;
-    @Before
-    public void init() throws ClassNotFoundException {
-        Class.forName("com.wsf.config.Configure");
-        write = new WriteToPoolImpl();
-        read = new ReadFromPoolImpl(Configure.getReqBuffer());
-    }
+//    @Before
+//    public void init() throws ClassNotFoundException {
+//        Class.forName("com.wsf.config.Configure");
+//        write = new WriteToPoolImpl();
+//        read = new ReadFromPoolImpl(Configure.getReqBuffer());
+//    }
     @Test
     public void testIOForRequest(){
         for (int i = 0; i < 50; i++) {
@@ -156,4 +161,33 @@ public class IOTest {
             System.out.println(concurrentLinkedQueue2);
         }
     }
+    @Test
+    public void testIOFactory(){
+        IReadFromPool readProxy = IOFactory.getReadConnect(40);
+        IWriteToPool writeProxy = IOFactory.getWriteConnect();
+        ConcurrentLinkedQueue<String> list = new ConcurrentLinkedQueue<>();
+        list.add("翁寿发");
+        writeProxy.writeToReq(list);
+        writeProxy.flush();
+        writeProxy.close();
+        System.out.println(writeProxy.isClosed());
+        writeProxy.writeToReq(list);
+        System.out.println(readProxy.readForReq()+"。。。。。。。。。。。。");
+    }
+
+
+
+    @Test
+    public void test() throws ClassNotFoundException {
+        Class.forName("com.wsf.source.Source");
+        ConcurrentLinkedQueue list1 = Source.getUrlBuffer();
+        list1 = null;
+        ConcurrentLinkedQueue list2 = Source.getUrlBuffer();
+        System.out.println(list2);
+        List<Integer> integers = List.of(1, 2, 3, 4);
+        List list3 = integers;
+        List list4 = integers;
+        System.out.println(list3==list4);
+    }
+
 }

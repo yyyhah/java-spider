@@ -4,13 +4,14 @@ import com.wsf.config.Configure;
 import com.wsf.domain.Item;
 import com.wsf.io.IReadFromPool;
 import com.wsf.source.Source;
+import org.apache.log4j.Logger;
 
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
- * 从资源池读取数据接口实现类,单例,线程不安全，不过我程序中不会出现并发调用的情况，所以也没关系
+ * 从资源池读取数据接口实现类
  */
 
 @SuppressWarnings("all")
@@ -23,7 +24,7 @@ public class ReadFromPoolImpl implements IReadFromPool {
     private ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
 
     //读取缓存区的大小,默认值40
-    private static Integer readBuffer = 40;
+    private static Integer readBuffer = Configure.getIOReadBuffer() == null?40:Configure.getIOReadBuffer();
 
     //按批读取时的批数 req
     private static Integer reqBatchNumber = Configure.getReqControllerThreadNumber()==null?Configure.getControllerNumber()
@@ -36,15 +37,17 @@ public class ReadFromPoolImpl implements IReadFromPool {
             :Configure.getParseControllerThreadNumber();
 
     //url读取缓存
-    private static ConcurrentLinkedQueue[] urlReadBuffer = null;
+    private ConcurrentLinkedQueue[] urlReadBuffer = null;
     //表示缓存数组下标
-    private static int urlIndex = 0;
+    private int urlIndex = 0;
     //html读取缓存
-    private static ConcurrentHashMap[] htmlReadBuffer = null;
-    private static int htmlIndex = 0;
+    private ConcurrentHashMap[] htmlReadBuffer = null;
+    private int htmlIndex = 0;
     //item读取缓存
-    private static ConcurrentHashMap[] itemReadBuffer = null;
-    private static int itemIndex = 0;
+    private ConcurrentHashMap[] itemReadBuffer = null;
+    private int itemIndex = 0;
+    private boolean closed = false;
+    private static Logger logger = Logger.getLogger(ReadFromPoolImpl.class);
 
 
 
@@ -160,25 +163,46 @@ public class ReadFromPoolImpl implements IReadFromPool {
     }
 
     @Override
+    public Boolean hasNextReq() {
+        return (urlIndex < readBuffer && urlReadBuffer[urlIndex]!=null) || urlBuffer.size()>0;
+    }
+
+    @Override
+    public Boolean hasNextParse() {
+        return (htmlIndex < readBuffer && htmlReadBuffer[htmlIndex]!=null) || htmlBuffer.size()>0;
+    }
+
+    @Override
+    public Boolean hashNextSave() {
+        return (itemIndex < readBuffer && itemReadBuffer[itemIndex]!=null) || itemBuffer.size()>0;
+    }
+
+    @Override
     public void close() {
         //将全部数据保存进资源池
-        if(urlIndex < readBuffer && urlReadBuffer[urlIndex]!=null) {
-            for (int i = urlIndex; i < readBuffer; i++) {
+        if (urlIndex < readBuffer && urlReadBuffer[urlIndex] != null) {
+            for (int i = urlIndex; i < readBuffer && urlReadBuffer[i]!=null; i++) {
                 urlBuffer.add(urlReadBuffer[i]);
             }
         }
-        if(itemIndex < readBuffer && itemReadBuffer[itemIndex]!=null){
-            for (int i = itemIndex; i < readBuffer; i++) {
+        if (itemIndex < readBuffer && itemReadBuffer[itemIndex] != null) {
+            for (int i = itemIndex; i < readBuffer && itemReadBuffer[i] != null; i++) {
                 itemBuffer.add(itemReadBuffer[i]);
             }
         }
-        if(htmlIndex < readBuffer && htmlReadBuffer[htmlIndex]!=null){
-            for (int i = htmlIndex; i < readBuffer; i++) {
+        if (htmlIndex < readBuffer && htmlReadBuffer[htmlIndex] != null) {
+            for (int i = htmlIndex; i < readBuffer && htmlReadBuffer[i] != null; i++) {
                 htmlBuffer.add(htmlReadBuffer[i]);
             }
         }
-        urlBuffer = null;
-        itemBuffer = null;
+        this.closed = true;
         htmlBuffer = null;
+        itemBuffer = null;
+        urlBuffer = null;
+    }
+
+    @Override
+    public Boolean isClosed() {
+        return this.closed;
     }
 }
