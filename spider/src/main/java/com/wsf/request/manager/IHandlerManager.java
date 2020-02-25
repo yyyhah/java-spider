@@ -1,4 +1,4 @@
-package com.wsf.manager;
+package com.wsf.request.manager;
 
 import java.util.concurrent.ExecutorService;
 

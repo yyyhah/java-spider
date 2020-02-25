@@ -1,10 +1,10 @@
-package com.wsf.manager.impl;
+package com.wsf.request.manager.impl;
 
 
 import com.wsf.controller.request.impl.RequestControllerImpl;
-import com.wsf.factory.RequestFactory;
-import com.wsf.manager.IHandlerManager;
-import com.wsf.request.RequestBean;
+import com.wsf.factory.request.RequestFactory;
+import com.wsf.request.manager.IHandlerManager;
+import com.wsf.request.bean.RequestBean;
 
 import org.apache.log4j.Logger;
 

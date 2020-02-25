@@ -1,18 +1,18 @@
-package com.wsf.controller.request.impl;
+package com.wsf.controller.center.impl;
 
 import com.wsf.config.Configure;
-import com.wsf.controller.request.ICenterController;
+import com.wsf.controller.center.ICenterController;
 import com.wsf.controller.request.IRequestController;
-import com.wsf.factory.IOFactory;
+import com.wsf.controller.request.impl.RequestControllerImpl;
+import com.wsf.factory.io.IOFactory;
 import com.wsf.io.IReadFromPool;
 import org.apache.log4j.Logger;
 
-import java.util.LinkedList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class CenterControllerImpl implements ICenterController {
     //与资源池的接口
-    private IReadFromPool fromPool = null;
+    private IReadFromPool urlReader = null;
     private IRequestController requestController = null;
     private Logger logger = Logger.getLogger(getClass());
 
@@ -45,37 +45,18 @@ public class CenterControllerImpl implements ICenterController {
         }
     }
 
-//    public void startBatchRequest(){
-//        LinkedList<ConcurrentLinkedQueue> inBufferList = fromPool.readForReqBatch();
-//        if(inBufferList!=null && inBufferList.size()>0) {
-//            Integer executeNum = requestController.executeBatch(inBufferList);
-//            if(executeNum<=0) {
-//                logger.warn("管理器繁忙");
-//                while(!requestController.isEmpty()) {
-//                    try {
-//                        Thread.sleep(2000);
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//        }else{
-//            logger.warn("url池中没数据了");
-//        }
-//    }
-
 
     //让请求器控制器读取一次资源池，然后执行请求访问
     @Override
     public void startOneRequest() {
-        ConcurrentLinkedQueue<String> inBuffer = fromPool.readForReq();
+        ConcurrentLinkedQueue<String> inBuffer = (ConcurrentLinkedQueue) urlReader.read();
         executeRequest(inBuffer);
     }
 
     @Override
     public void init() {
         //初始化读取器
-        fromPool = IOFactory.getReadConnect(Configure.getReqBuffer());
+        urlReader = IOFactory.getReqReadConnect(Configure.getReqBuffer(),diskSave);
         //创建请求器调度器
         requestController = new RequestControllerImpl();
         //初始化请求器调度器
@@ -93,7 +74,6 @@ public class CenterControllerImpl implements ICenterController {
             }
         }
         requestController.destroy();
-        fromPool.close();
-
+        urlReader.close();
     }
 }

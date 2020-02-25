@@ -3,10 +3,10 @@ package com.wsf.controller.request.impl;
 
 import com.wsf.config.Configure;
 import com.wsf.controller.request.IRequestController;
-import com.wsf.factory.IOFactory;
-import com.wsf.factory.ManagerFactory;
+import com.wsf.factory.io.IOFactory;
+import com.wsf.factory.request.ManagerFactory;
 import com.wsf.io.IWriteToPool;
-import com.wsf.manager.impl.RequestManager;
+import com.wsf.request.manager.impl.RequestManager;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -38,7 +38,7 @@ public class RequestControllerImpl implements IRequestController {
         managerPool = Executors.newFixedThreadPool(managerNumber);
 
         //导入资源池
-        toResource = new IOFactory().getWriteConnect();
+        toResource = new IOFactory().getReqWriteConnect(diskSave);
         //创建子管理器,之所以要先创建，主要是为了能重复利用子管理器。
         for (int i = 0; i < managerNumber; i++) {
             RequestManager manager = ManagerFactory.getRequestManager(i, Configure.getConnTimeout(), Configure.getReadTimeout(), Configure.getRequestHeader(), Configure.getHandlerNumber());
@@ -78,20 +78,6 @@ public class RequestControllerImpl implements IRequestController {
             }
         }
     }
-//    @Override
-//    public Integer executeBatch(LinkedList<ConcurrentLinkedQueue> inBufferList){
-//        if (waitManager.size() == 0) {
-//            return -1;
-//        } else {
-//            for (ConcurrentLinkedQueue inBuffer : inBufferList) {
-//                if(execute(inBuffer)>0){
-//                    inBuffer.remove();
-//                }
-//            }
-//            return waitManager.size();
-//        }
-//    }
-
 
     /**
      * 为了避免竞争manager资源，这里需要加锁
@@ -120,7 +106,7 @@ public class RequestControllerImpl implements IRequestController {
      * @param outBuffer
      */
     public static void setResource(ConcurrentHashMap<String, byte[]> outBuffer) {
-        toResource.writeToParse(outBuffer);
+        toResource.write(outBuffer);
     }
 
     public static Integer getManagerNumber() {

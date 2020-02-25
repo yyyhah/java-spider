@@ -1,7 +1,6 @@
 package com.wsf.controller;
 
-import java.util.LinkedHashMap;
-import java.util.concurrent.ExecutionException;
+import com.wsf.config.Configure;
 
 /**
  * 该接口为控制器接口，主要基本功能有
@@ -11,7 +10,8 @@ import java.util.concurrent.ExecutionException;
  */
 public interface IController<T, E> {
 
-
+    //设置是否开启磁盘存储
+    Boolean diskSave = Configure.getDiskSave();
     /**
      * 初始化控制器
      */

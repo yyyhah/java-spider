@@ -1,10 +1,10 @@
 package com.wsf.request;
 
 import com.wsf.config.Configure;
-import com.wsf.factory.ManagerFactory;
+import com.wsf.factory.request.ManagerFactory;
 import com.wsf.io.IReadFromPool;
-import com.wsf.io.impl.ReadFromPoolImpl;
-import com.wsf.manager.impl.RequestManager;
+import com.wsf.io.impl.ReadFromHTMLImpl;
+import com.wsf.request.manager.impl.RequestManager;
 import org.junit.Test;
 
 import java.util.LinkedHashMap;
@@ -22,8 +22,8 @@ public class RequestManagerTest {
         manager.init();
         new Thread(manager).start();
         Thread.sleep(100000);
-        IReadFromPool read = new ReadFromPoolImpl(Configure.getReqBuffer());
-        ConcurrentHashMap<String, byte[]> map = read.readForParse();
+        IReadFromPool read = new ReadFromHTMLImpl(Configure.getReqBuffer());
+        ConcurrentHashMap<String, byte[]> map = (ConcurrentHashMap<String, byte[]>) read.read();
         System.out.println(new String(map.get("https://cn/tp_up/vie")));
     }
 }

@@ -1,6 +1,8 @@
 package com.wsf.domain;
 
-public class HtmlInfo {
+import java.io.Serializable;
+
+public class HtmlInfo implements Serializable {
     private String charset;
 
     public String getCharset() {

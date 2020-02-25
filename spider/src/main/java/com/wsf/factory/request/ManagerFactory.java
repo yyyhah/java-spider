@@ -1,11 +1,11 @@
-package com.wsf.factory;
+package com.wsf.factory.request;
 
-import com.wsf.manager.impl.RequestManager;
+import com.wsf.request.manager.impl.RequestManager;
 
 import java.util.Map;
 
 /**
- * 该工厂用于获取管理器对象
+ * 该工厂用于获取request管理器对象
  */
 public class ManagerFactory {
     /**

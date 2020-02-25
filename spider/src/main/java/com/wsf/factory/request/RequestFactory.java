@@ -1,6 +1,6 @@
-package com.wsf.factory;
+package com.wsf.factory.request;
 
-import com.wsf.request.RequestBean;
+import com.wsf.request.bean.RequestBean;
 
 import java.util.Map;
 

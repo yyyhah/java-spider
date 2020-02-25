@@ -1,10 +1,9 @@
 package com.wsf.controller;
 
 import com.wsf.config.Configure;
-import com.wsf.controller.request.impl.CenterControllerImpl;
-import com.wsf.io.IReadFromPool;
-import com.wsf.io.impl.ReadFromPoolImpl;
-import com.wsf.io.impl.WriteToPoolImpl;
+import com.wsf.controller.center.impl.CenterControllerImpl;
+import com.wsf.io.impl.ReadFromHTMLImpl;
+import com.wsf.io.impl.WriteToURLImpl;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -18,8 +17,8 @@ public class CenterControllerTest {
     public void testStartOneRequest() throws ClassNotFoundException {
         //加载匹配
         Class.forName("com.wsf.config.Configure");
-        WriteToPoolImpl write = new WriteToPoolImpl();
-        IReadFromPool read = new ReadFromPoolImpl(Configure.getReqBuffer());
+        WriteToURLImpl write = new WriteToURLImpl();
+        ReadFromHTMLImpl read = new ReadFromHTMLImpl(Configure.getReqBuffer());
 
         for (int i = 0; i < 30; i++) {
             ConcurrentLinkedQueue<String> inBuffer = new ConcurrentLinkedQueue<>();
@@ -27,9 +26,9 @@ public class CenterControllerTest {
             inBuffer.add("https://www.baidu.com");
             inBuffer.add("https://www.bilibili.com/");
             inBuffer.add("https://www.douyu.com/");
-            write.writeToReq(inBuffer);
+            write.write(inBuffer);
         }
-        write.flushReq();//记住要刷新
+        write.flush();//记住要刷新
 
         CenterControllerImpl center = new CenterControllerImpl();
         for (int i = 0; i < 30; i++) {
@@ -37,9 +36,9 @@ public class CenterControllerTest {
         }
         center.destroy();
 
-        while(read.hasNextParse()) {
+        while(read.hasNext()) {
             int i = 0;
-            LinkedList<ConcurrentHashMap> mapList = read.readForParseBatch();
+            LinkedList<ConcurrentHashMap> mapList = read.readBatch();
             for (ConcurrentHashMap map : mapList) {
                 Set<Map.Entry> set = map.entrySet();
                 System.out.print(i+":{");

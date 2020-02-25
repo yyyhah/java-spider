@@ -1,6 +1,6 @@
 package com.wsf.config;
 
-import com.wsf.manager.impl.RequestManager;
+import com.wsf.request.manager.impl.RequestManager;
 import org.apache.log4j.Logger;
 
 import java.io.IOException;
@@ -30,6 +30,11 @@ public class Configure {
     private static Integer IOWriteBuffer = null;
     private static Integer IOReadBatchSize = null;
     private static String encodeType = null;
+    private static Integer sourceSize = null;
+    private static Double maxSize = null;
+    private static Double minSize = null;
+    private static String sourceFile = null;
+    private static Boolean diskSave = null;
     private static Logger logger = Logger.getLogger(Configure.class);
 
     static {
@@ -101,6 +106,23 @@ public class Configure {
             if (temp != null) {
                 IOReadBatchSize = Integer.parseInt(temp);
             }
+            temp = prop.getProperty("sourceSize");
+            if(temp!=null){
+                sourceSize = Integer.parseInt(temp);
+            }
+            temp = prop.getProperty("maxSize");
+            if(temp!=null){
+                maxSize = Double.parseDouble(temp);
+            }
+            temp = prop.getProperty("minSize");
+            if(temp!=null){
+                minSize = Double.parseDouble(temp);
+            }
+            temp = prop.getProperty("diskSave");
+            if(temp!=null){
+                diskSave = Boolean.parseBoolean(temp);
+            }
+            sourceFile = prop.getProperty("sourceFile");
             encodeType = prop.getProperty("encodeType");
             protocol = prop.getProperty("protocol");
             Class.forName("com.wsf.source.Source");
@@ -120,6 +142,30 @@ public class Configure {
                 }
             }
         }
+    }
+
+    public static Integer getSourceSize() {
+        return sourceSize;
+    }
+
+    public static void setSourceSize(Integer sourceSize) {
+        Configure.sourceSize = sourceSize;
+    }
+
+    public static Double getMaxSize() {
+        return maxSize;
+    }
+
+    public static void setMaxSize(Double maxSize) {
+        Configure.maxSize = maxSize;
+    }
+
+    public static Double getMinSize() {
+        return minSize;
+    }
+
+    public static void setMinSize(Double minSize) {
+        Configure.minSize = minSize;
     }
 
     public static Integer getReqBuffer() {
@@ -256,5 +302,21 @@ public class Configure {
 
     public static void setEncodeType(String encodeType) {
         Configure.encodeType = encodeType;
+    }
+
+    public static String getSourceFile() {
+        return sourceFile;
+    }
+
+    public static void setSourceFile(String sourceFile) {
+        Configure.sourceFile = sourceFile;
+    }
+
+    public static Boolean getDiskSave() {
+        return diskSave;
+    }
+
+    public static void setDiskSave(Boolean diskSave) {
+        Configure.diskSave = diskSave;
     }
 }

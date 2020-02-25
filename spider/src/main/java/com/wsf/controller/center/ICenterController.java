@@ -1,4 +1,4 @@
-package com.wsf.controller.request;
+package com.wsf.controller.center;
 
 import com.wsf.controller.IController;
 

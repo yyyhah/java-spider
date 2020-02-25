@@ -1,78 +1,38 @@
 package com.wsf.io;
 
-import com.wsf.domain.Item;
+import com.wsf.config.Configure;
 
 import java.util.LinkedList;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 /**
  * 当下载的资源过大会会向磁盘读取存入文件，该接口定义
  * 向资源池读入时操作
  */
-public interface IReadFromPool {
+public interface IReadFromPool<T> {
+    Double minSize = Configure.getMinSize();
+    Integer sourceSize = Configure.getSourceSize();
+
     /**
-     * 从url池中读取 请求器输入文件
+     * 从池中读取 保存器输入文件
      *
      * @return
      */
-    ConcurrentLinkedQueue<String> readForReq();
+    T read();
 
     /**
-     * 从html池中读取 解析器输入文件
+     * 从池中批量读取
      *
      * @return
      */
-    ConcurrentHashMap<String, byte[]> readForParse();
+    LinkedList<T> readBatch();
+
 
     /**
-     * 从item池中读取 保存器输入文件
-     *
-     * @return
-     */
-    ConcurrentHashMap<String, Item> readForSave();
-
-    /**
-     * 从url池中批量读取
-     *
-     * @return
-     */
-    LinkedList<ConcurrentLinkedQueue> readForReqBatch();
-
-    /**
-     * 从html池中批量读取
-     *
-     * @return
-     */
-    LinkedList<ConcurrentHashMap> readForParseBatch();
-
-    /**
-     * 从item池中批量读取
-     *
-     * @return
-     */
-    LinkedList<ConcurrentHashMap> readForSaveBatch();
-
-    /**
-     * 判断url池中是否还有数据
+     * 判断池中是否还有数据
      *
      * @return true 还有数据 false 没有数据
      */
-    Boolean hasNextReq();
-
-    /**
-     * 判断html池中是否还有数据
-     *
-     * @return true 还有数据 false 没有数据
-     */
-    Boolean hasNextParse();
-
-    /**
-     * 判断item池中是否还有数据
-     *
-     * @return true 还有数据 false 没有数据
-     */
-    Boolean hashNextSave();
+    Boolean hasNext();
 
     /**
      * 关闭读取器，将缓存区中的数据放回数据池子
@@ -85,4 +45,17 @@ public interface IReadFromPool {
      * @return
      */
     Boolean isClosed();
+
+    /**
+     * 获取当前资源池大小
+     * @return
+     */
+    Integer getCurrentSourceSize();
+    /**
+     * 判断池子大小，如果小于设定值，尝试从内存中读取数据
+     * @return
+     */
+    default Boolean tooSamll(){
+        return  getCurrentSourceSize()<minSize*sourceSize;
+    }
 }

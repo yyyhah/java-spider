@@ -1,5 +1,6 @@
 package com.wsf.request;
 
+import com.wsf.request.bean.RequestBean;
 import org.junit.Test;
 
 import java.util.HashMap;

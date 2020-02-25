@@ -2,16 +2,13 @@ package com.wsf.io;
 
 import com.wsf.config.Configure;
 import com.wsf.domain.Item;
-import com.wsf.factory.IOFactory;
-import com.wsf.io.impl.ReadFromPoolImpl;
-import com.wsf.io.impl.WriteToPoolImpl;
+import com.wsf.factory.io.IOFactory;
+import com.wsf.io.impl.*;
 import com.wsf.source.Source;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.FileInputStream;
-import java.util.List;
-import java.util.ArrayList;
+import java.io.File;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -19,99 +16,106 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class IOTest {
     private IWriteToPool write;
     private IReadFromPool read;
-//    @Before
-//    public void init() throws ClassNotFoundException {
-//        Class.forName("com.wsf.config.Configure");
-//        write = new WriteToPoolImpl();
-//        read = new ReadFromPoolImpl(Configure.getReqBuffer());
-//    }
+    @Before
+    public void init() throws ClassNotFoundException {
+        Class.forName("com.wsf.config.Configure");
+
+    }
     @Test
     public void testIOForRequest(){
+        write = new WriteToURLImpl();
+        read = new ReadFromUrlImpl(Configure.getReqBuffer());
         for (int i = 0; i < 50; i++) {
             ConcurrentLinkedQueue<String> list = new ConcurrentLinkedQueue<>();
             list.add("翁寿发"+i);
-            write.writeToReq(list);
+            write.write(list);
         }
         write.flush();
 
 
         for (int i = 0; i < 50; i++) {
-            System.out.println(i+":"+read.readForReq());
+            System.out.println(i+":"+read.read());
         }
 
         for (int i = 50; i < 100; i++) {
             ConcurrentLinkedQueue<String> list = new ConcurrentLinkedQueue<>();
             list.add("翁寿发"+i);
-            write.writeToReq(list);
+            write.write(list);
         }
         write.flush();
 
 
         for (int i = 0; i < 50; i++) {
-            System.out.println(i+":"+read.readForReq());
+            System.out.println(i+":"+read.read());
         }
     }
 
 
     @Test
     public void testIOForRequestBatch(){
+        write = new WriteToURLImpl();
+        read = new ReadFromUrlImpl(Configure.getReqBuffer());
         for (int i = 0; i < 30; i++) {
             ConcurrentLinkedQueue<String> list = new ConcurrentLinkedQueue<>();
             list.add("翁寿发"+i);
-            write.writeToReq(list);
+            write.write(list);
         }
         write.flush();
 
-        LinkedList<ConcurrentLinkedQueue> concurrentLinkedQueues = read.readForReqBatch();
+        LinkedList<ConcurrentLinkedQueue> concurrentLinkedQueues = read.readBatch();
         for (ConcurrentLinkedQueue concurrentLinkedQueue : concurrentLinkedQueues) {
             System.out.println(concurrentLinkedQueue);
         }
         System.out.println("-------------------------------------------------");
-        LinkedList<ConcurrentLinkedQueue> concurrentLinkedQueues2 = read.readForReqBatch();
+        LinkedList<ConcurrentLinkedQueue> concurrentLinkedQueues2 = read.readBatch();
         for (ConcurrentLinkedQueue concurrentLinkedQueue2 : concurrentLinkedQueues2) {
             System.out.println(concurrentLinkedQueue2);
         }
     }
     @Test
     public void testIOForParse(){
+        write = new WriteToHTMLImpl();
+        read = new ReadFromHTMLImpl(Configure.getReqBuffer());
         for (int i = 0; i < 50; i++) {
             ConcurrentHashMap<String,byte[]> map = new ConcurrentHashMap<>();
             map.put("翁寿发"+i,("你好"+i).getBytes());
-            write.writeToParse(map);
+            write.write(map);
         }
         write.flush();
 
 
         for (int i = 0; i < 50; i++) {
-            System.out.println(i+":"+read.readForParse());
+            System.out.println(i+":"+read.read());
         }
         for (int i = 50; i < 100; i++) {
             ConcurrentHashMap<String,byte[]> map = new ConcurrentHashMap<>();
             map.put("翁寿发"+i,("你好"+i).getBytes());
-            write.writeToParse(map);
+            write.write(map);
         }
         write.flush();
 
         for (int i = 0; i < 50; i++) {
-            System.out.println(i+":"+read.readForParse());
+            System.out.println(i+":"+read.read());
         }
     }
 
     @Test
     public void testIOForParseBatch(){
+        write = new WriteToHTMLImpl();
+        read = new ReadFromHTMLImpl(Configure.getReqBuffer());
         for (int i = 0; i < 30; i++) {
             ConcurrentHashMap<String,byte[]> map = new ConcurrentHashMap<>();
             map.put("翁寿发"+i,("你好"+i).getBytes());
-            write.writeToParse(map);
+            write.write(map);
         }
         write.flush();
 
-        LinkedList<ConcurrentHashMap> concurrentLinkedQueues = read.readForParseBatch();
+        LinkedList<ConcurrentHashMap> concurrentLinkedQueues = (LinkedList<ConcurrentHashMap>) read.readBatch();
         for (ConcurrentHashMap concurrentLinkedQueue : concurrentLinkedQueues) {
             System.out.println(concurrentLinkedQueue);
         }
         System.out.println("-------------------------------------------------");
-        LinkedList<ConcurrentHashMap> concurrentLinkedQueues2 = read.readForParseBatch();
+        LinkedList<ConcurrentHashMap> concurrentLinkedQueues2 = (LinkedList<ConcurrentHashMap>)read.readBatch();
         for (ConcurrentHashMap concurrentLinkedQueue2 : concurrentLinkedQueues2) {
             System.out.println(concurrentLinkedQueue2);
         }
@@ -121,73 +125,77 @@ public class IOTest {
 
     @Test
     public void testIOForSave() throws ClassNotFoundException {
+        write = new WriteToItemImpl();
+        read = new ReadFromItemImpl(Configure.getReqBuffer());
         for (int i = 0; i < 50; i++) {
             ConcurrentHashMap<String,Item> map = new ConcurrentHashMap<>();
             map.put("翁寿发"+i,new Item());
-            write.writeToSave(map);
+            write.write(map);
         }
 
 
         for (int i = 0; i < 50; i++) {
-            System.out.println(i+":"+read.readForSave());
+            System.out.println(i+":"+read.read());
         }
         for (int i = 50; i < 100; i++) {
             ConcurrentHashMap<String,Item> map = new ConcurrentHashMap<>();
             map.put("翁寿发"+i,new Item());
-            write.writeToSave(map);
+            write.write(map);
         }
         write.flush();
 
         for (int i = 0; i < 50; i++) {
-            System.out.println(i+":"+read.readForSave());
+            System.out.println(i+":"+read.read());
         }
     }
     @Test
     public void testIOForSaveBatch(){
+        write = new WriteToItemImpl();
+        read = new ReadFromItemImpl(Configure.getReqBuffer());
         for (int i = 0; i < 30; i++) {
             ConcurrentHashMap<String,Item> map = new ConcurrentHashMap<>();
             map.put("翁寿发"+i,new Item());
-            write.writeToSave(map);
+            write.write(map);
         }
         write.flush();
 
-        LinkedList<ConcurrentHashMap> concurrentLinkedQueues = read.readForSaveBatch();
+        LinkedList<ConcurrentHashMap> concurrentLinkedQueues = read.readBatch();
         for (ConcurrentHashMap concurrentLinkedQueue : concurrentLinkedQueues) {
             System.out.println(concurrentLinkedQueue);
         }
         System.out.println("-------------------------------------------------");
-        LinkedList<ConcurrentHashMap> concurrentLinkedQueues2 = read.readForSaveBatch();
+        LinkedList<ConcurrentHashMap> concurrentLinkedQueues2 = read.readBatch();
         for (ConcurrentHashMap concurrentLinkedQueue2 : concurrentLinkedQueues2) {
             System.out.println(concurrentLinkedQueue2);
         }
     }
     @Test
     public void testIOFactory(){
-        IReadFromPool readProxy = IOFactory.getReadConnect(40);
-        IWriteToPool writeProxy = IOFactory.getWriteConnect();
-        ConcurrentLinkedQueue<String> list = new ConcurrentLinkedQueue<>();
-        list.add("翁寿发");
-        writeProxy.writeToReq(list);
-        writeProxy.flush();
-        writeProxy.close();
-        System.out.println(writeProxy.isClosed());
-        writeProxy.writeToReq(list);
-        System.out.println(readProxy.readForReq()+"。。。。。。。。。。。。");
+        IReadFromPool readProxy = IOFactory.getReqReadConnect(40,true);
+//        IWriteToPool writeProxy = IOFactory.getSaveWriteConnect(true);
+//        ConcurrentLinkedQueue<String> list  = null;
+//        for (int i = 0;i<2000;i++) {
+//            list = new ConcurrentLinkedQueue<>();
+//            list.add("翁寿发"+i);
+//            writeProxy.write(list);
+//        }
+//        writeProxy.flush();
+//        writeProxy.close();
+//        Source.close();
+        int i = 0;
+        while(readProxy.hasNext()) {
+            System.out.println(i+":"+readProxy.read());
+            i++;
+        }
     }
 
 
 
     @Test
-    public void test() throws ClassNotFoundException {
-        Class.forName("com.wsf.source.Source");
-        ConcurrentLinkedQueue list1 = Source.getUrlBuffer();
-        list1 = null;
-        ConcurrentLinkedQueue list2 = Source.getUrlBuffer();
-        System.out.println(list2);
-        List<Integer> integers = List.of(1, 2, 3, 4);
-        List list3 = integers;
-        List list4 = integers;
-        System.out.println(list3==list4);
+    public void test(){
+        File f = new File("D://webSpider/source/item");
+        File[] files = f.listFiles(file -> file.getName().endsWith("." + "items"));
+        System.out.println(files.length);
     }
 
 }
