@@ -19,8 +19,8 @@ public class IOFactory {
      */
 
     public static IReadFromPool getReqReadConnect(Integer bufferSize,Boolean diskSave) {
-        ReadFromUrlImpl readFromPool = new ReadFromUrlImpl(bufferSize);
-        return (IReadFromPool) Proxy.newProxyInstance(ReadFromUrlImpl.class.getClassLoader(), ReadFromUrlImpl.class.getInterfaces(), new InvocationHandler() {
+        ReadFromUrl readFromPool = new ReadFromUrl(bufferSize);
+        return (IReadFromPool) Proxy.newProxyInstance(ReadFromUrl.class.getClassLoader(), ReadFromUrl.class.getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
                 String name = method.getName();
@@ -49,8 +49,8 @@ public class IOFactory {
      * @return
      */
     public static IWriteToPool getReqWriteConnect(Boolean diskSave) {
-        WriteToHTMLImpl writeToPool = new WriteToHTMLImpl();
-        return (IWriteToPool) Proxy.newProxyInstance(WriteToHTMLImpl.class.getClassLoader(), WriteToHTMLImpl.class.getInterfaces(), new InvocationHandler() {
+        WriteToHtml writeToPool = new WriteToHtml();
+        return (IWriteToPool) Proxy.newProxyInstance(WriteToHtml.class.getClassLoader(), WriteToHtml.class.getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
                 String name = method.getName();
@@ -74,8 +74,8 @@ public class IOFactory {
 
 
     public static IReadFromPool getParseReadConnect(Integer bufferSize,Boolean diskSave) {
-        ReadFromHTMLImpl readFromPool = new ReadFromHTMLImpl(bufferSize);
-        return (IReadFromPool) Proxy.newProxyInstance(ReadFromHTMLImpl.class.getClassLoader(), ReadFromHTMLImpl.class.getInterfaces(), new InvocationHandler() {
+        ReadFromHtml readFromPool = new ReadFromHtml(bufferSize);
+        return (IReadFromPool) Proxy.newProxyInstance(ReadFromHtml.class.getClassLoader(), ReadFromHtml.class.getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
                 String name = method.getName();
@@ -102,8 +102,8 @@ public class IOFactory {
      * @return
      */
     public static IWriteToPool getParseWriteConnect(Boolean diskSave) {
-        WriteToItemImpl writeToPool = new WriteToItemImpl();
-        return (IWriteToPool) Proxy.newProxyInstance(WriteToItemImpl.class.getClassLoader(), WriteToItemImpl.class.getInterfaces(), new InvocationHandler() {
+        WriteToItem writeToPool = new WriteToItem();
+        return (IWriteToPool) Proxy.newProxyInstance(WriteToItem.class.getClassLoader(), WriteToItem.class.getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
                 String name = method.getName();
@@ -126,8 +126,8 @@ public class IOFactory {
     }
 
     public static IReadFromPool getSaveReadConnect(Integer bufferSize,Boolean diskSave) {
-        ReadFromItemImpl readFromPool = new ReadFromItemImpl(bufferSize);
-        return (IReadFromPool) Proxy.newProxyInstance(ReadFromItemImpl.class.getClassLoader(), ReadFromItemImpl.class.getInterfaces(), new InvocationHandler() {
+        ReadFromItem readFromPool = new ReadFromItem(bufferSize);
+        return (IReadFromPool) Proxy.newProxyInstance(ReadFromItem.class.getClassLoader(), ReadFromItem.class.getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
                 String name = method.getName();
@@ -154,8 +154,8 @@ public class IOFactory {
      * @return
      */
     public static IWriteToPool getSaveWriteConnect(Boolean diskSave) {
-        WriteToURLImpl writeToPool = new WriteToURLImpl();
-        return (IWriteToPool) Proxy.newProxyInstance(WriteToURLImpl.class.getClassLoader(), WriteToURLImpl.class.getInterfaces(), new InvocationHandler() {
+        WriteToUrl writeToPool = new WriteToUrl();
+        return (IWriteToPool) Proxy.newProxyInstance(WriteToUrl.class.getClassLoader(), WriteToUrl.class.getInterfaces(), new InvocationHandler() {
             @Override
             public Object invoke(Object o, Method method, Object[] objects) throws Throwable {
                 String name = method.getName();

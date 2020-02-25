@@ -17,7 +17,7 @@ import java.util.concurrent.*;
  * 连接请求器的控制器实现类,单例,请求器调度器接收中央调度器的资源，访问返回资源写入资源池。
  */
 @SuppressWarnings("all")
-public class RequestControllerImpl implements IRequestController {
+public class RequestController implements IRequestController {
     //向资源池写入接口
     private static IWriteToPool toResource;
     //请求器线程池大小,默认值10
@@ -41,7 +41,7 @@ public class RequestControllerImpl implements IRequestController {
         toResource = new IOFactory().getReqWriteConnect(diskSave);
         //创建子管理器,之所以要先创建，主要是为了能重复利用子管理器。
         for (int i = 0; i < managerNumber; i++) {
-            RequestManager manager = ManagerFactory.getRequestManager(i, Configure.getConnTimeout(), Configure.getReadTimeout(), Configure.getRequestHeader(), Configure.getHandlerNumber());
+            RequestManager manager = ManagerFactory.getRequestManager(i, Configure.getConnTimeout(), Configure.getReadTimeout(), Configure.getRequestHeader(), Configure.getHandlerNumber(),Configure.getGzip());
             manager.init();
             managers.add(manager);
             //将所有的管理器放入等待队列
@@ -114,7 +114,7 @@ public class RequestControllerImpl implements IRequestController {
     }
 
     public static void setManagerNumber(Integer managerNumber) {
-        RequestControllerImpl.managerNumber = managerNumber;
+        RequestController.managerNumber = managerNumber;
     }
 
     //判断当前控制器的线程池是否空闲

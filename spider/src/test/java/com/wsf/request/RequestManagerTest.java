@@ -3,7 +3,7 @@ package com.wsf.request;
 import com.wsf.config.Configure;
 import com.wsf.factory.request.ManagerFactory;
 import com.wsf.io.IReadFromPool;
-import com.wsf.io.impl.ReadFromHTMLImpl;
+import com.wsf.io.impl.ReadFromHtml;
 import com.wsf.request.manager.impl.RequestManager;
 import org.junit.Test;
 
@@ -17,12 +17,12 @@ public class RequestManagerTest {
         ExecutorService es = Executors.newFixedThreadPool(3);
         ConcurrentLinkedQueue<String> inBuffer = new ConcurrentLinkedQueue<>();
         inBuffer.add("https://cn/tp_up/vie");
-        RequestManager manager = ManagerFactory.getRequestManager(1,null,null,null,5);
+        RequestManager manager = ManagerFactory.getRequestManager(1,null,null,null,5,false);
         manager.setInBuffer(inBuffer);
         manager.init();
         new Thread(manager).start();
         Thread.sleep(100000);
-        IReadFromPool read = new ReadFromHTMLImpl(Configure.getReqBuffer());
+        IReadFromPool read = new ReadFromHtml(Configure.getReqBuffer());
         ConcurrentHashMap<String, byte[]> map = (ConcurrentHashMap<String, byte[]>) read.read();
         System.out.println(new String(map.get("https://cn/tp_up/vie")));
     }

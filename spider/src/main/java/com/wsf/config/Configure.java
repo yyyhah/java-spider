@@ -35,6 +35,7 @@ public class Configure {
     private static Double minSize = null;
     private static String sourceFile = null;
     private static Boolean diskSave = null;
+    private static Boolean gzip = null;
     private static Logger logger = Logger.getLogger(Configure.class);
 
     static {
@@ -121,6 +122,10 @@ public class Configure {
             temp = prop.getProperty("diskSave");
             if(temp!=null){
                 diskSave = Boolean.parseBoolean(temp);
+            }
+            temp = prop.getProperty("gzip");
+            if(temp!=null){
+                gzip = Boolean.parseBoolean(temp);
             }
             sourceFile = prop.getProperty("sourceFile");
             encodeType = prop.getProperty("encodeType");
@@ -314,6 +319,14 @@ public class Configure {
 
     public static Boolean getDiskSave() {
         return diskSave;
+    }
+
+    public static Boolean getGzip() {
+        return gzip;
+    }
+
+    public static void setGzip(Boolean gzip) {
+        Configure.gzip = gzip;
     }
 
     public static void setDiskSave(Boolean diskSave) {

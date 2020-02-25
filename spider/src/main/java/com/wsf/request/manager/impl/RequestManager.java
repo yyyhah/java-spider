@@ -1,9 +1,9 @@
 package com.wsf.request.manager.impl;
 
 
-import com.wsf.controller.request.impl.RequestControllerImpl;
+import com.wsf.controller.request.impl.RequestController;
 import com.wsf.factory.request.RequestFactory;
-import com.wsf.request.manager.IHandlerManager;
+import com.wsf.request.manager.IRequestManager;
 import com.wsf.request.bean.RequestBean;
 
 import org.apache.log4j.Logger;
@@ -16,7 +16,7 @@ import java.util.concurrent.*;
 /**
  * 该类用于管理请求器的请求，多例
  */
-public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<String>, ConcurrentHashMap<String, byte[]>> {
+public class RequestManager implements IRequestManager<ConcurrentLinkedQueue<String>, ConcurrentHashMap<String, byte[]>> {
     //线程池
     private ExecutorService executorService;
     //控制器和请求器之间的缓冲区(单向) 控制器->请求器 conReqBuffer;
@@ -34,15 +34,18 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
     //管理器的id
     private Integer manaferId = null;
 
+    private Boolean gzip = null;
+
     public RequestManager() {
     }
 
-    public RequestManager(Integer id, Map<String, String> requestHeader, Integer connTimeout, Integer readTimeout, Integer size) {
+    public RequestManager(Integer id, Map<String, String> requestHeader, Integer connTimeout, Integer readTimeout, Integer size,Boolean gzip) {
         this.manaferId = id;
         this.requestHeader = requestHeader;
         this.connTimeout = connTimeout;
         this.readTimeout = readTimeout;
         this.size = size == null ? this.size : size;
+        this.gzip = gzip;
     }
 
     /**
@@ -54,7 +57,7 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
         //创建线程池
         executorService = Executors.newFixedThreadPool(size);
         //设置请求头，创建request工厂
-        factory = new RequestFactory(this.connTimeout, this.readTimeout, this.requestHeader);
+        factory = new RequestFactory(this.connTimeout, this.readTimeout, this.requestHeader,this.gzip);
     }
 
     /**
@@ -122,6 +125,14 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
         this.inBuffer = inBuffer;
     }
 
+    public Boolean getGzip() {
+        return gzip;
+    }
+
+    public void setGzip(Boolean gzip) {
+        this.gzip = gzip;
+    }
+
     @Override
     public void run() {
         if (inBuffer == null || inBuffer.size() == 0) {
@@ -152,6 +163,6 @@ public class RequestManager implements IHandlerManager<ConcurrentLinkedQueue<Str
             }
         }
         System.out.println("RequestManager等待关闭后:" + executorService);
-        RequestControllerImpl.finish(outBuffer, manaferId);
+        RequestController.finish(outBuffer, manaferId);
     }
 }

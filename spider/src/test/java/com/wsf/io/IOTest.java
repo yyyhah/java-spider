@@ -1,14 +1,13 @@
 package com.wsf.io;
 
 import com.wsf.config.Configure;
-import com.wsf.domain.Item;
+import com.wsf.domain.BaseItem;
 import com.wsf.factory.io.IOFactory;
 import com.wsf.io.impl.*;
 import com.wsf.source.Source;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -23,8 +22,8 @@ public class IOTest {
     }
     @Test
     public void testIOForRequest(){
-        write = new WriteToURLImpl();
-        read = new ReadFromUrlImpl(Configure.getReqBuffer());
+        write = new WriteToUrl();
+        read = new ReadFromUrl(Configure.getReqBuffer());
         for (int i = 0; i < 50; i++) {
             ConcurrentLinkedQueue<String> list = new ConcurrentLinkedQueue<>();
             list.add("翁寿发"+i);
@@ -53,8 +52,8 @@ public class IOTest {
 
     @Test
     public void testIOForRequestBatch(){
-        write = new WriteToURLImpl();
-        read = new ReadFromUrlImpl(Configure.getReqBuffer());
+        write = new WriteToUrl();
+        read = new ReadFromUrl(Configure.getReqBuffer());
         for (int i = 0; i < 30; i++) {
             ConcurrentLinkedQueue<String> list = new ConcurrentLinkedQueue<>();
             list.add("翁寿发"+i);
@@ -74,8 +73,8 @@ public class IOTest {
     }
     @Test
     public void testIOForParse(){
-        write = new WriteToHTMLImpl();
-        read = new ReadFromHTMLImpl(Configure.getReqBuffer());
+        write = new WriteToHtml();
+        read = new ReadFromHtml(Configure.getReqBuffer());
         for (int i = 0; i < 50; i++) {
             ConcurrentHashMap<String,byte[]> map = new ConcurrentHashMap<>();
             map.put("翁寿发"+i,("你好"+i).getBytes());
@@ -101,8 +100,8 @@ public class IOTest {
 
     @Test
     public void testIOForParseBatch(){
-        write = new WriteToHTMLImpl();
-        read = new ReadFromHTMLImpl(Configure.getReqBuffer());
+        write = new WriteToHtml();
+        read = new ReadFromHtml(Configure.getReqBuffer());
         for (int i = 0; i < 30; i++) {
             ConcurrentHashMap<String,byte[]> map = new ConcurrentHashMap<>();
             map.put("翁寿发"+i,("你好"+i).getBytes());
@@ -125,11 +124,11 @@ public class IOTest {
 
     @Test
     public void testIOForSave() throws ClassNotFoundException {
-        write = new WriteToItemImpl();
-        read = new ReadFromItemImpl(Configure.getReqBuffer());
+        write = new WriteToItem();
+        read = new ReadFromItem(Configure.getReqBuffer());
         for (int i = 0; i < 50; i++) {
-            ConcurrentHashMap<String,Item> map = new ConcurrentHashMap<>();
-            map.put("翁寿发"+i,new Item());
+            ConcurrentHashMap<String, BaseItem> map = new ConcurrentHashMap<>();
+            map.put("翁寿发"+i,new BaseItem());
             write.write(map);
         }
 
@@ -138,8 +137,8 @@ public class IOTest {
             System.out.println(i+":"+read.read());
         }
         for (int i = 50; i < 100; i++) {
-            ConcurrentHashMap<String,Item> map = new ConcurrentHashMap<>();
-            map.put("翁寿发"+i,new Item());
+            ConcurrentHashMap<String, BaseItem> map = new ConcurrentHashMap<>();
+            map.put("翁寿发"+i,new BaseItem());
             write.write(map);
         }
         write.flush();
@@ -150,11 +149,11 @@ public class IOTest {
     }
     @Test
     public void testIOForSaveBatch(){
-        write = new WriteToItemImpl();
-        read = new ReadFromItemImpl(Configure.getReqBuffer());
+        write = new WriteToItem();
+        read = new ReadFromItem(Configure.getReqBuffer());
         for (int i = 0; i < 30; i++) {
-            ConcurrentHashMap<String,Item> map = new ConcurrentHashMap<>();
-            map.put("翁寿发"+i,new Item());
+            ConcurrentHashMap<String, BaseItem> map = new ConcurrentHashMap<>();
+            map.put("翁寿发"+i,new BaseItem());
             write.write(map);
         }
         write.flush();
@@ -172,16 +171,16 @@ public class IOTest {
     @Test
     public void testIOFactory(){
         IReadFromPool readProxy = IOFactory.getReqReadConnect(40,true);
-//        IWriteToPool writeProxy = IOFactory.getSaveWriteConnect(true);
-//        ConcurrentLinkedQueue<String> list  = null;
-//        for (int i = 0;i<2000;i++) {
-//            list = new ConcurrentLinkedQueue<>();
-//            list.add("翁寿发"+i);
-//            writeProxy.write(list);
-//        }
-//        writeProxy.flush();
-//        writeProxy.close();
-//        Source.close();
+        IWriteToPool writeProxy = IOFactory.getSaveWriteConnect(true);
+        ConcurrentLinkedQueue<String> list  = null;
+        for (int i = 0;i<2000;i++) {
+            list = new ConcurrentLinkedQueue<>();
+            list.add("翁寿发"+i);
+            writeProxy.write(list);
+        }
+        writeProxy.flush();
+        writeProxy.close();
+        Source.close();
         int i = 0;
         while(readProxy.hasNext()) {
             System.out.println(i+":"+readProxy.read());
@@ -193,9 +192,7 @@ public class IOTest {
 
     @Test
     public void test(){
-        File f = new File("D://webSpider/source/item");
-        File[] files = f.listFiles(file -> file.getName().endsWith("." + "items"));
-        System.out.println(files.length);
+        System.out.println("http://www.xbiquge.la/".matches("http://www.xbiquge.\\w\\w/"));
     }
 
 }

@@ -23,17 +23,7 @@ public class GetHtmlInfo {
     //默认使用配置文件中的请求头
     private static Map<String, String> requestHeader = Configure.getRequestHeader();
 
-    public static HtmlInfo get(String url, Integer readTimeout, HashMap<String, String> header) {
-        return get(url, null, readTimeout, header);
-    }
-
-    public static HtmlInfo get(String url, HashMap<String, String> header) {
-        return get(url, null, null, header);
-    }
-
-    public static HtmlInfo get(String url) {
-        return get(url, null, null, null);
-    }
+    private static String contentEncode = null;
 
     /**
      * 获取网站的基本信息
@@ -67,6 +57,7 @@ public class GetHtmlInfo {
             }
             connection.connect();
             String encode = connection.getContentType();
+            contentEncode = connection.getContentEncoding();
 //            String contentEncoding = connection.getContentEncoding();
 //            System.out.println("网站内容编码:"+contentEncoding);
 
@@ -103,5 +94,23 @@ public class GetHtmlInfo {
             return matcher.group(1);
         }
         return null;
+    }
+
+    public static HtmlInfo get(String url, Integer readTimeout, HashMap<String, String> header) {
+        return get(url, null, readTimeout, header);
+    }
+
+    public static HtmlInfo get(String url, HashMap<String, String> header) {
+        return get(url, null, null, header);
+    }
+
+    public static HtmlInfo get(String url) {
+        return get(url, null, null, null);
+    }
+
+    //获取网页的压缩编码方式，如果这个值不为nul，表示网页进行了压缩编码处理，需要解码后再编码
+    public static String getContentEncode(String url) {
+        get(url);
+        return contentEncode;
     }
 }

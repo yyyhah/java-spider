@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @SuppressWarnings("all")
-public class ReadFromUrlImpl implements IReadFromPool<ConcurrentLinkedQueue<String>> {
+public class ReadFromUrl implements IReadFromPool<ConcurrentLinkedQueue<String>> {
     //url池
     private ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer = Source.getUrlBuffer();
     //读取缓存区的大小,默认值40
@@ -24,13 +24,13 @@ public class ReadFromUrlImpl implements IReadFromPool<ConcurrentLinkedQueue<Stri
 
     private boolean closed = false;
 
-    private static Logger logger = Logger.getLogger(ReadFromUrlImpl.class);
+    private static Logger logger = Logger.getLogger(ReadFromUrl.class);
 
-    public ReadFromUrlImpl() {
+    public ReadFromUrl() {
         this(null);
     }
 
-    public ReadFromUrlImpl(Integer bufferSize) {
+    public ReadFromUrl(Integer bufferSize) {
         reqBatchNumber = reqBatchNumber == null ? 10 : reqBatchNumber;
         readBuffer = bufferSize == null ? readBuffer : bufferSize;
         urlReadBuffer = new ConcurrentLinkedQueue[readBuffer];

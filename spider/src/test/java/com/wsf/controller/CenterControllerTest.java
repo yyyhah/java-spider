@@ -2,8 +2,8 @@ package com.wsf.controller;
 
 import com.wsf.config.Configure;
 import com.wsf.controller.center.impl.CenterControllerImpl;
-import com.wsf.io.impl.ReadFromHTMLImpl;
-import com.wsf.io.impl.WriteToURLImpl;
+import com.wsf.io.impl.ReadFromHtml;
+import com.wsf.io.impl.WriteToUrl;
 import org.junit.Test;
 
 import java.util.LinkedList;
@@ -17,8 +17,8 @@ public class CenterControllerTest {
     public void testStartOneRequest() throws ClassNotFoundException {
         //加载匹配
         Class.forName("com.wsf.config.Configure");
-        WriteToURLImpl write = new WriteToURLImpl();
-        ReadFromHTMLImpl read = new ReadFromHTMLImpl(Configure.getReqBuffer());
+        WriteToUrl write = new WriteToUrl();
+        ReadFromHtml read = new ReadFromHtml(Configure.getReqBuffer());
 
         for (int i = 0; i < 30; i++) {
             ConcurrentLinkedQueue<String> inBuffer = new ConcurrentLinkedQueue<>();
@@ -51,8 +51,4 @@ public class CenterControllerTest {
         }
     }
 
-    @Test
-    public void testStartBatchRequest() throws ClassNotFoundException, InterruptedException {
-
-    }
 }

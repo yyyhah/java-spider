@@ -23,7 +23,7 @@ public class RequestFactoryTest {
         header.put("request.referer","https://i.hdu.edu.cn/tp_up/view?m=up");
         header.put("request.host","Host: i.hdu.edu.cn");
         header.put("request.user-agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36");
-        RequestFactory factory = new RequestFactory(null,null,header);
+        RequestFactory factory = new RequestFactory(null,null,header,false);
         RequestBean req = factory.getRequestBean("https://i.hdu");
         ExecutorService executorService = Executors.newCachedThreadPool();
         Future<Object[]> submit = executorService.submit(req);

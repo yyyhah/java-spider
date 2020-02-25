@@ -3,7 +3,7 @@ package com.wsf.controller.center.impl;
 import com.wsf.config.Configure;
 import com.wsf.controller.center.ICenterController;
 import com.wsf.controller.request.IRequestController;
-import com.wsf.controller.request.impl.RequestControllerImpl;
+import com.wsf.controller.request.impl.RequestController;
 import com.wsf.factory.io.IOFactory;
 import com.wsf.io.IReadFromPool;
 import org.apache.log4j.Logger;
@@ -58,7 +58,7 @@ public class CenterControllerImpl implements ICenterController {
         //初始化读取器
         urlReader = IOFactory.getReqReadConnect(Configure.getReqBuffer(),diskSave);
         //创建请求器调度器
-        requestController = new RequestControllerImpl();
+        requestController = new RequestController();
         //初始化请求器调度器
         requestController.init();
     }

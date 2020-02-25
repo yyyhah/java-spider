@@ -11,8 +11,9 @@ public class RequestFactory {
     private Map<String, String> requestHeader;
     private Integer connTimeout = null;
     private Integer readTimeout = null;
+    private Boolean gzip = null;
 
-    public RequestFactory(Integer connTimeout, Integer readTimeout, Map<String, String> requestHeader) {
+    public RequestFactory(Integer connTimeout, Integer readTimeout, Map<String, String> requestHeader,Boolean gzip) {
         this.requestHeader = requestHeader;
         //如果超时不为0 设置超时
         if (connTimeout != null) {
@@ -21,6 +22,7 @@ public class RequestFactory {
         if (readTimeout != null) {
             setReadTimeout(readTimeout);
         }
+        this.gzip = gzip;
     }
 
     public Map<String, String> getRequestHeader() {
@@ -77,6 +79,6 @@ public class RequestFactory {
      */
     public RequestBean getRequestBean(String url) {
         //这里直接new创建对象好了，反射的话虽然耦合低，但是会慢挺多的。
-        return new RequestBean(url, requestHeader);
+        return new RequestBean(url, requestHeader,gzip);
     }
 }

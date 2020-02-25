@@ -5,7 +5,7 @@ import java.util.concurrent.ExecutorService;
 /**
  * 各个处理模块的管理器接口模板
  */
-public interface IHandlerManager<E, T> extends Runnable {
+public interface IRequestManager<E, T> extends Runnable {
 
     /**
      * 初始化方法，创建线程池，建造子模块工厂

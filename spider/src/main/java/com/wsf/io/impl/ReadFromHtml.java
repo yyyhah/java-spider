@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 @SuppressWarnings("all")
-public class ReadFromHTMLImpl implements IReadFromPool<ConcurrentHashMap> {
+public class ReadFromHtml implements IReadFromPool<ConcurrentHashMap> {
     //html池
     private ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer = Source.getHtmlBuffer();
     //读取缓存区的大小,默认值40
@@ -25,13 +25,13 @@ public class ReadFromHTMLImpl implements IReadFromPool<ConcurrentHashMap> {
 
     private boolean closed = false;
 
-    private static Logger logger = Logger.getLogger(ReadFromHTMLImpl.class);
+    private static Logger logger = Logger.getLogger(ReadFromHtml.class);
 
-    public ReadFromHTMLImpl() {
+    public ReadFromHtml() {
         this(null);
     }
 
-    public ReadFromHTMLImpl(Integer bufferSize) {
+    public ReadFromHtml(Integer bufferSize) {
         parseBatchNumber = parseBatchNumber == null ? 10 : parseBatchNumber;
         readBuffer = bufferSize == null ? readBuffer : bufferSize;
         htmlReadBuffer = new ConcurrentHashMap[readBuffer];

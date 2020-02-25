@@ -7,7 +7,7 @@ import com.wsf.source.Source;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class WriteToHTMLImpl implements IWriteToPool<ConcurrentHashMap<String, byte[]>> {
+public class WriteToHtml implements IWriteToPool<ConcurrentHashMap<String, byte[]>> {
     //html池
     private ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer = Source.getHtmlBuffer();
     //写入缓存区的大小,默认值40
@@ -19,11 +19,11 @@ public class WriteToHTMLImpl implements IWriteToPool<ConcurrentHashMap<String, b
 
     private boolean closed = false;
 
-    public WriteToHTMLImpl() {
+    public WriteToHtml() {
         this(null);
     }
 
-    public WriteToHTMLImpl(Integer bufferSize) {
+    public WriteToHtml(Integer bufferSize) {
         writeBuffer = bufferSize == null ? writeBuffer : bufferSize;
         htmlWriteBuffer = new ConcurrentHashMap[writeBuffer];
     }

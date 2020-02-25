@@ -1,7 +1,7 @@
 package com.wsf.io.impl;
 
 import com.wsf.config.Configure;
-import com.wsf.domain.Item;
+import com.wsf.domain.BaseItem;
 import com.wsf.io.IWriteToPool;
 import com.wsf.source.Source;
 
@@ -12,7 +12,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  * 从资源池读取数据接口实现类,单例，必须保证线程安全
  */
 @SuppressWarnings("all")
-public class WriteToItemImpl implements IWriteToPool<ConcurrentHashMap<String, Item>> {
+public class WriteToItem implements IWriteToPool<ConcurrentHashMap<String, BaseItem>> {
     //item池
     private ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
     //写入缓存区的大小,默认值40
@@ -24,18 +24,18 @@ public class WriteToItemImpl implements IWriteToPool<ConcurrentHashMap<String, I
 
     private boolean closed = false;
 
-    public WriteToItemImpl() {
+    public WriteToItem() {
         this(null);
     }
 
-    public WriteToItemImpl(Integer bufferSize) {
+    public WriteToItem(Integer bufferSize) {
         writeBuffer = bufferSize == null ? writeBuffer : bufferSize;
         itemWriteBuffer = new ConcurrentHashMap[writeBuffer];
     }
 
 
     @Override
-    public void write(ConcurrentHashMap<String, Item> inBuffer) {
+    public void write(ConcurrentHashMap<String, BaseItem> inBuffer) {
         if (inBuffer == null || inBuffer.size() == 0) {
             return;
         }

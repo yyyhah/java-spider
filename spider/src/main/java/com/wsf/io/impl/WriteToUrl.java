@@ -6,7 +6,7 @@ import com.wsf.source.Source;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class WriteToURLImpl implements IWriteToPool<ConcurrentLinkedQueue<String>> {
+public class WriteToUrl implements IWriteToPool<ConcurrentLinkedQueue<String>> {
     //url池
     private ConcurrentLinkedQueue<ConcurrentLinkedQueue> urlBuffer = Source.getUrlBuffer();
     //写入缓存区的大小,默认值40
@@ -18,11 +18,11 @@ public class WriteToURLImpl implements IWriteToPool<ConcurrentLinkedQueue<String
 
     private boolean closed = false;
 
-    public WriteToURLImpl() {
+    public WriteToUrl() {
         this(null);
     }
 
-    public WriteToURLImpl(Integer bufferSize) {
+    public WriteToUrl(Integer bufferSize) {
         writeBuffer = bufferSize == null ? writeBuffer : bufferSize;
         urlWriteBuffer = new ConcurrentLinkedQueue[writeBuffer];
     }

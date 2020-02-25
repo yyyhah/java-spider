@@ -1,7 +1,7 @@
 package com.wsf.io.impl;
 
 import com.wsf.config.Configure;
-import com.wsf.domain.Item;
+import com.wsf.domain.BaseItem;
 import com.wsf.io.IReadFromPool;
 import com.wsf.source.Source;
 import org.apache.log4j.Logger;
@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
  */
 
 @SuppressWarnings("all")
-public class ReadFromItemImpl implements IReadFromPool<ConcurrentHashMap> {
+public class ReadFromItem implements IReadFromPool<ConcurrentHashMap> {
     //item池
     private ConcurrentLinkedQueue<ConcurrentHashMap> itemBuffer = Source.getItemBuffer();
 
@@ -33,14 +33,14 @@ public class ReadFromItemImpl implements IReadFromPool<ConcurrentHashMap> {
 
     private boolean closed = false;
 
-    private static Logger logger = Logger.getLogger(ReadFromItemImpl.class);
+    private static Logger logger = Logger.getLogger(ReadFromItem.class);
 
 
-    public ReadFromItemImpl() {
+    public ReadFromItem() {
         this(null);
     }
 
-    public ReadFromItemImpl(Integer bufferSize) {
+    public ReadFromItem(Integer bufferSize) {
 
         saveBatchNumber = saveBatchNumber == null ? 10 : saveBatchNumber;
         readBuffer = bufferSize == null ? readBuffer : bufferSize;
@@ -52,7 +52,7 @@ public class ReadFromItemImpl implements IReadFromPool<ConcurrentHashMap> {
 
 
     @Override
-    public ConcurrentHashMap<String, Item> read() {
+    public ConcurrentHashMap<String, BaseItem> read() {
         if (itemReadBuffer.length <= itemIndex || itemReadBuffer[itemIndex] == null) {
             //如果池子中没有数据，直接返回null
             if (itemBuffer.size() == 0) {
@@ -75,7 +75,7 @@ public class ReadFromItemImpl implements IReadFromPool<ConcurrentHashMap> {
     public LinkedList<ConcurrentHashMap> readBatch() {
         LinkedList<ConcurrentHashMap> lists = new LinkedList<>();
         for (Integer i = 0; i < saveBatchNumber; i++) {
-            ConcurrentHashMap<String, Item> map = read();
+            ConcurrentHashMap<String, BaseItem> map = read();
             if (map == null) {
                 break;
             }
