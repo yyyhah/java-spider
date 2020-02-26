@@ -49,7 +49,14 @@ public class ParseManager {
                 logger.warn("没有找到对应模板，请确认正则表达式是否正确！");
                 break;
             }else {
-                BaseItem item = new ParseBean(template, entry.getValue()).start(entry.getKey());
+                BaseItem item = null;
+                try {
+                    item = new ParseBean(template).start(entry.getValue());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    logger.error("html解析封装出错！");
+                }
+                item.setUrl(entry.getKey());
                 map.put(entry.getKey(),item);
             }
         }

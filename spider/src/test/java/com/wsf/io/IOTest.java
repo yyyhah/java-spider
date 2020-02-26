@@ -1,13 +1,21 @@
 package com.wsf.io;
 
 import com.wsf.config.Configure;
+import com.wsf.domain.Atom;
 import com.wsf.domain.BaseItem;
+import com.wsf.domain.Item;
 import com.wsf.factory.io.IOFactory;
 import com.wsf.io.impl.*;
 import com.wsf.source.Source;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -191,8 +199,11 @@ public class IOTest {
 
 
     @Test
-    public void test(){
-        System.out.println("http://www.xbiquge.la/".matches("http://www.xbiquge.\\w\\w/"));
+    public void test() throws IllegalAccessException, InvocationTargetException {
+        Field[] fields = BaseItem.class.getDeclaredFields();
+        for (Field field : fields) {
+            System.out.println(field.getType().getName().equals("String"));
+        }
     }
 
 }

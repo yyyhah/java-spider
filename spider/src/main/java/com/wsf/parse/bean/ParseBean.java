@@ -6,64 +6,123 @@ import com.wsf.domain.Template;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.List;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.*;
 
 public class ParseBean {
     private Template template;
-    private byte[] htmlBytes;
     private static Logger logger = Logger.getLogger(ParseBean.class);
-    public ParseBean(Template template,byte[] htmlBytes) {
+    private HashMap<String, String> elementCss;
+
+    public ParseBean(Template template) {
         this.template = template;
-        this.htmlBytes = htmlBytes;
+        this.elementCss = template.getElementCss();
     }
 
-    private ArrayList<String> parseCssPath(Document document,String url,String key,String cssPath){
-        String[] split = cssPath.split(";");
-        //如果路径中有;则将:后的内容视为属性
-        Elements element = document.select(split[0]);
-        if(element!=null) {
-            ArrayList<String> select = new ArrayList<String>();
-            if(split.length==1){
-                element.stream().forEach(element1->select.add(element1.text()));
-            }else if(split.length==2){
-                element.stream().forEach(element1 -> select.add(element1.attr(split[1])));
-            }else{
-                logger.warn("css书写路径错误请检查！");
-            }
-            return select;
-        }else{
-            logger.warn("在网址: "+url+" 中 "+key+" 元素为空");
-            return null;
-        }
-    }
     /**
-     * 解析网页的源码，获取信息封装到item当中
-     * @param url 网站得到网址
+     * 获取泛型的真实对象
+     * @param type
      * @return
      */
-    public BaseItem start(String url){
-        String html = null;
-        BaseItem item = new BaseItem();
-        try {
-            html = new String(htmlBytes,template.getEncode());
-            Document document = Jsoup.parse(html);
-            HashMap<String, String> elementCss = template.getElementCss();
-            HashMap<String,ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
-            for (Map.Entry<String, String> entry : elementCss.entrySet()) {
-                ArrayList<String> list = parseCssPath(document, url, entry.getKey(), entry.getValue());
-                map.put(entry.getKey(),list);
-            }
-            item.setUrl(url);
-            item.setItems(map);
-            return item;
-        } catch (UnsupportedEncodingException e) {
-            logger.error("文件编码错误");
+    private Class<?> getGenericType(Type type){
+        if(type instanceof ParameterizedType){
+            ParameterizedType parameterizedType = (ParameterizedType)type;
+            return (Class<?>)parameterizedType.getActualTypeArguments()[0];
         }
         return null;
     }
+    /**
+     * 利用反射递归生成item里对应的属性
+     * @param elements
+     * @return
+     */
+    private Object createProperty(String path,Elements elements,Class<?> property) throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        Object object = property.getConstructor().newInstance();
+        Field[] fields = property.getDeclaredFields();
+        for (Field field : fields) {
+            //设置私有变量可以访问
+            field.setAccessible(true);
+            String cssPath = path.length()> 0 ?path + "." + field.getName():field.getName();
+            if(path.length() == 0 && field.getName().equals("url")){
+                continue;
+            }
+            //如果是基本类型的,直接赋值
+            if(field.getType().getName().equals("java.lang.String")){
+                //切分css路径判断其是text还是attr
+                String[] split = elementCss.get(cssPath).split(";");
+                Elements select = elements.select(split[0]);
+                //如果没有该元素，直接跳过
+                if(select == null){
+                    break;
+                }
+                if(split.length == 1){
+                    field.set(object, select.text());
+                }else if(split.length == 2){
+                    field.set(object, select.attr(split[1]));
+                }else{
+                    logger.error("请检查 "+path+"."+field.getName()+"的css路径是否写错");
+                }
+            }else if(field.getType().getName().equals("java.util.ArrayList")){
+                //如果是list类型
+                List list = (List)field.getType().getConstructor().newInstance();
+                //如果泛型为基本类型
+                if(getGenericType(field.getGenericType()).getName().equals("java.lang.String")){
+                    //切分css路径判断其是text还是attr
+                    String[] split = elementCss.get(cssPath).split(";");
+                    Elements select = elements.select(split[0]);
+                    if(select == null){
+                        break;
+                    }
+                    if(split.length == 1){
+                        for (Element element : select) {
+                            list.add(element.text());
+                        }
+                    }else if(split.length == 2){
+                        for (Element element : select) {
+                            list.add(element.attr(split[1]));
+                        }
+                    }else {
+                        logger.error("请检查 "+path+"."+field.getName()+"的css路径是否写错");
+                    }
+                    field.set(object,list);
+                }else {
+                    Elements es = elements.select(elementCss.get(cssPath));
+                    for(Element e:es){
+                        list.add(createProperty(cssPath, e.select("*"), getGenericType(field.getGenericType())));
+                    }
+
+                    field.set(object,list);
+                }
+            }else{
+                //如果是非基本类型
+                field.set(object,createProperty(cssPath, elements.select(elementCss.get(cssPath)), field.getType()));
+            }
+        }
+        return object;
+    }
+
+
+    /**
+     * 启动ParseBean的方法，解析byte字节，调用createProperty方法将html文档信息封装到BeanItem中返回
+     * @param bytes
+     * @return
+     * @throws Exception
+     */
+    public BaseItem start(byte[] bytes) throws Exception {
+        //将网页源码编码
+        String html = new String(bytes, template.getCharset());
+        //解析文档树
+        Document document = Jsoup.parse(html);
+        return (BaseItem) createProperty("", document.select("html"), BaseItem.class);
+
+    }
+
+
 }

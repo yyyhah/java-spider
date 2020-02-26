@@ -1,133 +1,29 @@
-2020-02-24 11:10:35 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:18:04 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:18:04 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:18:04 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:18:04 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:19:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:19:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:19:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:19:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:19:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:19:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:19:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:19:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:19:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-24 11:33:19 method: com.wsf.io.impl.ReadFromPoolImpl.close(ReadFromPoolImpl.java:189) - [ ERROR ]----空指针异常
-2020-02-24 11:40:24 method: com.wsf.io.impl.ReadFromPoolImpl.close(ReadFromPoolImpl.java:189) - [ ERROR ]----空指针异常
-2020-02-24 12:49:59 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:49:59 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:24 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:21 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:20 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:20 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:20 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:20 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:16 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:16 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:34 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:25 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:36 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:36 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:38 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:41 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:41 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:42 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:42 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:42 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:42 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:42 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:43 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:43 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:43 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:43 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:43 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:43 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:43 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:43 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:44 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:44 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:44 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:44 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLHandshakeException: Remote host terminated the handshake无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 12:56:48 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 12:56:49 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----javax.net.ssl.SSLProtocolException: Read timed out无法访问到 https://i.hdu.edu.cn/tp_up/view?m=up#act=portal/viewhome
-2020-02-24 13:38:38 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:38:38 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:38:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:39:37 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:43:25 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:43:25 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:43:25 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:43:25 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:43:25 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:44:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:44:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:44:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:44:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:44:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 13:44:40 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:23:26 method: com.wsf.config.Configure.<clinit>(Configure.java:110) - [ ERROR ]----初始化资源池出错
-2020-02-24 14:24:13 method: com.wsf.config.Configure.<clinit>(Configure.java:110) - [ ERROR ]----初始化资源池出错
-2020-02-24 14:26:17 method: com.wsf.config.Configure.<clinit>(Configure.java:110) - [ ERROR ]----初始化资源池出错
-2020-02-24 14:36:03 method: com.wsf.controller.center.impl.CenterControllerImpl.startBatchRequest(CenterControllerImpl.java:51) - [ WARN ]----管理器繁忙
-2020-02-24 14:37:17 method: com.wsf.controller.center.impl.CenterControllerImpl.startBatchRequest(CenterControllerImpl.java:51) - [ WARN ]----管理器繁忙
-2020-02-24 14:44:48 method: com.wsf.controller.center.impl.CenterControllerImpl.executeRequest(CenterControllerImpl.java:32) - [ WARN ]----管理器繁忙,请稍后再试
-2020-02-24 14:44:52 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:52 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:52 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:52 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:52 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:55 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:55 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:55 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:55 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:55 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:55 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:55 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:44:57 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:48 method: com.wsf.controller.center.impl.CenterControllerImpl.startBatchRequest(CenterControllerImpl.java:51) - [ WARN ]----管理器繁忙
-2020-02-24 14:45:50 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:50 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:50 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:50 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:50 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:50 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:50 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:50 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:50 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:53 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:53 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:53 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:53 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:53 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:53 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:53 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:53 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:54 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:54 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:54 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:54 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 502 for URL: https://blog.csdn.net/kq1983/article/details/89851138无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:57 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:57 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:57 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:57 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:45:57 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:85) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 https://blog.csdn.net/kq1983/article/details/89851138
-2020-02-24 14:47:50 method: com.wsf.controller.center.impl.CenterControllerImpl.startBatchRequest(CenterControllerImpl.java:51) - [ WARN ]----管理器繁忙
-2020-02-24 14:49:04 method: com.wsf.controller.center.impl.CenterControllerImpl.startBatchRequest(CenterControllerImpl.java:51) - [ WARN ]----管理器繁忙
-2020-02-24 14:49:53 method: com.wsf.controller.center.impl.CenterControllerImpl.startBatchRequest(CenterControllerImpl.java:51) - [ WARN ]----管理器繁忙
-2020-02-24 14:55:48 method: com.wsf.controller.center.impl.CenterControllerImpl.startBatchRequest(CenterControllerImpl.java:51) - [ WARN ]----管理器繁忙
-2020-02-24 14:57:36 method: com.wsf.controller.center.impl.CenterControllerImpl.executeRequest(CenterControllerImpl.java:32) - [ WARN ]----管理器繁忙,请稍后再试
-2020-02-24 17:25:31 method: com.wsf.info.GetHtmlInfo.get(GetHtmlInfo.java:84) - [ ERROR ]----网站访问失败！
-2020-02-25 13:57:03 method: com.wsf.source.Source.writeToFile(Source.java:174) - [ ERROR ]----将item写入磁盘文件出错！
-2020-02-25 13:57:56 method: com.wsf.source.Source.writeToFile(Source.java:175) - [ ERROR ]----将item写入磁盘文件出错！
-2020-02-25 14:00:42 method: com.wsf.source.Source.writeToFile(Source.java:175) - [ ERROR ]----将item写入磁盘文件出错！
-2020-02-25 20:21:13 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:95) - [ WARN ]----java.util.zip.ZipException: Not in GZIP format无法访问到 https://www.baidu.com
-2020-02-25 20:42:10 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:95) - [ WARN ]----java.util.zip.ZipException: Not in GZIP format无法访问到 http://www.xbiquge.la/
-2020-02-25 20:42:14 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认正则表达式是否正确！
-2020-02-25 20:45:36 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认正则表达式是否正确！
-2020-02-25 20:47:41 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认正则表达式是否正确！
+2020-02-26 13:04:26 method: com.wsf.domain.Item.setProperty(Item.java:38) - [ ERROR ]----无法找到该属性
+2020-02-26 13:06:39 method: com.wsf.domain.Item.setProperty(Item.java:38) - [ ERROR ]----无法找到该属性
+2020-02-26 13:07:49 method: com.wsf.domain.Item.setProperty(Item.java:38) - [ ERROR ]----无法找到该属性
+2020-02-26 13:08:40 method: com.wsf.domain.Item.setProperty(Item.java:38) - [ ERROR ]----无法找到该属性
+2020-02-26 13:09:34 method: com.wsf.domain.Item.setProperty(Item.java:38) - [ ERROR ]----无法找到该属性
+2020-02-26 20:23:50 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:101) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:28:39 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:101) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:30:09 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:97) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:33:02 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:97) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:40:09 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:97) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:40:23 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:97) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:42:33 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:97) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:46:31 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:97) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:48:27 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:100) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:51:56 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:100) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:52:49 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:100) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:52:58 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:100) - [ ERROR ]----赋值给Item出错
+2020-02-26 20:54:12 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:100) - [ ERROR ]----赋值给Item出错
+2020-02-26 21:04:17 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:104) - [ ERROR ]----赋值给Item出错
+2020-02-26 21:10:11 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:104) - [ ERROR ]----赋值给Item出错
+2020-02-26 21:12:28 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:104) - [ ERROR ]----赋值给Item出错
+2020-02-26 21:15:02 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:104) - [ ERROR ]----赋值给Item出错
+2020-02-26 21:19:50 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:105) - [ ERROR ]----赋值给Item出错
+2020-02-26 21:20:20 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:105) - [ ERROR ]----赋值给Item出错
+2020-02-26 21:33:30 method: com.wsf.parse.bean.ParseBean.parseCssPath(ParseBean.java:114) - [ ERROR ]----赋值给Item出错
+2020-02-26 21:56:37 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:57) - [ ERROR ]----html解析封装出错！
+2020-02-26 21:58:47 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:57) - [ ERROR ]----html解析封装出错！
+2020-02-26 22:02:18 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:57) - [ ERROR ]----html解析封装出错！
+2020-02-26 22:06:55 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:57) - [ ERROR ]----html解析封装出错！
