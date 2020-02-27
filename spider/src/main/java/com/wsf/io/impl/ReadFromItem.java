@@ -1,7 +1,7 @@
 package com.wsf.io.impl;
 
 import com.wsf.config.Configure;
-import com.wsf.domain.BaseItem;
+import com.wsf.domain.impl.BaseItem;
 import com.wsf.io.IReadFromPool;
 import com.wsf.source.Source;
 import org.apache.log4j.Logger;

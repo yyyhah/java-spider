@@ -13,7 +13,7 @@ public class ManagerFactory {
      *
      * @return
      */
-    public static RequestManager getRequestManager(Integer managerId, Integer connTimeout, Integer readTimeout, Map<String, String> header, Integer size,Boolean gzip) {
-        return new RequestManager(managerId, header, connTimeout, readTimeout, size,gzip);
+    public static RequestManager getRequestManager(Integer managerId, Integer connTimeout, Integer readTimeout, Map<String, String> header, Integer size) {
+        return new RequestManager(managerId, header, connTimeout, readTimeout, size);
     }
 }

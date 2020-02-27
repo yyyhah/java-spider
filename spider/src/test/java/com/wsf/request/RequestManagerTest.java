@@ -17,7 +17,7 @@ public class RequestManagerTest {
         ExecutorService es = Executors.newFixedThreadPool(3);
         ConcurrentLinkedQueue<String> inBuffer = new ConcurrentLinkedQueue<>();
         inBuffer.add("https://cn/tp_up/vie");
-        RequestManager manager = ManagerFactory.getRequestManager(1,null,null,null,5,false);
+        RequestManager manager = ManagerFactory.getRequestManager(1,null,null,null,5);
         manager.setInBuffer(inBuffer);
         manager.init();
         new Thread(manager).start();

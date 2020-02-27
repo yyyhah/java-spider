@@ -21,6 +21,10 @@ public interface Item extends Serializable {
      * @throws IllegalAccessException
      */
     Logger logger = Logger.getLogger(Item.class);
+    /**
+     * 设置url
+     */
+    void setUrl(String url);
 
     default void setProperty(String property,Object value){
         try {

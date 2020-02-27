@@ -2,17 +2,41 @@ package com.wsf.controller;
 
 import com.wsf.config.Configure;
 import com.wsf.controller.center.impl.CenterControllerImpl;
+import com.wsf.domain.Template;
 import com.wsf.io.impl.ReadFromHtml;
 import com.wsf.io.impl.WriteToUrl;
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class CenterControllerTest {
+    private List<Template> getTemplate(){
+        ArrayList<Template> lists = new ArrayList<>();
+        //创建模板
+        Template template = new Template();
+        template.setCharset("utf-8");
+        template.setUrlReg("http://www.xbiquge.la/");
+        HashMap<String, String> temp = new HashMap<>();
+        temp.put("atoms","#main > div:nth-child(4) > div.content");
+        temp.put("atoms.title","h2");
+        temp.put("atoms.chapterHref","div > dl > dt > a;href");
+        temp.put("atoms.author","div > dl > dt > a");
+        temp.put("atoms.books","ul > li > a");
+        template.setElementCss(temp);
+        template.setItem("com.wsf.domain.impl.BaseItem");
+        lists.add(template);
+        Template template1 = new Template();
+        template1.setCharset("utf-8");
+        template.setUrlReg("http://www.xbiquge\\.la/\\d+/\\d+/");
+        template.setItem("com.wsf.domain.impl.IntItem");
+        HashMap<String, String> temp2 = new HashMap<>();
+        temp2.put("title","#info > h1");
+        temp2.put("chapters","#list > dl > dd > a");
+        lists.add(template1);
+        return lists;
+    }
     @Test
     public void testStartOneRequest() throws ClassNotFoundException {
         //加载匹配
@@ -22,15 +46,13 @@ public class CenterControllerTest {
 
         for (int i = 0; i < 30; i++) {
             ConcurrentLinkedQueue<String> inBuffer = new ConcurrentLinkedQueue<>();
-            inBuffer.add("https://vip.iqiyi.com/waimeizhy_pc.html?fv=0519153914b4dcb3b8757c8b4981be6b&bd_vid=11764348259367254056");
-            inBuffer.add("https://www.baidu.com");
-            inBuffer.add("https://www.bilibili.com/");
-            inBuffer.add("https://www.douyu.com/");
+            inBuffer.add("http://www.xbiquge.la/10/10489/");
+            inBuffer.add("http://www.xbiquge.la/");
             write.write(inBuffer);
         }
         write.flush();//记住要刷新
 
-        CenterControllerImpl center = new CenterControllerImpl();
+        CenterControllerImpl center = new CenterControllerImpl(getTemplate());
         for (int i = 0; i < 30; i++) {
             center.startOneRequest();
         }

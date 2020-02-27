@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * 该类主要用于html的基本信息获取
+ * 该工具类主要用于html的基本信息获取
  * 1. 网页的编码方式
  * 2. 请求是否有gzip压缩
  */

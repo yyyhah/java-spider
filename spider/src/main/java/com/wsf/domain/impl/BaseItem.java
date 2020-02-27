@@ -1,4 +1,6 @@
-package com.wsf.domain;
+package com.wsf.domain.impl;
+import com.wsf.domain.Item;
+import com.wsf.domain.impl.MyAtom;
 
 import java.util.ArrayList;
 

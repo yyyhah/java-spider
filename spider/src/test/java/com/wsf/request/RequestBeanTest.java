@@ -25,7 +25,7 @@ public class RequestBeanTest {
         header.put("request.referer","Referer: https://i.hdu.edu.cn/tp_up/view?m=up");
         header.put("request.host","Host: i.hdu.edu.cn");
         header.put("request.user-agent","Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.116 Safari/537.36");
-        RequestBean req = new RequestBean("http://www.xbiquge.la/",header,false);
+        RequestBean req = new RequestBean("http://www.xbiquge.la/",header);
         ExecutorService executorService = Executors.newCachedThreadPool();
         Future<Object[]> submit = executorService.submit(req);
         Object[] objects = submit.get();

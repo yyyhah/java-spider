@@ -1,9 +1,11 @@
-package com.wsf.domain;
+package com.wsf.domain.impl;
 
+
+import com.wsf.domain.Atom;
 
 import java.util.ArrayList;
 
-public class MyAtom implements Atom{
+public class MyAtom implements Atom {
     private String author;
     private String title;
     private String chapterHref;

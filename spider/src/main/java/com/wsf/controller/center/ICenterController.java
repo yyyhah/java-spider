@@ -1,6 +1,9 @@
 package com.wsf.controller.center;
 
 import com.wsf.controller.IController;
+import com.wsf.domain.Template;
+
+import java.util.List;
 
 
 /**
@@ -14,17 +17,19 @@ public interface ICenterController extends IController {
      * 请求器执行一组数据
      */
     void startOneRequest();
-//
-//    /**
-//     * 请求器执行多组数据
-//     */
-//    void startBatchRequest();
+
+    /**
+     * 解析器解析一组数据
+     */
+    void startOneParse();
 
 
     @Override
     default void init() {
 
     }
+
+    void init(List<Template> templates);
 
     @Override
     default Integer execute(Object o) {

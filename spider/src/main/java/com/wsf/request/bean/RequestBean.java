@@ -26,8 +26,6 @@ public class RequestBean implements Callable<Object[]> {
     private Object[] ret = new Object[2];
     //请求头信息
     private Map<String, String> requestHeader;
-    //是否经过gzip编码
-    private Boolean gzip;
     //设置超时时间,设置为静态变量，那所有的类都是这个时间
     private static Integer connectTimeOut = 2000;
     //设置资源传输超时时间
@@ -38,11 +36,10 @@ public class RequestBean implements Callable<Object[]> {
      *
      * @param url
      */
-    public RequestBean(String url, Map<String, String> requestHeader,Boolean gzip) {
+    public RequestBean(String url, Map<String, String> requestHeader) {
         //如果url是以http开头的，那就认为url中包含了协议
         this.url = url;
         this.requestHeader = requestHeader;
-        this.gzip = gzip;
     }
 
     /**
@@ -73,7 +70,7 @@ public class RequestBean implements Callable<Object[]> {
             //建立实际连接
             connection.connect();
             //将资源写入ByteArrayOutputStream中
-            if(gzip==null||gzip==false) {
+            if(connection.getContentEncoding()==null||!connection.getContentEncoding().equals("gzip")) {
                 bis = new BufferedInputStream(connection.getInputStream());
             }else{
                 bis = new BufferedInputStream(new GZIPInputStream(connection.getInputStream()));
@@ -122,11 +119,4 @@ public class RequestBean implements Callable<Object[]> {
         RequestBean.readTimeout = readTimeout;
     }
 
-    public Boolean getGzip() {
-        return gzip;
-    }
-
-    public void setGzip(Boolean gzip) {
-        this.gzip = gzip;
-    }
 }

@@ -41,7 +41,7 @@ public class RequestController implements IRequestController {
         toResource = new IOFactory().getReqWriteConnect(diskSave);
         //创建子管理器,之所以要先创建，主要是为了能重复利用子管理器。
         for (int i = 0; i < managerNumber; i++) {
-            RequestManager manager = ManagerFactory.getRequestManager(i, Configure.getConnTimeout(), Configure.getReadTimeout(), Configure.getRequestHeader(), Configure.getHandlerNumber(),Configure.getGzip());
+            RequestManager manager = ManagerFactory.getRequestManager(i, Configure.getConnTimeout(), Configure.getReadTimeout(), Configure.getRequestHeader(), Configure.getHandlerNumber());
             manager.init();
             managers.add(manager);
             //将所有的管理器放入等待队列

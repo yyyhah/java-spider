@@ -1,8 +1,9 @@
 package com.wsf.parse;
 
 import com.wsf.controller.center.impl.CenterControllerImpl;
-import com.wsf.domain.BaseItem;
+import com.wsf.domain.Item;
 import com.wsf.domain.Template;
+import com.wsf.domain.impl.BaseItem;
 import com.wsf.factory.io.IOFactory;
 import com.wsf.io.IReadFromPool;
 import com.wsf.io.IWriteToPool;
@@ -31,13 +32,7 @@ public class ParseBeanTest {
         writeProxy.write(list);
         writeProxy.flush();//记住要刷新
 
-        CenterControllerImpl center = new CenterControllerImpl();
-        center.startOneRequest();
-        center.destroy();
-
-        ConcurrentHashMap<String,byte[]> map = (ConcurrentHashMap<String,byte[]>)readProxy.read();
-        System.out.println("map:"+map);
-
+        //创建模板
         Template template = new Template();
         template.setCharset("utf-8");
         template.setUrlReg("http://www.xbiquge.\\w\\w/");
@@ -50,8 +45,25 @@ public class ParseBeanTest {
         template.setElementCss(temp);
         ArrayList<Template> lists = new ArrayList<>();
         lists.add(template);
+
+
+
+
+        CenterControllerImpl center = new CenterControllerImpl(lists);
+        center.startOneRequest();
+        center.destroy();
+
+        ConcurrentHashMap<String,byte[]> map = (ConcurrentHashMap<String,byte[]>)readProxy.read();
+        System.out.println("map:"+map);
+
+
+
+
+        //将模板导入manager
         ParseManager manager = new ParseManager(lists);
-        ConcurrentHashMap<String, BaseItem> result = manager.startOneParse(map);
+        //开启一个ParseBean执行清洗任务
+        ConcurrentHashMap<String, Item> result = manager.startOneParse(map);
         System.out.println(result);
+
     }
 }

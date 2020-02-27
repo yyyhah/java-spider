@@ -13,6 +13,8 @@ public class Template implements Serializable {
     private HashMap<String,String> elementCss;
     //网站编码
     private String charset;
+    //对应的Item的全类名
+    private String item;
 
     public String getCharset() {
         return charset;
@@ -36,5 +38,13 @@ public class Template implements Serializable {
 
     public void setElementCss(HashMap<String, String> elementCss) {
         this.elementCss = elementCss;
+    }
+
+    public String getItem() {
+        return item;
+    }
+
+    public void setItem(String item) {
+        this.item = item;
     }
 }

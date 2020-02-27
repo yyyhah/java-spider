@@ -1,8 +1,9 @@
 package com.wsf.parse.bean;
 
 
-import com.wsf.domain.BaseItem;
+import com.wsf.domain.Item;
 import com.wsf.domain.Template;
+import com.wsf.domain.impl.BaseItem;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -115,13 +116,12 @@ public class ParseBean {
      * @return
      * @throws Exception
      */
-    public BaseItem start(byte[] bytes) throws Exception {
+    public Item start(byte[] bytes) throws Exception {
         //将网页源码编码
         String html = new String(bytes, template.getCharset());
         //解析文档树
         Document document = Jsoup.parse(html);
-        return (BaseItem) createProperty("", document.select("html"), BaseItem.class);
-
+        return (Item)createProperty("", document.select("html"), Class.forName(template.getItem()));
     }
 
 

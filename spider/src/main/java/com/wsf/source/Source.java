@@ -99,7 +99,6 @@ public class Source {
                                 return;
                             }
                             itemBuffer.addAll((ConcurrentLinkedQueue<ConcurrentHashMap>) ois.readObject());
-
                             break;
                         default:
                             return;

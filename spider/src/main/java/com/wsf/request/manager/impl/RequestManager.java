@@ -34,18 +34,16 @@ public class RequestManager implements IRequestManager<ConcurrentLinkedQueue<Str
     //管理器的id
     private Integer manaferId = null;
 
-    private Boolean gzip = null;
 
     public RequestManager() {
     }
 
-    public RequestManager(Integer id, Map<String, String> requestHeader, Integer connTimeout, Integer readTimeout, Integer size,Boolean gzip) {
+    public RequestManager(Integer id, Map<String, String> requestHeader, Integer connTimeout, Integer readTimeout, Integer size) {
         this.manaferId = id;
         this.requestHeader = requestHeader;
         this.connTimeout = connTimeout;
         this.readTimeout = readTimeout;
         this.size = size == null ? this.size : size;
-        this.gzip = gzip;
     }
 
     /**
@@ -57,7 +55,7 @@ public class RequestManager implements IRequestManager<ConcurrentLinkedQueue<Str
         //创建线程池
         executorService = Executors.newFixedThreadPool(size);
         //设置请求头，创建request工厂
-        factory = new RequestFactory(this.connTimeout, this.readTimeout, this.requestHeader,this.gzip);
+        factory = new RequestFactory(this.connTimeout, this.readTimeout, this.requestHeader);
     }
 
     /**
@@ -123,14 +121,6 @@ public class RequestManager implements IRequestManager<ConcurrentLinkedQueue<Str
 
     public void setInBuffer(ConcurrentLinkedQueue<String> inBuffer) {
         this.inBuffer = inBuffer;
-    }
-
-    public Boolean getGzip() {
-        return gzip;
-    }
-
-    public void setGzip(Boolean gzip) {
-        this.gzip = gzip;
     }
 
     @Override
