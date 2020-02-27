@@ -3,42 +3,31 @@ package com.wsf.parse.bean;
 
 import com.wsf.domain.Item;
 import com.wsf.domain.Template;
-import com.wsf.domain.impl.BaseItem;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.List;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 
-public class ParseBean {
+/**
+ * 解析html字节流
+ */
+public class HtmlParseBean implements IParseBean{
     private Template template;
-    private static Logger logger = Logger.getLogger(ParseBean.class);
+    private static Logger logger = Logger.getLogger(HtmlParseBean.class);
     private HashMap<String, String> elementCss;
 
-    public ParseBean(Template template) {
+    public HtmlParseBean(Template template) {
         this.template = template;
-        this.elementCss = template.getElementCss();
+        this.elementCss = template.getElementPath();
     }
 
-    /**
-     * 获取泛型的真实对象
-     * @param type
-     * @return
-     */
-    private Class<?> getGenericType(Type type){
-        if(type instanceof ParameterizedType){
-            ParameterizedType parameterizedType = (ParameterizedType)type;
-            return (Class<?>)parameterizedType.getActualTypeArguments()[0];
-        }
-        return null;
-    }
+
     /**
      * 利用反射递归生成item里对应的属性
      * @param elements
@@ -116,6 +105,7 @@ public class ParseBean {
      * @return
      * @throws Exception
      */
+    @Override
     public Item start(byte[] bytes) throws Exception {
         //将网页源码编码
         String html = new String(bytes, template.getCharset());

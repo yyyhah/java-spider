@@ -145,6 +145,9 @@ public class Source {
         try {
             switch (fileName) {
                 case "url":
+                    if(urlBuffer.size() == 0){
+                        break;
+                    }
                     File urlFile = new File(f, "" + System.currentTimeMillis() + UUID.randomUUID() + "." + fileName + "s");
                     temp = new ConcurrentLinkedQueue();
                     urlFile.createNewFile();
@@ -156,6 +159,9 @@ public class Source {
                     hasUrlResource = true;
                     break;
                 case "html":
+                    if(htmlBuffer.size()==0){
+                        break;
+                    }
                     File htmlFile = new File(f, "" + System.currentTimeMillis() + UUID.randomUUID() + "." + fileName + "s");
                     temp = new ConcurrentLinkedQueue();
                     htmlFile.createNewFile();
@@ -167,6 +173,9 @@ public class Source {
                     hasHtmlResource = true;
                     break;
                 case "item":
+                    if(itemBuffer.size()==0){
+                        break;
+                    }
                     File itemFile = new File(f, "" + System.currentTimeMillis() + UUID.randomUUID() + "." + fileName + "s");
                     temp = new ConcurrentLinkedQueue();
                     itemFile.createNewFile();

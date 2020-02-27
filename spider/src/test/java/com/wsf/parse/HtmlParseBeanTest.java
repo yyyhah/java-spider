@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class ParseBeanTest {
+public class HtmlParseBeanTest {
     @Before
     public void init() throws ClassNotFoundException {
         Class.forName("com.wsf.source.Source");
@@ -42,7 +42,7 @@ public class ParseBeanTest {
         temp.put("atoms.chapterHref","div > dl > dt > a;href");
         temp.put("atoms.author","div > dl > dt > a");
         temp.put("atoms.books","ul > li > a");
-        template.setElementCss(temp);
+        template.setElementPath(temp);
         ArrayList<Template> lists = new ArrayList<>();
         lists.add(template);
 

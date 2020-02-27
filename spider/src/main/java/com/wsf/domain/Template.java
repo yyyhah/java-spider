@@ -10,11 +10,13 @@ public class Template implements Serializable {
     //该item对应的网址正则表达式
     private String urlReg;
     //该map对应 元素和页面中的css路径
-    private HashMap<String,String> elementCss;
+    private HashMap<String,String> elementPath;
     //网站编码
     private String charset;
     //对应的Item的全类名
     private String item;
+    //对应的解析器全类名
+    private String parseBean;
 
     public String getCharset() {
         return charset;
@@ -32,12 +34,12 @@ public class Template implements Serializable {
         this.urlReg = urlReg;
     }
 
-    public HashMap<String, String> getElementCss() {
-        return elementCss;
+    public HashMap<String, String> getElementPath() {
+        return elementPath;
     }
 
-    public void setElementCss(HashMap<String, String> elementCss) {
-        this.elementCss = elementCss;
+    public void setElementPath(HashMap<String, String> elementPath) {
+        this.elementPath = elementPath;
     }
 
     public String getItem() {
@@ -46,5 +48,13 @@ public class Template implements Serializable {
 
     public void setItem(String item) {
         this.item = item;
+    }
+
+    public String getParseBean() {
+        return parseBean;
+    }
+
+    public void setParseBean(String parseBean) {
+        this.parseBean = parseBean;
     }
 }

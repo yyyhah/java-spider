@@ -24,7 +24,7 @@ public class CenterControllerTest {
         temp.put("atoms.chapterHref","div > dl > dt > a;href");
         temp.put("atoms.author","div > dl > dt > a");
         temp.put("atoms.books","ul > li > a");
-        template.setElementCss(temp);
+        template.setElementPath(temp);
         template.setItem("com.wsf.domain.impl.BaseItem");
         lists.add(template);
         Template template1 = new Template();

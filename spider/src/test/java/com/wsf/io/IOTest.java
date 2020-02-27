@@ -193,7 +193,7 @@ public class IOTest {
 
     @Test
     public void test() throws IllegalAccessException, InvocationTargetException {
-
+        System.out.println("http://i2.hdslb.com/bfs/archive/f72f0b68e92f475c86bfb48f0f902d4b5904ad08.jpg".matches("http://i\\d.hdslb.com/bfs/archive/.+?\\.jpg"));
     }
 
 }

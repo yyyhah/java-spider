@@ -2,8 +2,8 @@ package com.wsf.parse.manager.impl;
 
 import com.wsf.domain.Item;
 import com.wsf.domain.Template;
-import com.wsf.domain.impl.BaseItem;
-import com.wsf.parse.bean.ParseBean;
+import com.wsf.parse.bean.HtmlParseBean;
+import com.wsf.parse.bean.IParseBean;
 import org.apache.log4j.Logger;
 
 import java.util.List;
@@ -52,13 +52,14 @@ public class ParseManager {
             }else {
                 Item item = null;
                 try {
-                    item = new ParseBean(template).start(entry.getValue());
+                    IParseBean bean = (IParseBean)Class.forName(template.getParseBean()).getConstructor(Template.class).newInstance(template);
+                    item = (Item)bean.start(entry.getValue());
                 } catch (Exception e) {
                     e.printStackTrace();
-                    logger.error("html解析封装出错！");
+                    logger.error("字节流解析封装出错！");
                 }
                 item.setUrl(entry.getKey());
-                map.put(template.getItem(),item);
+                map.put(entry.getKey(),item);
             }
         }
         return map;

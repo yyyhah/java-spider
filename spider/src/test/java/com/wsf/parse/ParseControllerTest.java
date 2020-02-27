@@ -1,17 +1,18 @@
 package com.wsf.parse;
 
 import com.wsf.controller.center.impl.CenterControllerImpl;
+import com.wsf.domain.Item;
 import com.wsf.domain.Template;
+import com.wsf.domain.impl.ByteItem;
 import com.wsf.factory.io.IOFactory;
 import com.wsf.io.IReadFromPool;
 import com.wsf.io.IWriteToPool;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.*;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class ParseControllerTest {
@@ -20,6 +21,7 @@ public class ParseControllerTest {
         Class.forName("com.wsf.config.Configure");
     }
 
+    /*
     private List<Template> getTemplate(){
         ArrayList<Template> lists = new ArrayList<>();
         //创建模板
@@ -49,16 +51,27 @@ public class ParseControllerTest {
         return lists;
     }
 
+     */
+    private List<Template> getTemplate(){
+        ArrayList<Template> list = new ArrayList<>();
+        Template template = new Template();
+        template.setCharset("utf-8");
+        template.setUrlReg("http://i\\d.hdslb.com/bfs/archive/.+?\\.jpg");
+        template.setItem("com.wsf.domain.impl.ByteItem");
+        template.setParseBean("com.wsf.parse.bean.ByteParseBean");
+        list.add(template);
+        return list;
+    }
     @Test
     public void testStartOnParse(){
         IWriteToPool writeToUrl = IOFactory.getSaveWriteConnect(true);
         IReadFromPool readFromItem = IOFactory.getSaveReadConnect(40, true);
         IReadFromPool readFromUrl = IOFactory.getReqReadConnect(40, true);
         IWriteToPool writeToHtml = IOFactory.getReqWriteConnect(true);
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i <2; i++) {
             ConcurrentLinkedQueue<String> urls = new ConcurrentLinkedQueue<>();
-            urls.add("http://www.xbiquge.la/");
-            urls.add("http://www.xbiquge.la/10/10489/");
+            urls.add("http://i1.hdslb.com/bfs/archive/63e26687df6739a7bda69bfa5ca8b7feffe46036.jpg");
+            urls.add("http://i2.hdslb.com/bfs/archive/f72f0b68e92f475c86bfb48f0f902d4b5904ad08.jpg");
             writeToUrl.write(urls);
         }
         writeToUrl.flush();
@@ -90,11 +103,24 @@ public class ParseControllerTest {
         centerController.destroy();
     }
     @Test
-    public void read(){
+    public void read() throws IOException {
         IReadFromPool readFromItem = IOFactory.getSaveReadConnect(40, true);
-        while(readFromItem.hasNext()){
-            LinkedList linkedList = readFromItem.readBatch();
-            System.out.println(linkedList);
+        File file = new File("D:\\webSpider\\source\\images");
+
+        while (readFromItem.hasNext()){
+            ConcurrentHashMap<String,Item> read = (ConcurrentHashMap<String, Item>)readFromItem.read();
+            Set<Map.Entry<String, Item>> entries = read.entrySet();
+            for (Map.Entry<String, Item> entry : entries) {
+                File f = new File(file,UUID.randomUUID().toString()+".jpg");
+                if(!f.exists()){
+                    f.createNewFile();
+                }
+                ByteItem value = (ByteItem) (entry.getValue());
+                System.out.println(value.getUrl());
+                FileOutputStream fos = new FileOutputStream(f);
+                fos.write(value.getBytes());
+                fos.close();
+            }
         }
     }
 }

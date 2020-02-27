@@ -3,16 +3,16 @@ package com.wsf.domain.impl;
 import com.wsf.domain.Atom;
 
 public class MyAtom2 implements Atom {
-    private String name;
-    private String bofang;
-    private String pinlun;
+    private String typename;
+    private String title;
+    private String pic;
 
     @Override
     public String toString() {
         return "MyAtom2{" +
-                "name='" + name + '\'' +
-                ", bofang='" + bofang + '\'' +
-                ", pinlun='" + pinlun + '\'' +
+                "typename='" + typename + '\'' +
+                ", title='" + title + '\'' +
+                ", pic='" + pic + '\'' +
                 '}';
     }
 }

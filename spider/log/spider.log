@@ -812,3 +812,31 @@
 2020-02-27 15:44:47 method: com.wsf.source.Source.readFile(Source.java:110) - [ ERROR ]----从磁盘中读取item出错
 2020-02-27 15:45:01 method: com.wsf.source.Source.readFile(Source.java:110) - [ ERROR ]----从磁盘中读取item出错
 2020-02-27 15:47:00 method: com.wsf.source.Source.readFile(Source.java:110) - [ ERROR ]----从磁盘中读取item出错
+2020-02-27 19:17:45 method: com.wsf.info.GetHtmlInfo.get(GetHtmlInfo.java:100) - [ ERROR ]----网站访问失败！
+2020-02-27 19:20:16 method: com.wsf.info.GetHtmlInfo.get(GetHtmlInfo.java:100) - [ ERROR ]----网站访问失败！
+2020-02-27 19:26:40 method: com.wsf.info.GetHtmlInfo.get(GetHtmlInfo.java:100) - [ ERROR ]----网站访问失败！
+2020-02-27 19:26:46 method: com.wsf.info.GetHtmlInfo.get(GetHtmlInfo.java:99) - [ ERROR ]----网站访问失败！
+2020-02-27 20:24:33 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:49) - [ WARN ]----没有找到对应模板，请确认 http://www.xbiquge.la/ 的正则表达式是否正确！注意转义字符
+2020-02-27 20:24:33 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:49) - [ WARN ]----没有找到对应模板，请确认 http://www.xbiquge.la/10/10489/ 的正则表达式是否正确！注意转义字符
+2020-02-27 20:25:34 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:49) - [ WARN ]----没有找到对应模板，请确认 http://www.xbiquge.la/ 的正则表达式是否正确！注意转义字符
+2020-02-27 20:25:34 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:49) - [ WARN ]----没有找到对应模板，请确认 http://www.xbiquge.la/10/10489/ 的正则表达式是否正确！注意转义字符
+2020-02-27 20:28:59 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:58) - [ ERROR ]----html解析封装出错！
+2020-02-27 20:31:09 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认 http://www.xbiquge.la/ 的正则表达式是否正确！注意转义字符
+2020-02-27 20:31:09 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认 http://www.xbiquge.la/10/10489/ 的正则表达式是否正确！注意转义字符
+2020-02-27 20:32:06 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:59) - [ ERROR ]----html解析封装出错！
+2020-02-27 20:34:39 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:59) - [ ERROR ]----字节流解析封装出错！
+2020-02-27 20:37:06 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:59) - [ ERROR ]----字节流解析封装出错！
+2020-02-27 20:57:46 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认 http://i2.hdslb.com/bfs/archive/f72f0b68e92f475c86bfb48f0f902d4b5904ad08.jpg 的正则表达式是否正确！注意转义字符
+2020-02-27 20:57:46 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:59) - [ ERROR ]----字节流解析封装出错！
+2020-02-27 20:59:08 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认 http://i2.hdslb.com/bfs/archive/f72f0b68e92f475c86bfb48f0f902d4b5904ad08.jpg 的正则表达式是否正确！注意转义字符
+2020-02-27 20:59:08 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认 http://i1.hdslb.com/bfs/archive/63e26687df6739a7bda69bfa5ca8b7feffe46036.jpg 的正则表达式是否正确！注意转义字符
+2020-02-27 21:03:55 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认 http://i2.hdslb.com/bfs/archive/f72f0b68e92f475c86bfb48f0f902d4b5904ad08.jpg 的正则表达式是否正确！注意转义字符
+2020-02-27 21:03:55 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:50) - [ WARN ]----没有找到对应模板，请确认 http://i1.hdslb.com/bfs/archive/63e26687df6739a7bda69bfa5ca8b7feffe46036.jpg 的正则表达式是否正确！注意转义字符
+2020-02-27 21:03:59 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:59) - [ ERROR ]----字节流解析封装出错！
+2020-02-27 21:07:11 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:59) - [ ERROR ]----字节流解析封装出错！
+2020-02-27 21:07:16 method: com.wsf.parse.manager.impl.ParseManager.startOneParse(ParseManager.java:59) - [ ERROR ]----字节流解析封装出错！
+2020-02-27 21:15:00 method: com.wsf.source.Source.readFile(Source.java:110) - [ ERROR ]----从磁盘中读取item出错
+2020-02-27 21:21:31 method: com.wsf.source.Source.readFile(Source.java:110) - [ ERROR ]----从磁盘中读取item出错
+2020-02-27 21:21:52 method: com.wsf.source.Source.readFile(Source.java:110) - [ ERROR ]----从磁盘中读取item出错
+2020-02-27 21:22:07 method: com.wsf.source.Source.readFile(Source.java:110) - [ ERROR ]----从磁盘中读取item出错
+2020-02-27 21:22:13 method: com.wsf.source.Source.readFile(Source.java:110) - [ ERROR ]----从磁盘中读取item出错
