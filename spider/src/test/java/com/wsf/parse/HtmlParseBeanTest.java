@@ -30,7 +30,7 @@ public class HtmlParseBeanTest {
         ConcurrentLinkedQueue<String> list  = new ConcurrentLinkedQueue<>();
         list.add("http://www.xbiquge.la/");
         writeProxy.write(list);
-        writeProxy.flush();//记住要刷新
+
 
         //创建模板
         Template template = new Template();

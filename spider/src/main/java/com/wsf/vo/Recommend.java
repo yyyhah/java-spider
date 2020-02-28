@@ -1,8 +1,9 @@
-package com.wsf.domain.impl;
+package com.wsf.vo;
 
-import com.wsf.domain.Atom;
-
-public class MyAtom2 implements Atom {
+/**
+ * 数据库连接实体类
+ */
+public class Recommend {
     private String typename;
     private String title;
     private String pic;
@@ -29,14 +30,5 @@ public class MyAtom2 implements Atom {
 
     public void setPic(String pic) {
         this.pic = pic;
-    }
-
-    @Override
-    public String toString() {
-        return "MyAtom2{" +
-                "typename='" + typename + '\'' +
-                ", title='" + title + '\'' +
-                ", pic='" + pic + '\'' +
-                '}';
     }
 }

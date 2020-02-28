@@ -9,9 +9,30 @@ public class IntItem implements Item {
     private String title;
     private ArrayList<String> chapters;
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public ArrayList<String> getChapters() {
+        return chapters;
+    }
+
+    public void setChapters(ArrayList<String> chapters) {
+        this.chapters = chapters;
+    }
+
     @Override
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    @Override
+    public String getUrl() {
+        return url;
     }
 
     @Override

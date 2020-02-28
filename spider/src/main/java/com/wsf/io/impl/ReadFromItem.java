@@ -59,7 +59,7 @@ public class ReadFromItem implements IReadFromPool<ConcurrentHashMap> {
                 return null;
             }
             for (int i = 0; i < readBuffer; i++) {
-                if (itemBuffer.size() > 0) {
+                if (!itemBuffer.isEmpty()) {
                     itemReadBuffer[i] = itemBuffer.poll();
                 } else {
                     itemReadBuffer[i] = null;
@@ -87,7 +87,7 @@ public class ReadFromItem implements IReadFromPool<ConcurrentHashMap> {
 
     @Override
     public Boolean hasNext() {
-        return (itemIndex < readBuffer && itemReadBuffer[itemIndex] != null) || itemBuffer.size() > 0 || Source.getHasItemResource();
+        return (itemIndex < readBuffer && itemReadBuffer[itemIndex] != null) || !itemBuffer.isEmpty() || Source.getHasItemResource();
     }
 
     @Override

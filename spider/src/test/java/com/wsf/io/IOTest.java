@@ -30,7 +30,6 @@ public class IOTest {
             list.add("翁寿发"+i);
             write.write(list);
         }
-        write.flush();
 
 
         for (int i = 0; i < 50; i++) {
@@ -42,7 +41,6 @@ public class IOTest {
             list.add("翁寿发"+i);
             write.write(list);
         }
-        write.flush();
 
 
         for (int i = 0; i < 50; i++) {
@@ -60,7 +58,6 @@ public class IOTest {
             list.add("翁寿发"+i);
             write.write(list);
         }
-        write.flush();
 
         LinkedList<ConcurrentLinkedQueue> concurrentLinkedQueues = read.readBatch();
         for (ConcurrentLinkedQueue concurrentLinkedQueue : concurrentLinkedQueues) {
@@ -81,7 +78,6 @@ public class IOTest {
             map.put("翁寿发"+i,("你好"+i).getBytes());
             write.write(map);
         }
-        write.flush();
 
 
         for (int i = 0; i < 50; i++) {
@@ -92,7 +88,6 @@ public class IOTest {
             map.put("翁寿发"+i,("你好"+i).getBytes());
             write.write(map);
         }
-        write.flush();
 
         for (int i = 0; i < 50; i++) {
             System.out.println(i+":"+read.read());
@@ -108,7 +103,6 @@ public class IOTest {
             map.put("翁寿发"+i,("你好"+i).getBytes());
             write.write(map);
         }
-        write.flush();
 
         LinkedList<ConcurrentHashMap> concurrentLinkedQueues = (LinkedList<ConcurrentHashMap>) read.readBatch();
         for (ConcurrentHashMap concurrentLinkedQueue : concurrentLinkedQueues) {
@@ -142,7 +136,6 @@ public class IOTest {
             map.put("翁寿发"+i,new BaseItem());
             write.write(map);
         }
-        write.flush();
 
         for (int i = 0; i < 50; i++) {
             System.out.println(i+":"+read.read());
@@ -157,8 +150,6 @@ public class IOTest {
             map.put("翁寿发"+i,new BaseItem());
             write.write(map);
         }
-        write.flush();
-
         LinkedList<ConcurrentHashMap> concurrentLinkedQueues = read.readBatch();
         for (ConcurrentHashMap concurrentLinkedQueue : concurrentLinkedQueues) {
             System.out.println(concurrentLinkedQueue);
@@ -179,7 +170,6 @@ public class IOTest {
             list.add("翁寿发"+i);
             writeProxy.write(list);
         }
-        writeProxy.flush();
         writeProxy.close();
         Source.close();
         int i = 0;
@@ -193,7 +183,13 @@ public class IOTest {
 
     @Test
     public void test() throws IllegalAccessException, InvocationTargetException {
-        System.out.println("http://i2.hdslb.com/bfs/archive/f72f0b68e92f475c86bfb48f0f902d4b5904ad08.jpg".matches("http://i\\d.hdslb.com/bfs/archive/.+?\\.jpg"));
+        ConcurrentHashMap<String,String> map = new ConcurrentHashMap<>();
+        map.put("aaaa","dsdsd");
+        map.put("dsadasd","dasdasd");
+        ConcurrentLinkedQueue linkedQueue = new ConcurrentLinkedQueue();
+        linkedQueue.add(map);
+        linkedQueue.add(map);
+        System.out.println(linkedQueue);
     }
 
 }

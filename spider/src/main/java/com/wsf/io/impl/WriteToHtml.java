@@ -10,23 +10,9 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 public class WriteToHtml implements IWriteToPool<ConcurrentHashMap<String, byte[]>> {
     //html池
     private ConcurrentLinkedQueue<ConcurrentHashMap> htmlBuffer = Source.getHtmlBuffer();
-    //写入缓存区的大小,默认值40
-    private static Integer writeBuffer = Configure.getIOWriteBuffer() == null ? 40 : Configure.getIOWriteBuffer();
-    //html读取缓存
-    private ConcurrentHashMap[] htmlWriteBuffer = null;
-
-    private Integer htmlIndex = 0;
 
     private boolean closed = false;
 
-    public WriteToHtml() {
-        this(null);
-    }
-
-    public WriteToHtml(Integer bufferSize) {
-        writeBuffer = bufferSize == null ? writeBuffer : bufferSize;
-        htmlWriteBuffer = new ConcurrentHashMap[writeBuffer];
-    }
 
     @Override
     public void write(ConcurrentHashMap<String, byte[]> inBuffer) {
@@ -34,31 +20,12 @@ public class WriteToHtml implements IWriteToPool<ConcurrentHashMap<String, byte[
         if (inBuffer == null || inBuffer.size() == 0) {
             return;
         }
-        //如果缓存区没满，加入缓存区
-        if (htmlIndex < writeBuffer) {
-            htmlWriteBuffer[htmlIndex++] = inBuffer;
-        } else {
-            //如果缓存区满了，全部放入资源池
-            flush();
-            htmlWriteBuffer[htmlIndex++] = inBuffer;
-        }
+        htmlBuffer.add(inBuffer);
     }
 
-    /**
-     * 将写入html的信息全部刷入资源池
-     */
-    @Override
-    public void flush() {
-        for (int i = 0; i < htmlIndex; i++) {
-            htmlBuffer.add(htmlWriteBuffer[i]);
-            htmlWriteBuffer[i] = null;
-        }
-        htmlIndex = 0;
-    }
 
     @Override
     public void close() {
-        flush();
         closed = true;
         htmlBuffer = null;
     }
@@ -72,4 +39,5 @@ public class WriteToHtml implements IWriteToPool<ConcurrentHashMap<String, byte[
     public Integer getCurrentSourceSize() {
         return htmlBuffer.size();
     }
+
 }

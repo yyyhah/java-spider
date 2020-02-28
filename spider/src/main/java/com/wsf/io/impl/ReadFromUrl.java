@@ -45,7 +45,7 @@ public class ReadFromUrl implements IReadFromPool<ConcurrentLinkedQueue<String>>
                 return null;
             }
             for (int i = 0; i < readBuffer; i++) {
-                if (urlBuffer.size() > 0) {
+                if (!urlBuffer.isEmpty()) {
                     urlReadBuffer[i] = urlBuffer.poll();
                 } else {
                     urlReadBuffer[i] = null;
@@ -71,7 +71,7 @@ public class ReadFromUrl implements IReadFromPool<ConcurrentLinkedQueue<String>>
 
     @Override
     public Boolean hasNext() {
-        return (urlIndex < readBuffer && urlReadBuffer[urlIndex] != null) || urlBuffer.size() > 0 || Source.getHasUrlResource();
+        return (urlIndex < readBuffer && urlReadBuffer[urlIndex] != null) || !urlBuffer.isEmpty() || Source.getHasUrlResource();
     }
 
     @Override

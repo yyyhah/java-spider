@@ -32,6 +32,10 @@ public class RequestController implements IRequestController {
     //等待队列中管理器，设置其初始化大小
     private static HashMap<Integer, RequestManager> waitManager = new HashMap<Integer, RequestManager>(managerNumber);
 
+    public RequestController() {
+        init();
+    }
+
     @Override
     public void init() {
         // 创建管理器资源池
@@ -92,21 +96,12 @@ public class RequestController implements IRequestController {
             synchronized (runManager) {
                 RequestManager remove = runManager.remove(managerId);
                 //将得到的数据保存到资源池中
-                setResource(outBuffer);
+                toResource.write(outBuffer);
                 remove.setInBuffer(null);
                 waitManager.put(managerId, remove);
                 System.out.println("managerPool 归还了一个线程:" + managerPool);
             }
         }
-    }
-
-    /**
-     * 将outBuffer存入资源池
-     *
-     * @param outBuffer
-     */
-    public static void setResource(ConcurrentHashMap<String, byte[]> outBuffer) {
-        toResource.write(outBuffer);
     }
 
     public static Integer getManagerNumber() {
@@ -120,15 +115,12 @@ public class RequestController implements IRequestController {
     //判断当前控制器的线程池是否空闲
     @Override
     public Boolean isEmpty() {
-        if (runManager == null || runManager.size() == 0) {
-            return true;
-        }
-        return false;
+        return ((ThreadPoolExecutor)managerPool).getActiveCount()==0;
     }
 
     @Override
     public Boolean isIdle() {
-        return waitManager.size() > 0;
+        return ((ThreadPoolExecutor)managerPool).getActiveCount() < managerNumber;
     }
 
     @Override
@@ -150,5 +142,9 @@ public class RequestController implements IRequestController {
         }
         //关闭输出流
         toResource.close();
+    }
+    @Override
+    public IWriteToPool getWriter() {
+        return toResource;
     }
 }

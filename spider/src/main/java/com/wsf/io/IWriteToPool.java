@@ -22,10 +22,6 @@ public interface IWriteToPool<T> {
      */
     void close();
 
-    /**
-     * 刷新读取器
-     */
-    void flush();
 
 
     /**

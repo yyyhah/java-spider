@@ -3,7 +3,6 @@ package com.wsf.parse;
 import com.wsf.controller.center.impl.CenterControllerImpl;
 import com.wsf.domain.Item;
 import com.wsf.domain.Template;
-import com.wsf.domain.impl.ByteItem;
 import com.wsf.factory.io.IOFactory;
 import com.wsf.io.IReadFromPool;
 import com.wsf.io.IWriteToPool;
@@ -21,7 +20,7 @@ public class ParseControllerTest {
         Class.forName("com.wsf.config.Configure");
     }
 
-    /*
+
     private List<Template> getTemplate(){
         ArrayList<Template> lists = new ArrayList<>();
         //创建模板
@@ -34,7 +33,8 @@ public class ParseControllerTest {
         temp.put("atoms.chapterHref","div > dl > dt > a;href");
         temp.put("atoms.author","div > dl > dt > a");
         temp.put("atoms.books","ul > li > a");
-        template.setElementCss(temp);
+        template.setElementPath(temp);
+        template.setParseBean("com.wsf.parse.bean.impl.HtmlParseBean");
         template.setItem("com.wsf.domain.impl.BaseItem");
         lists.add(template);
 
@@ -46,22 +46,25 @@ public class ParseControllerTest {
         HashMap<String, String> temp2 = new HashMap<>();
         temp2.put("title","#info > h1");
         temp2.put("chapters","#list > dl > dd > a");
-        template1.setElementCss(temp2);
+        template.setParseBean("com.wsf.parse.bean.impl.HtmlParseBean");
+        template1.setElementPath(temp2);
         lists.add(template1);
         return lists;
     }
 
-     */
+    /*
     private List<Template> getTemplate(){
         ArrayList<Template> list = new ArrayList<>();
         Template template = new Template();
         template.setCharset("utf-8");
         template.setUrlReg("http://i\\d.hdslb.com/bfs/archive/.+?\\.jpg");
         template.setItem("com.wsf.domain.impl.ByteItem");
-        template.setParseBean("com.wsf.parse.bean.ByteParseBean");
+        template.setParseBean("com.wsf.parse.bean.impl.ByteParseBean");
         list.add(template);
         return list;
     }
+
+     */
     @Test
     public void testStartOnParse(){
         IWriteToPool writeToUrl = IOFactory.getSaveWriteConnect(true);
@@ -70,11 +73,9 @@ public class ParseControllerTest {
         IWriteToPool writeToHtml = IOFactory.getReqWriteConnect(true);
         for (int i = 0; i <2; i++) {
             ConcurrentLinkedQueue<String> urls = new ConcurrentLinkedQueue<>();
-            urls.add("http://i1.hdslb.com/bfs/archive/63e26687df6739a7bda69bfa5ca8b7feffe46036.jpg");
-            urls.add("http://i2.hdslb.com/bfs/archive/f72f0b68e92f475c86bfb48f0f902d4b5904ad08.jpg");
+            urls.add("http://www.xbiquge.la/");
             writeToUrl.write(urls);
         }
-        writeToUrl.flush();
 
 
         List<Template> templates = getTemplate();
@@ -109,18 +110,7 @@ public class ParseControllerTest {
 
         while (readFromItem.hasNext()){
             ConcurrentHashMap<String,Item> read = (ConcurrentHashMap<String, Item>)readFromItem.read();
-            Set<Map.Entry<String, Item>> entries = read.entrySet();
-            for (Map.Entry<String, Item> entry : entries) {
-                File f = new File(file,UUID.randomUUID().toString()+".jpg");
-                if(!f.exists()){
-                    f.createNewFile();
-                }
-                ByteItem value = (ByteItem) (entry.getValue());
-                System.out.println(value.getUrl());
-                FileOutputStream fos = new FileOutputStream(f);
-                fos.write(value.getBytes());
-                fos.close();
-            }
+            System.out.println(read);
         }
     }
 }

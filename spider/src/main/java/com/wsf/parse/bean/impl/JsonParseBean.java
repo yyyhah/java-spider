@@ -1,7 +1,8 @@
-package com.wsf.parse.bean;
+package com.wsf.parse.bean.impl;
 
 import com.wsf.domain.Item;
 import com.wsf.domain.Template;
+import com.wsf.parse.bean.IParseBean;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import org.apache.log4j.Logger;
@@ -15,7 +16,7 @@ import java.util.HashMap;
  * 解析json字节流的
  */
 @SuppressWarnings("all")
-public class JsonParseBean implements IParseBean{
+public class JsonParseBean implements IParseBean {
     private Template template;
     private static Logger logger = Logger.getLogger(HtmlParseBean.class);
     private HashMap<String, String> jsonPath;

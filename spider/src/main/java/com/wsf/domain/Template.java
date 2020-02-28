@@ -17,6 +17,8 @@ public class Template implements Serializable {
     private String item;
     //对应的解析器全类名
     private String parseBean;
+    //对应的存储器的全类名
+    private String saveBean;
 
     public String getCharset() {
         return charset;
@@ -56,5 +58,13 @@ public class Template implements Serializable {
 
     public void setParseBean(String parseBean) {
         this.parseBean = parseBean;
+    }
+
+    public String getSaveBean() {
+        return saveBean;
+    }
+
+    public void setSaveBean(String saveBean) {
+        this.saveBean = saveBean;
     }
 }

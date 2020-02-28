@@ -6,6 +6,9 @@ import com.wsf.controller.parse.IParseController;
 import com.wsf.controller.parse.impl.ParseController;
 import com.wsf.controller.request.IRequestController;
 import com.wsf.controller.request.impl.RequestController;
+import com.wsf.controller.save.ISaveController;
+import com.wsf.controller.save.impl.SaveController;
+import com.wsf.domain.Item;
 import com.wsf.domain.Template;
 import com.wsf.factory.io.IOFactory;
 import com.wsf.io.IReadFromPool;
@@ -24,6 +27,7 @@ public class CenterControllerImpl implements ICenterController {
     //控制器
     private IRequestController requestController = null;
     private IParseController parseController = null;
+    private ISaveController saveController = null;
     //模板
     private ArrayList<Template> templates = null;
 
@@ -40,22 +44,26 @@ public class CenterControllerImpl implements ICenterController {
      */
     @Override
     public void startOneRequest() {
-        ConcurrentLinkedQueue<String> inBuffer = (ConcurrentLinkedQueue) urlReader.read();
-        if (inBuffer != null && inBuffer.size() > 0) {
-            Integer executeNum = requestController.execute(inBuffer);
-            if (executeNum <= 0) {
-                logger.warn("管理器繁忙,请稍后再试");
-                while (!requestController.isIdle()) {
-                    try {
-                        Thread.sleep(2000);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        //如果请求器有空闲的队列才会执行
+        if(requestController.isIdle()) {
+            ConcurrentLinkedQueue<String> inBuffer = (ConcurrentLinkedQueue) urlReader.read();
+            //如果有读取到数据才会执行
+            if (inBuffer != null && inBuffer.size() > 0) {
+                requestController.execute(inBuffer);
+            } else {
+                logger.warn("url池中没数据了");
+            }
+        }else{
+            logger.warn("管理器繁忙,请稍后再试");
+            while (!requestController.isIdle()) {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
-        } else {
-            logger.warn("url池中没数据了");
         }
+
     }
 
 
@@ -67,6 +75,33 @@ public class CenterControllerImpl implements ICenterController {
         }
     }
 
+    @Override
+    public void startOneSave(){
+        ConcurrentHashMap<String,Item> inBuffer = (ConcurrentHashMap<String, Item>)itemReader.read();
+        if(inBuffer!=null && inBuffer.size()>0){
+            saveController.execute(inBuffer);
+        }
+    }
+
+    /**
+     * 爬虫启动
+     */
+    public void start(){
+        //当有数据存在,或者request未执行完毕时，一直执行
+        while(true){
+            if(urlReader.hasNext()) {
+                startOneRequest();
+            }
+            if(htmlReader.hasNext()) {
+                startOneParse();
+            }
+            if(itemReader.hasNext()) {
+                startOneSave();
+            }
+        }
+    }
+
+
 
     @Override
     public void init(List<Template> templates) {
@@ -77,13 +112,15 @@ public class CenterControllerImpl implements ICenterController {
         //创建请求器调度器
         requestController = new RequestController();
         parseController = new ParseController(templates);
-        //初始化请求器调度器
-        requestController.init();
+        saveController = new SaveController(templates);
     }
+
+
+
 
     @Override
     public void destroy() {
-        //只有当各个管理器的运行队列为空时才能关闭程序,设置休息时间4秒，4秒后强制关闭
+        //只有当各个管理器的运行队列为空时才能关闭程序,设置休息时间4秒
         while (!requestController.isEmpty()) {
             try {
                 Thread.sleep(4000);
@@ -93,8 +130,10 @@ public class CenterControllerImpl implements ICenterController {
         }
         requestController.destroy();
         parseController.destroy();
+        saveController.destroy();
         urlReader.close();
         htmlReader.close();
+        itemReader.close();
         Source.close();
     }
 }

@@ -45,7 +45,7 @@ public class ReadFromHtml implements IReadFromPool<ConcurrentHashMap> {
                 return null;
             }
             for (int i = 0; i < readBuffer; i++) {
-                if (htmlBuffer.size() > 0) {
+                if (!htmlBuffer.isEmpty()) {
                     htmlReadBuffer[i] = htmlBuffer.poll();
                 } else {
                     htmlReadBuffer[i] = null;
@@ -71,7 +71,7 @@ public class ReadFromHtml implements IReadFromPool<ConcurrentHashMap> {
 
     @Override
     public Boolean hasNext() {
-        return (htmlIndex < readBuffer && htmlReadBuffer[htmlIndex] != null) || htmlBuffer.size() > 0 || Source.getHasHtmlResource();
+        return (htmlIndex < readBuffer && htmlReadBuffer[htmlIndex] != null) || !htmlBuffer.isEmpty() || Source.getHasHtmlResource();
     }
 
     @Override

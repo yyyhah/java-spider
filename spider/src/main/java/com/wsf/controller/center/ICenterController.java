@@ -2,6 +2,7 @@ package com.wsf.controller.center;
 
 import com.wsf.controller.IController;
 import com.wsf.domain.Template;
+import com.wsf.io.IWriteToPool;
 
 import java.util.List;
 
@@ -23,6 +24,10 @@ public interface ICenterController extends IController {
      */
     void startOneParse();
 
+    /**
+     * 存入一组数据
+     */
+    void startOneSave();
 
     @Override
     default void init() {
@@ -40,14 +45,8 @@ public interface ICenterController extends IController {
     default void destroy() {
 
     }
-
     @Override
-    default Boolean isIdle() {
-        return null;
-    }
-
-    @Override
-    default Boolean isEmpty() {
+    default IWriteToPool getWriter() {
         return null;
     }
 

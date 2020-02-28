@@ -1,6 +1,7 @@
 package com.wsf.controller;
 
 import com.wsf.config.Configure;
+import com.wsf.io.IWriteToPool;
 
 /**
  * 该接口为控制器接口，主要基本功能有
@@ -29,18 +30,6 @@ public interface IController<T, E> {
      */
     void destroy();
 
-    /**
-     * 判断当前控制器的管理器是否有空闲线程
-     *
-     * @return
-     */
-    Boolean isIdle();
-
-    /**
-     * 当前运行队列是否为空
-     *
-     * @return
-     */
-    Boolean isEmpty();
+    IWriteToPool getWriter();
 
 }

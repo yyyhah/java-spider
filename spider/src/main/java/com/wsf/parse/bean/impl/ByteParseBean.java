@@ -1,8 +1,9 @@
-package com.wsf.parse.bean;
+package com.wsf.parse.bean.impl;
 
 import com.wsf.domain.Item;
 import com.wsf.domain.Template;
 
+import com.wsf.parse.bean.IParseBean;
 import org.apache.log4j.Logger;
 
 import java.lang.reflect.Field;
@@ -11,7 +12,7 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * 解析image，video等字节流的
  */
-public class ByteParseBean implements IParseBean{
+public class ByteParseBean implements IParseBean {
     private Template template;
     private static Logger logger = Logger.getLogger(HtmlParseBean.class);
 

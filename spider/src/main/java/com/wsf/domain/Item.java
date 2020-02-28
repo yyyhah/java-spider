@@ -26,6 +26,8 @@ public interface Item extends Serializable {
      */
     void setUrl(String url);
 
+    String getUrl();
+
     default void setProperty(String property,Object value){
         try {
             String[] split = property.split("\\.");

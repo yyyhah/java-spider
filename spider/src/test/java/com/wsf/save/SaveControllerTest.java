@@ -1,17 +1,19 @@
-package com.wsf.controller;
+package com.wsf.save;
 
-import com.wsf.config.Configure;
-import com.wsf.controller.center.impl.CenterControllerImpl;
+import com.wsf.controller.save.impl.SaveController;
+import com.wsf.domain.Item;
 import com.wsf.domain.Template;
-import com.wsf.io.impl.ReadFromHtml;
-import com.wsf.io.impl.WriteToUrl;
+import com.wsf.factory.io.IOFactory;
+import com.wsf.io.IReadFromPool;
+import com.wsf.source.Source;
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
-public class CenterControllerTest {
+public class SaveControllerTest {
     private List<Template> getTemplate(){
         ArrayList<Template> lists = new ArrayList<>();
         //创建模板
@@ -38,27 +40,27 @@ public class CenterControllerTest {
         HashMap<String, String> temp2 = new HashMap<>();
         temp2.put("title","#info > h1");
         temp2.put("chapters","#list > dl > dd > a");
-        template1.setParseBean("com.wsf.parse.bean.impl.HtmlParseBean");
-        template1.setSaveBean("com.wsf.save.bean.impl.DBSaveBean2");
+        template.setParseBean("com.wsf.parse.bean.impl.HtmlParseBean");
+        template.setSaveBean("com.wsf.save.bean.impl.DBSaveBean2");
         template1.setElementPath(temp2);
         lists.add(template1);
         return lists;
     }
     @Test
-    public void testStartOneRequest() throws ClassNotFoundException {
-        //加载匹配
-        Class.forName("com.wsf.config.Configure");
-        WriteToUrl write = new WriteToUrl();
-        //写入初始网址
-        for (int i = 0; i < 1; i++) {
-            ConcurrentLinkedQueue<String> inBuffer = new ConcurrentLinkedQueue<>();
-            inBuffer.add("http://www.xbiquge.la/");
-            write.write(inBuffer);
+    public void testSaveController(){
+        IReadFromPool readFromItem = IOFactory.getSaveReadConnect(40, true);
+        SaveController controller = new SaveController(getTemplate());
+        while (readFromItem.hasNext()) {
+            controller.execute((ConcurrentHashMap<String, Item>) readFromItem.read());
         }
-
-        CenterControllerImpl center = new CenterControllerImpl(getTemplate());
-        center.start();
-        //center.destroy();
+        controller.destroy();
+        Source.close();
     }
-
+    @Test
+    public void read(){
+        IReadFromPool readFromUrl = IOFactory.getReqReadConnect(40, true);
+        while(readFromUrl.hasNext()){
+            System.out.println(readFromUrl.read());
+        }
+    }
 }

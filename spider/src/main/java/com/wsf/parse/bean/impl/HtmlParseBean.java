@@ -1,8 +1,9 @@
-package com.wsf.parse.bean;
+package com.wsf.parse.bean.impl;
 
 
 import com.wsf.domain.Item;
 import com.wsf.domain.Template;
+import com.wsf.parse.bean.IParseBean;
 import org.apache.log4j.Logger;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -17,7 +18,7 @@ import java.util.*;
 /**
  * 解析html字节流
  */
-public class HtmlParseBean implements IParseBean{
+public class HtmlParseBean implements IParseBean {
     private Template template;
     private static Logger logger = Logger.getLogger(HtmlParseBean.class);
     private HashMap<String, String> elementCss;

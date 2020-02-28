@@ -2,7 +2,7 @@ package com.wsf.parse.manager.impl;
 
 import com.wsf.domain.Item;
 import com.wsf.domain.Template;
-import com.wsf.parse.bean.HtmlParseBean;
+import com.wsf.domain.impl.EmptyItem;
 import com.wsf.parse.bean.IParseBean;
 import org.apache.log4j.Logger;
 
@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 
+@SuppressWarnings("all")
 public class ParseManager {
     //映射模板，String为网址的正则匹配字符串 Item为页面种需要提取的元素,通过这个映射规则知道要找哪个ParseBean解析
     private static List<Template> templates = null;
@@ -21,7 +22,7 @@ public class ParseManager {
     }
 
     /**
-     * 解析出该网址需要创建哪种ParseBean处理器处理
+     * 找出网址对应的template
      */
     public Template findBean(String url){
         for (Template template : templates) {
@@ -45,6 +46,11 @@ public class ParseManager {
         ConcurrentHashMap<String, Item> map = new ConcurrentHashMap<String, Item>();
         Set<Map.Entry<String, byte[]>> entries = inBuffer.entrySet();
         for (Map.Entry<String, byte[]> entry : entries) {
+            //如果为空，也就是request中没有请求到
+            if(entry.getValue().length == 1){
+                map.put(entry.getKey(), new EmptyItem());
+                continue;
+            }
             Template template = findBean(entry.getKey());
             if(template == null){
                 logger.warn("没有找到对应模板，请确认 "+entry.getKey()+" 的正则表达式是否正确！注意转义字符");

@@ -50,6 +50,7 @@ public class RequestBean implements Callable<Object[]> {
         System.out.println("RequestBean 当前线程为:" + Thread.currentThread());
         BufferedInputStream bis = null;
         URLConnection connection = null;
+        System.out.println(url);
         try {
             //请求资源
             URL url = new URL(this.url);

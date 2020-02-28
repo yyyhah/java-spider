@@ -20,6 +20,7 @@ public class ParseController implements IParseController {
 
     public ParseController(List<Template> templates) {
         init(templates);
+        init();
     }
 
     @Override
@@ -42,4 +43,11 @@ public class ParseController implements IParseController {
     public void destroy() {
         toResource.close();
     }
+
+    @Override
+    public IWriteToPool getWriter() {
+        return toResource;
+    }
+
+
 }
