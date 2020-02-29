@@ -30,3 +30,4 @@
 2020-02-29 13:35:22 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1006无法访问到 翁寿发1006
 2020-02-29 13:35:23 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1007无法访问到 翁寿发1007
 2020-02-29 13:35:24 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1008无法访问到 翁寿发1008
+2020-02-29 14:40:47 method: com.wsf.config.Configure.<clinit>(Configure.java:139) - [ ERROR ]----初始化资源池出错

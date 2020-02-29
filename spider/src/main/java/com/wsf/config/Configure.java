@@ -41,7 +41,7 @@ public class Configure {
     private static Logger logger = Logger.getLogger(Configure.class);
 
     static {
-        InputStream is = RequestManager.class.getClassLoader().getResourceAsStream("config.properties");
+        InputStream is = RequestManager.class.getClassLoader().getResourceAsStream("spiderConfig.properties");
         try {
             Properties prop = new Properties();
             prop.load(is);
