@@ -1,3 +1,5 @@
+SpiderConfigure.properties是配置文件，程序启动前时必须加载。需要放在类路径下
+
 template 定义爬虫规则，设置解析器，存储器，元素筛选规则，Item保存对象
 
 Item 存储页面元素信息的java类,需要实现Item
