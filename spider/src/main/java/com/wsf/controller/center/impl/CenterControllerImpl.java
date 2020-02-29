@@ -88,9 +88,15 @@ public class CenterControllerImpl implements ICenterController {
      */
     public void start(){
         //当有数据存在,或者request未执行完毕时，一直执行
-        while(true){
+        while(!requestController.isEmpty() || urlReader.hasNext() || itemReader.hasNext() || htmlReader.hasNext()){
             if(urlReader.hasNext()) {
                 startOneRequest();
+                //每轮请求完毕休息一秒
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
             if(htmlReader.hasNext()) {
                 startOneParse();
@@ -98,6 +104,7 @@ public class CenterControllerImpl implements ICenterController {
             if(itemReader.hasNext()) {
                 startOneSave();
             }
+
         }
     }
 

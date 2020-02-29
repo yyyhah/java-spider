@@ -19,3 +19,6 @@
 2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
 2020-02-28 21:11:27 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: connect timed out无法访问到 http://www.xbiquge.la/20/20948/
 2020-02-28 22:13:21 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 http://www.xbiquge.la/29/29056/
+2020-02-28 22:36:08 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 http://www.xbiquge.la/20/20948/
+2020-02-28 22:36:09 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 http://www.xbiquge.la/10/10489/
+2020-02-28 22:36:09 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 http://www.xbiquge.la/29/29056/

@@ -115,12 +115,20 @@ public class RequestController implements IRequestController {
     //判断当前控制器的线程池是否空闲
     @Override
     public Boolean isEmpty() {
-        return ((ThreadPoolExecutor)managerPool).getActiveCount()==0;
+        Boolean ret;
+        synchronized (runManager){
+            ret = runManager.isEmpty();
+        }
+        return ret;
     }
 
     @Override
     public Boolean isIdle() {
-        return ((ThreadPoolExecutor)managerPool).getActiveCount() < managerNumber;
+        Boolean ret;
+        synchronized (waitManager){
+            ret = !waitManager.isEmpty();
+        }
+        return ret;
     }
 
     @Override
