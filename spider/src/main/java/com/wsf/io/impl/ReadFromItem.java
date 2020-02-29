@@ -1,6 +1,7 @@
 package com.wsf.io.impl;
 
 import com.wsf.config.Configure;
+import com.wsf.domain.Item;
 import com.wsf.domain.impl.BaseItem;
 import com.wsf.io.IReadFromPool;
 import com.wsf.source.Source;
@@ -52,7 +53,7 @@ public class ReadFromItem implements IReadFromPool<ConcurrentHashMap> {
 
 
     @Override
-    public ConcurrentHashMap<String, BaseItem> read() {
+    public ConcurrentHashMap<String, Item> read() {
         if (itemReadBuffer.length <= itemIndex || itemReadBuffer[itemIndex] == null) {
             //如果池子中没有数据，直接返回null
             if (itemBuffer.size() == 0) {
@@ -75,7 +76,7 @@ public class ReadFromItem implements IReadFromPool<ConcurrentHashMap> {
     public LinkedList<ConcurrentHashMap> readBatch() {
         LinkedList<ConcurrentHashMap> lists = new LinkedList<>();
         for (Integer i = 0; i < saveBatchNumber; i++) {
-            ConcurrentHashMap<String, BaseItem> map = read();
+            ConcurrentHashMap<String, Item> map = read();
             if (map == null) {
                 break;
             }
