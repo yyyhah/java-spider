@@ -1,24 +1,32 @@
-2020-02-28 19:04:13 method: com.wsf.controller.center.impl.CenterControllerImpl.startOneRequest(CenterControllerImpl.java:57) - [ WARN ]----管理器繁忙,请稍后再试
-2020-02-28 19:04:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:14 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 19:04:15 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:92) - [ WARN ]----java.io.IOException: Server returned HTTP response code: 503 for URL: http://www.xbiquge.la/无法访问到 http://www.xbiquge.la/
-2020-02-28 21:11:27 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: connect timed out无法访问到 http://www.xbiquge.la/20/20948/
-2020-02-28 22:13:21 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 http://www.xbiquge.la/29/29056/
-2020-02-28 22:36:08 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 http://www.xbiquge.la/20/20948/
-2020-02-28 22:36:09 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 http://www.xbiquge.la/10/10489/
-2020-02-28 22:36:09 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.SocketTimeoutException: Read timed out无法访问到 http://www.xbiquge.la/29/29056/
+2020-02-29 13:33:35 method: com.wsf.source.Source.readFile(Source.java:110) - [ ERROR ]----�Ӵ����ж�ȡurl����
+2020-02-29 13:33:35 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.UnknownHostException: i.hdu�޷����ʵ� https://i.hdu
+2020-02-29 13:33:47 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.UnknownHostException: cn�޷����ʵ� https://cn/tp_up/vie
+2020-02-29 13:34:51 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发0无法访问到 翁寿发0
+2020-02-29 13:34:52 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1无法访问到 翁寿发1
+2020-02-29 13:34:53 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发2无法访问到 翁寿发2
+2020-02-29 13:34:54 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发3无法访问到 翁寿发3
+2020-02-29 13:34:55 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发4无法访问到 翁寿发4
+2020-02-29 13:34:56 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发5无法访问到 翁寿发5
+2020-02-29 13:34:57 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发6无法访问到 翁寿发6
+2020-02-29 13:34:58 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发7无法访问到 翁寿发7
+2020-02-29 13:34:59 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发8无法访问到 翁寿发8
+2020-02-29 13:35:00 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发9无法访问到 翁寿发9
+2020-02-29 13:35:01 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发10无法访问到 翁寿发10
+2020-02-29 13:35:02 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发11无法访问到 翁寿发11
+2020-02-29 13:35:03 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发12无法访问到 翁寿发12
+2020-02-29 13:35:04 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发13无法访问到 翁寿发13
+2020-02-29 13:35:05 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发14无法访问到 翁寿发14
+2020-02-29 13:35:06 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发15无法访问到 翁寿发15
+2020-02-29 13:35:07 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发16无法访问到 翁寿发16
+2020-02-29 13:35:08 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发17无法访问到 翁寿发17
+2020-02-29 13:35:09 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发18无法访问到 翁寿发18
+2020-02-29 13:35:10 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发19无法访问到 翁寿发19
+2020-02-29 13:35:11 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发20无法访问到 翁寿发20
+2020-02-29 13:35:17 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1001无法访问到 翁寿发1001
+2020-02-29 13:35:18 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1002无法访问到 翁寿发1002
+2020-02-29 13:35:19 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1003无法访问到 翁寿发1003
+2020-02-29 13:35:20 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1004无法访问到 翁寿发1004
+2020-02-29 13:35:21 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1005无法访问到 翁寿发1005
+2020-02-29 13:35:22 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1006无法访问到 翁寿发1006
+2020-02-29 13:35:23 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1007无法访问到 翁寿发1007
+2020-02-29 13:35:24 method: com.wsf.request.bean.RequestBean.call(RequestBean.java:93) - [ WARN ]----java.net.MalformedURLException: no protocol: 翁寿发1008无法访问到 翁寿发1008
